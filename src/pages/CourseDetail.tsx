@@ -3,147 +3,153 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { 
-  Play, Star, Clock, Award, Users, Globe, 
-  CheckCircle, BookOpen, FileText, MessageCircle 
+  Clock, Users, BarChart, Award, Star, Play, 
+  ChevronDown, ChevronUp, BookOpen, Heart, Share2
 } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { useToast } from '@/hooks/use-toast';
+
+// Mock course data
+const courseData = {
+  id: '1',
+  title: 'Pengembangan Web Frontend dengan React & TypeScript',
+  description: 'Pelajari cara membuat aplikasi web modern dengan React, TypeScript, dan tools terkini. Kursus ini dirancang untuk pemula hingga menengah dan akan membantu Anda menjadi developer frontend yang kompeten.',
+  longDescription: `
+    <p>Dalam kursus ini, Anda akan mempelajari:</p>
+    <ul>
+      <li>Fundamental React dan konsep component-based architecture</li>
+      <li>TypeScript untuk pengembangan yang lebih aman dan terstruktur</li>
+      <li>State management dengan Redux dan Context API</li>
+      <li>Styling dengan CSS-in-JS dan component libraries</li>
+      <li>Testing dan debugging aplikasi React</li>
+      <li>Performance optimization dan best practices</li>
+      <li>Deployment dan continuous integration</li>
+    </ul>
+    <p>Kursus ini mencakup berbagai proyek praktis yang akan membantu Anda mengaplikasikan pengetahuan baru Anda dan membangun portofolio yang mengesankan.</p>
+  `,
+  instructor: 'Budi Santoso',
+  instructorTitle: 'Senior Frontend Developer',
+  instructorBio: 'Budi adalah seorang pengembang frontend berpengalaman dengan lebih dari 8 tahun pengalaman di berbagai startup dan perusahaan teknologi. Dia telah mengajar lebih dari 50,000 siswa online.',
+  instructorAvatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+  thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1740&auto=format&fit=crop',
+  price: 599000,
+  discountPrice: 299000,
+  rating: 4.8,
+  reviewCount: 1250,
+  studentCount: 15420,
+  lastUpdated: 'November 2023',
+  language: 'Bahasa Indonesia',
+  level: 'Menengah',
+  duration: '20 jam',
+  lectures: 42,
+  category: 'Pengembangan Web',
+  tags: ['React', 'TypeScript', 'Frontend', 'Web Development'],
+  isBestseller: true,
+  isNew: false,
+  whatYouWillLearn: [
+    'Membangun aplikasi React modern dari dasar hingga deployment',
+    'Mengaplikasikan TypeScript untuk kode yang lebih aman dan maintainable',
+    'Menerapkan state management yang efektif dengan Redux dan Context API',
+    'Menggunakan hooks dan fitur-fitur React terbaru',
+    'Mengoptimalkan performa aplikasi web Anda',
+    'Menguji aplikasi React dengan Jest dan React Testing Library'
+  ],
+  requirements: [
+    'Pengetahuan dasar HTML, CSS, dan JavaScript',
+    'Pemahaman dasar konsep pemrograman',
+    'Komputer dengan koneksi internet yang stabil'
+  ],
+  curriculum: [
+    {
+      id: 1,
+      title: 'Pengenalan React dan TypeScript',
+      lectures: [
+        { id: '1-1', title: 'Selamat Datang di Kursus', duration: '5:20', preview: true },
+        { id: '1-2', title: 'Apa itu React dan Mengapa Menggunakannya?', duration: '10:15', preview: true },
+        { id: '1-3', title: 'Setup Development Environment', duration: '12:30', preview: false },
+        { id: '1-4', title: 'TypeScript Basics', duration: '15:45', preview: false }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Fundamental React',
+      lectures: [
+        { id: '2-1', title: 'Component dan JSX', duration: '14:20', preview: false },
+        { id: '2-2', title: 'Props dan State', duration: '18:45', preview: false },
+        { id: '2-3', title: 'Event Handling', duration: '12:10', preview: false },
+        { id: '2-4', title: 'Conditional Rendering', duration: '9:35', preview: false },
+        { id: '2-5', title: 'List dan Keys', duration: '11:25', preview: false }
+      ]
+    },
+    {
+      id: 3,
+      title: 'TypeScript dengan React',
+      lectures: [
+        { id: '3-1', title: 'TypeScript dengan Functional Components', duration: '16:40', preview: false },
+        { id: '3-2', title: 'Type Props dan Event Handlers', duration: '13:55', preview: false },
+        { id: '3-3', title: 'Custom Types dan Interfaces', duration: '18:20', preview: false }
+      ]
+    }
+  ],
+  reviews: [
+    {
+      id: 1,
+      user: 'Ahmad Fauzi',
+      avatar: 'https://randomuser.me/api/portraits/men/42.jpg',
+      rating: 5,
+      date: '2 bulan yang lalu',
+      comment: 'Kursus yang sangat komprehensif! Saya belajar banyak dan sekarang sudah bisa membuat aplikasi React sendiri. Penjelasannya sangat jelas dan contoh-contohnya relevan dengan kebutuhan industri saat ini.'
+    },
+    {
+      id: 2,
+      user: 'Siti Nuraini',
+      avatar: 'https://randomuser.me/api/portraits/women/52.jpg',
+      rating: 4,
+      date: '1 bulan yang lalu',
+      comment: 'Materi sangat bagus dan terstruktur. Saya suka bagaimana instruktur menjelaskan konsep-konsep kompleks dengan cara yang mudah dipahami. Alasan saya memberi 4 bintang adalah karena beberapa bagian terlalu cepat untuk pemula seperti saya.'
+    },
+    {
+      id: 3,
+      user: 'Rudi Hermawan',
+      avatar: 'https://randomuser.me/api/portraits/men/62.jpg',
+      rating: 5,
+      date: '3 minggu yang lalu',
+      comment: 'Salah satu kursus terbaik tentang React dan TypeScript yang pernah saya ikuti. Proyek-proyeknya sangat membantu untuk mengaplikasikan pengetahuan yang didapat. Sangat direkomendasikan!'
+    }
+  ]
+};
 
 const CourseDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  const [showMore, setShowMore] = useState(false);
+  const { id } = useParams();
+  const [activeSection, setActiveSection] = useState<number | null>(null);
+  const { toast } = useToast();
   
-  // Mock course data - in a real app, you would fetch this based on the ID
-  const course = {
-    id,
-    title: 'Pengembangan Web Frontend dengan React & TypeScript',
-    description: 'Kursus lengkap tentang pengembangan frontend modern menggunakan React.js dan TypeScript. Pelajari cara membangun aplikasi web yang responsif, dapat diskalakan, dan mudah dipelihara dengan praktik terbaik industri.',
-    instructor: {
-      name: 'Budi Santoso',
-      title: 'Senior Frontend Developer',
-      bio: 'Budi adalah pengembang frontend dengan pengalaman lebih dari 8 tahun di perusahaan teknologi terkemuka. Ia telah membantu ribuan siswa untuk menguasai React melalui kursus-kursus online.',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
-      courses: 12,
-      students: 15420,
-      rating: 4.8
-    },
-    thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1740&auto=format&fit=crop',
-    price: 599000,
-    discountPrice: 299000,
-    rating: 4.8,
-    reviewCount: 1250,
-    level: 'Menengah',
-    duration: '20 jam',
-    studentCount: 15420,
-    lastUpdated: 'November 2023',
-    language: 'Bahasa Indonesia',
-    category: 'Pengembangan Web',
-    tags: ['React', 'TypeScript', 'Frontend', 'Web Development'],
-    isBestseller: true,
-    whatYouWillLearn: [
-      'Membangun aplikasi web modern dengan React.js dan TypeScript',
-      'Menerapkan manajemen state dengan Redux dan React Context API',
-      'Membuat UI responsif dan menarik dengan CSS-in-JS',
-      'Menerapkan praktik terbaik dalam pengembangan frontend',
-      'Mengintegrasikan API REST dan GraphQL ke aplikasi React',
-      'Menguji aplikasi React dengan Jest dan React Testing Library',
-      'Mengoptimalkan kinerja aplikasi frontend'
-    ],
-    requirements: [
-      'Pengetahuan dasar HTML, CSS, dan JavaScript',
-      'Pemahaman fundamental tentang pemrograman',
-      'Komputer dengan akses internet dan browser modern',
-      'Tidak diperlukan pengalaman React sebelumnya'
-    ],
-    curriculum: [
-      {
-        section: 'Pengenalan dan Persiapan',
-        lectures: [
-          { title: 'Selamat Datang di Kursus', duration: '5 menit', type: 'video', preview: true },
-          { title: 'Menyiapkan Lingkungan Pengembangan', duration: '15 menit', type: 'video', preview: false },
-          { title: 'Pengenalan React.js dan TypeScript', duration: '20 menit', type: 'video', preview: false },
-          { title: 'Memahami JSX dan TSX', duration: '25 menit', type: 'video', preview: false },
-        ]
-      },
-      {
-        section: 'Dasar-dasar React',
-        lectures: [
-          { title: 'Komponen dan Props', duration: '30 menit', type: 'video', preview: false },
-          { title: 'State dan Lifecycle', duration: '35 menit', type: 'video', preview: false },
-          { title: 'Penanganan Event', duration: '25 menit', type: 'video', preview: false },
-          { title: 'Latihan: Membuat Counter App', duration: '20 menit', type: 'exercise', preview: false },
-        ]
-      },
-      {
-        section: 'TypeScript dalam React',
-        lectures: [
-          { title: 'Tipe-tipe Dasar dalam TypeScript', duration: '25 menit', type: 'video', preview: false },
-          { title: 'Antarmuka dan Tipe untuk Props', duration: '30 menit', type: 'video', preview: false },
-          { title: 'Generic Types dan Utilitas Tipe', duration: '40 menit', type: 'video', preview: false },
-          { title: 'Latihan: Refaktor Aplikasi ke TypeScript', duration: '35 menit', type: 'exercise', preview: false },
-        ]
-      },
-      {
-        section: 'Manajemen State Lanjutan',
-        lectures: [
-          { title: 'Context API', duration: '30 menit', type: 'video', preview: false },
-          { title: 'Hooks: useState, useEffect, useContext', duration: '45 menit', type: 'video', preview: false },
-          { title: 'Redux dengan TypeScript', duration: '50 menit', type: 'video', preview: false },
-          { title: 'Proyek: Aplikasi To-Do dengan State Management', duration: '60 menit', type: 'project', preview: false },
-        ]
-      },
-      {
-        section: 'Routing dan Navigasi',
-        lectures: [
-          { title: 'Pengenalan React Router', duration: '25 menit', type: 'video', preview: false },
-          { title: 'Route Parameters dan Query Strings', duration: '30 menit', type: 'video', preview: false },
-          { title: 'Navigasi Terpogram dan Guards', duration: '35 menit', type: 'video', preview: false },
-          { title: 'Latihan: Membuat Multi-page Application', duration: '40 menit', type: 'exercise', preview: false },
-        ]
-      }
-    ],
-    reviews: [
-      {
-        id: '1',
-        user: 'Ahmad Faisal',
-        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-        rating: 5,
-        date: '15 Oktober 2023',
-        comment: 'Kursus yang sangat komprehensif dan mudah diikuti. Materi dijelaskan dengan sangat baik dan proyek-proyek yang disertakan sangat membantu pemahaman.'
-      },
-      {
-        id: '2',
-        user: 'Ratna Dewi',
-        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-        rating: 4,
-        date: '2 September 2023',
-        comment: 'Sangat bermanfaat bagi saya yang ingin beralih ke frontend development. Penjelasan tentang TypeScript sedikit terlalu cepat, tapi secara keseluruhan kursus ini luar biasa.'
-      },
-      {
-        id: '3',
-        user: 'Dimas Prayoga',
-        avatar: 'https://randomuser.me/api/portraits/men/67.jpg',
-        rating: 5,
-        date: '20 Agustus 2023',
-        comment: 'Budi adalah instruktur yang luar biasa! Cara dia menjelaskan konsep-konsep kompleks menjadi sangat mudah dipahami. Saya sekarang bisa membuat aplikasi React dengan percaya diri.'
-      }
-    ]
+  const toggleSection = (sectionId: number) => {
+    if (activeSection === sectionId) {
+      setActiveSection(null);
+    } else {
+      setActiveSection(sectionId);
+    }
   };
   
-  // Calculate total curriculum content
-  const totalLectures = course.curriculum.reduce((total, section) => total + section.lectures.length, 0);
-  const totalDuration = course.curriculum.reduce((total, section) => {
-    return total + section.lectures.reduce((secTotal, lecture) => {
-      const minutes = parseInt(lecture.duration.split(' ')[0]);
-      return secTotal + minutes;
-    }, 0);
-  }, 0);
+  const addToWishlist = () => {
+    toast({
+      title: "Ditambahkan ke wishlist",
+      description: `${courseData.title} telah ditambahkan ke wishlist Anda`,
+    });
+  };
   
-  // Format total duration to hours and minutes
-  const hours = Math.floor(totalDuration / 60);
-  const minutes = totalDuration % 60;
-  const formattedTotalDuration = `${hours} jam ${minutes} menit`;
+  const shareCourse = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast({
+      title: "Link disalin",
+      description: "Link kursus telah disalin ke clipboard",
+    });
+  };
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -153,109 +159,147 @@ const CourseDetail = () => {
         {/* Course Header */}
         <section className="bg-gray-900 text-white py-12">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="flex items-center gap-2 text-sm text-blue-300 mb-4">
-                  <Link to={`/category/${course.category.toLowerCase().replace(' ', '-')}`} className="hover:underline">
-                    {course.category}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <Link to="/category/web" className="text-blue-300 hover:underline text-sm">
+                    Pengembangan Web
                   </Link>
-                  {' > '}
-                  <span>React</span>
+                  <span className="text-gray-400">›</span>
+                  <Link to="/category/frontend" className="text-blue-300 hover:underline text-sm">
+                    Frontend
+                  </Link>
                 </div>
                 
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">{course.title}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold mb-4">{courseData.title}</h1>
                 
-                <p className="text-lg text-gray-300 mb-6">{course.description.substring(0, 150)}...</p>
+                <p className="text-gray-300 mb-4">{courseData.description}</p>
                 
-                <div className="flex items-center gap-4 text-sm mb-6">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  {courseData.isBestseller && (
+                    <Badge variant="secondary" className="bg-yellow-500 text-black">Bestseller</Badge>
+                  )}
+                  {courseData.isNew && (
+                    <Badge variant="secondary" className="bg-green-500 text-white">Baru</Badge>
+                  )}
+                  
                   <div className="flex items-center">
-                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 mr-1" />
-                    <span>{course.rating.toFixed(1)}</span>
-                    <span className="text-gray-400 ml-1">({course.reviewCount} ulasan)</span>
+                    <span className="text-yellow-500 font-medium mr-1">{courseData.rating.toFixed(1)}</span>
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i}
+                          size={14} 
+                          className={i < Math.floor(courseData.rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-400"} 
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-gray-300 ml-1">
+                      ({courseData.reviewCount} ulasan)
+                    </span>
                   </div>
-                  <div className="flex items-center">
-                    <Users className="w-4 h-4 mr-1" />
-                    <span>{course.studentCount.toLocaleString()} siswa</span>
-                  </div>
+                  
+                  <span className="text-sm text-gray-300">
+                    {courseData.studentCount.toLocaleString()} peserta
+                  </span>
                 </div>
                 
-                <div className="text-sm mb-6">
-                  <p>Dibuat oleh <Link to={`/instructor/${course.instructor.name.replace(' ', '-')}`} className="text-blue-300 hover:underline">{course.instructor.name}</Link></p>
+                <div className="flex items-center text-sm text-gray-300 mb-6">
+                  <span>Dibuat oleh</span>
+                  <Link to="/instructor/budi-santoso" className="text-blue-300 hover:underline ml-1">
+                    {courseData.instructor}
+                  </Link>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-4 text-sm mb-6">
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    <span>Durasi: {course.duration}</span>
+                <div className="flex flex-wrap gap-4 text-sm text-gray-300">
+                  <div className="flex items-center gap-1">
+                    <Clock size={16} />
+                    <span>Terakhir diperbarui {courseData.lastUpdated}</span>
                   </div>
-                  <div className="flex items-center">
-                    <Award className="w-4 h-4 mr-1" />
-                    <span>Level: {course.level}</span>
+                  <div className="flex items-center gap-1">
+                    <BookOpen size={16} />
+                    <span>{courseData.language}</span>
                   </div>
-                  <div className="flex items-center">
-                    <Globe className="w-4 h-4 mr-1" />
-                    <span>Bahasa: {course.language}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    <span>Terakhir diupdate: {course.lastUpdated}</span>
+                  <div className="flex items-center gap-1">
+                    <BarChart size={16} />
+                    <span>{courseData.level}</span>
                   </div>
                 </div>
               </div>
               
-              <div className="lg:ml-auto max-w-md w-full bg-white text-gray-900 rounded-lg shadow-lg overflow-hidden">
-                <div className="relative aspect-video w-full">
+              <div className="bg-white text-black rounded-lg shadow-lg overflow-hidden">
+                <div className="relative">
                   <img 
-                    src={course.thumbnail} 
-                    alt={course.title} 
-                    className="w-full h-full object-cover"
+                    src={courseData.thumbnail} 
+                    alt={courseData.title} 
+                    className="w-full aspect-video object-cover"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <Button variant="outline" className="rounded-full bg-white bg-opacity-90 text-primary hover:bg-white hover:text-primary">
+                    <Button variant="outline" className="rounded-full bg-white text-black hover:bg-white">
                       <Play className="h-6 w-6 fill-current" />
                     </Button>
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <div className="flex items-baseline mb-4">
-                    <span className="text-3xl font-bold">Rp {course.discountPrice?.toLocaleString()}</span>
-                    <span className="text-lg text-muted-foreground line-through ml-2">
-                      Rp {course.price.toLocaleString()}
-                    </span>
-                    <span className="ml-2 text-green-600 font-medium">
-                      {Math.round(((course.price - (course.discountPrice || 0)) / course.price) * 100)}% diskon
-                    </span>
+                  <div className="mb-4">
+                    <div className="flex items-baseline mb-2">
+                      <span className="text-2xl font-bold">
+                        Rp {courseData.discountPrice?.toLocaleString()}
+                      </span>
+                      {courseData.discountPrice && (
+                        <span className="text-base text-muted-foreground line-through ml-2">
+                          Rp {courseData.price.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                    {courseData.discountPrice && (
+                      <div className="text-sm text-red-500">
+                        {Math.round((1 - courseData.discountPrice / courseData.price) * 100)}% diskon! Berakhir dalam 2 hari
+                      </div>
+                    )}
                   </div>
                   
-                  <div className="space-y-3 mb-6">
-                    <Button className="w-full text-base py-6">Beli Sekarang</Button>
-                    <Button variant="outline" className="w-full text-base py-6">Tambahkan ke Wishlist</Button>
+                  <div className="space-y-3">
+                    <Button className="w-full">Beli Sekarang</Button>
+                    <Button variant="outline" className="w-full">
+                      Coba Gratis 7 Hari
+                    </Button>
                   </div>
                   
-                  <div className="text-center text-sm text-muted-foreground mb-6">
-                    <p>Jaminan uang kembali 30 hari</p>
-                    <p>Akses penuh seumur hidup</p>
+                  <div className="mt-4 text-center text-sm text-muted-foreground">
+                    Garansi uang kembali 30 hari
                   </div>
                   
-                  <div className="text-sm space-y-2">
+                  <div className="mt-6 space-y-4">
                     <h3 className="font-medium">Kursus ini mencakup:</h3>
-                    <p className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      {course.duration} video on-demand
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <FileText className="h-4 w-4 text-muted-foreground" />
-                      5 artikel dan sumber daya
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <BookOpen className="h-4 w-4 text-muted-foreground" />
-                      Akses di perangkat seluler dan TV
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <Award className="h-4 w-4 text-muted-foreground" />
-                      Sertifikat penyelesaian
-                    </p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-start gap-2">
+                        <Clock className="h-4 w-4 mt-1 flex-shrink-0" />
+                        <span>{courseData.duration} konten video on-demand</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <BookOpen className="h-4 w-4 mt-1 flex-shrink-0" />
+                        <span>{courseData.lectures} kuliah</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Award className="h-4 w-4 mt-1 flex-shrink-0" />
+                        <span>Sertifikat penyelesaian</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Users className="h-4 w-4 mt-1 flex-shrink-0" />
+                        <span>Forum diskusi</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-6 flex gap-2">
+                    <Button variant="ghost" size="icon" onClick={addToWishlist}>
+                      <Heart className="h-5 w-5" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={shareCourse}>
+                      <Share2 className="h-5 w-5" />
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -263,237 +307,216 @@ const CourseDetail = () => {
           </div>
         </section>
         
-        {/* Course Content */}
+        {/* Course Content Tabs */}
         <section className="py-12">
           <div className="container">
-            <div className="max-w-4xl">
-              <Tabs defaultValue="content">
-                <TabsList className="mb-8">
-                  <TabsTrigger value="content">Konten Kursus</TabsTrigger>
-                  <TabsTrigger value="instructor">Instruktur</TabsTrigger>
-                  <TabsTrigger value="reviews">Ulasan</TabsTrigger>
-                </TabsList>
+            <Tabs defaultValue="overview">
+              <TabsList className="w-full max-w-md mb-8">
+                <TabsTrigger value="overview" className="flex-1">Ikhtisar</TabsTrigger>
+                <TabsTrigger value="curriculum" className="flex-1">Kurikulum</TabsTrigger>
+                <TabsTrigger value="instructor" className="flex-1">Instruktur</TabsTrigger>
+                <TabsTrigger value="reviews" className="flex-1">Ulasan</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="overview" className="space-y-8">
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Apa yang akan Anda pelajari</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                    {courseData.whatYouWillLearn.map((item, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <div className="text-green-500 mt-1">✓</div>
+                        <p>{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 
-                <TabsContent value="content" className="space-y-8">
-                  {/* What You'll Learn */}
-                  <div className="border rounded-lg p-6">
-                    <h2 className="text-xl font-bold mb-4">Yang Akan Anda Pelajari</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {course.whatYouWillLearn.map((item, index) => (
-                        <div key={index} className="flex gap-2">
-                          <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>{item}</span>
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Persyaratan</h2>
+                  <ul className="list-disc pl-5 space-y-2">
+                    {courseData.requirements.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Deskripsi</h2>
+                  <div dangerouslySetInnerHTML={{ __html: courseData.longDescription }} />
+                </div>
+                
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Ditujukan untuk</h2>
+                  <ul className="list-disc pl-5 space-y-2">
+                    <li>Pengembang yang ingin belajar React dan TypeScript</li>
+                    <li>Frontend developer yang ingin meningkatkan keterampilan mereka</li>
+                    <li>Developer yang ingin beralih ke teknologi modern</li>
+                    <li>Pemula yang memiliki pengetahuan dasar JavaScript</li>
+                  </ul>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="curriculum">
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold mb-2">Konten Kursus</h2>
+                  <div className="text-sm text-muted-foreground">
+                    {courseData.curriculum.reduce((total, section) => total + section.lectures.length, 0)} kuliah • {courseData.duration} total
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  {courseData.curriculum.map((section) => (
+                    <div key={section.id} className="border rounded-md overflow-hidden">
+                      <div 
+                        className="flex justify-between items-center bg-muted p-4 cursor-pointer"
+                        onClick={() => toggleSection(section.id)}
+                      >
+                        <div className="font-medium flex items-center gap-2">
+                          {activeSection === section.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                          <span>{section.title}</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Requirements */}
-                  <div>
-                    <h2 className="text-xl font-bold mb-4">Prasyarat</h2>
-                    <ul className="list-disc pl-5 space-y-2">
-                      {course.requirements.map((req, index) => (
-                        <li key={index}>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Course Description */}
-                  <div>
-                    <h2 className="text-xl font-bold mb-4">Deskripsi Kursus</h2>
-                    <div className={`relative ${!showMore && 'max-h-60 overflow-hidden'}`}>
-                      <p className="mb-4">{course.description}</p>
-                      <p className="mb-4">
-                        Kursus ini dirancang untuk pemula hingga tingkat menengah yang ingin mempelajari pengembangan frontend modern dengan React dan TypeScript. Anda akan belajar dari dasar hingga teknik lanjutan melalui video tutorial, latihan praktis, dan proyek-proyek nyata.
-                      </p>
-                      <p className="mb-4">
-                        Setiap modul membangun keterampilan Anda secara bertahap, mulai dari konsep dasar React hingga penggunaan TypeScript untuk membuat aplikasi yang lebih aman dan mudah dipelihara. Anda akan mempelajari praktik terbaik dalam pengembangan frontend, manajemen state, routing, dan teknik pengujian.
-                      </p>
-                      <p className="mb-4">
-                        Di akhir kursus, Anda akan mampu membangun aplikasi web React yang kompleks dan siap untuk produksi, menggunakan TypeScript untuk meningkatkan kualitas kode Anda.
-                      </p>
+                        <div className="text-sm text-muted-foreground">
+                          {section.lectures.length} kuliah
+                        </div>
+                      </div>
                       
-                      {!showMore && (
-                        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
-                      )}
-                    </div>
-                    <button 
-                      className="text-primary font-medium mt-2"
-                      onClick={() => setShowMore(!showMore)}
-                    >
-                      {showMore ? 'Tampilkan lebih sedikit' : 'Tampilkan lebih banyak'}
-                    </button>
-                  </div>
-                  
-                  {/* Course Curriculum */}
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-xl font-bold">Kurikulum Kursus</h2>
-                      <div className="text-sm text-muted-foreground">
-                        {totalLectures} pelajaran • {formattedTotalDuration}
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {course.curriculum.map((section, idx) => (
-                        <div key={idx} className="border rounded-lg overflow-hidden">
-                          <div className="bg-muted p-4">
-                            <h3 className="font-medium">{section.section}</h3>
-                            <p className="text-sm text-muted-foreground">
-                              {section.lectures.length} pelajaran • {
-                                (() => {
-                                  const mins = section.lectures.reduce((total, lecture) => total + parseInt(lecture.duration), 0);
-                                  const hrs = Math.floor(mins / 60);
-                                  const remaining = mins % 60;
-                                  return hrs > 0 ? `${hrs} jam ${remaining} menit` : `${mins} menit`;
-                                })()
-                              }
-                            </p>
-                          </div>
-                          <div className="divide-y">
-                            {section.lectures.map((lecture, lectureIdx) => (
-                              <div key={lectureIdx} className="p-4 flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                  {lecture.type === 'video' ? (
-                                    <Play className="h-4 w-4 text-muted-foreground" />
-                                  ) : lecture.type === 'exercise' ? (
-                                    <FileText className="h-4 w-4 text-muted-foreground" />
-                                  ) : (
-                                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                      {activeSection === section.id && (
+                        <div className="p-4 bg-white">
+                          {section.lectures.map((lecture) => (
+                            <div 
+                              key={lecture.id} 
+                              className="py-3 flex justify-between items-center border-b last:border-b-0"
+                            >
+                              <div className="flex items-start gap-3">
+                                <Play className="h-4 w-4 mt-1" />
+                                <div>
+                                  <div className="font-medium text-sm">{lecture.title}</div>
+                                  {lecture.preview && (
+                                    <span className="text-xs text-blue-500">Preview</span>
                                   )}
-                                  <div>
-                                    <p className="font-medium">{lecture.title}</p>
-                                    <p className="text-xs text-muted-foreground">{lecture.duration}</p>
-                                  </div>
                                 </div>
-                                {lecture.preview && (
-                                  <Button variant="link" size="sm">Pratinjau</Button>
-                                )}
                               </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="instructor">
-                  <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      <img 
-                        src={course.instructor.avatar} 
-                        alt={course.instructor.name}
-                        className="w-24 h-24 rounded-full object-cover" 
-                      />
-                      <div>
-                        <h2 className="text-xl font-bold mb-1">{course.instructor.name}</h2>
-                        <p className="text-muted-foreground mb-4">{course.instructor.title}</p>
-                        
-                        <div className="flex flex-wrap gap-4 text-sm mb-4">
-                          <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4 text-yellow-500" />
-                            <span>{course.instructor.rating.toFixed(1)} Rating</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MessageCircle className="h-4 w-4" />
-                            <span>{course.reviewCount} Ulasan</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            <span>{course.instructor.students.toLocaleString()} Siswa</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <BookOpen className="h-4 w-4" />
-                            <span>{course.instructor.courses} Kursus</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium mb-3">Tentang Instruktur</h3>
-                      <p>{course.instructor.bio}</p>
-                    </div>
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="reviews">
-                  <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row gap-8 items-center">
-                      <div className="text-center">
-                        <div className="text-5xl font-bold mb-2">{course.rating.toFixed(1)}</div>
-                        <div className="flex mb-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star 
-                              key={i}
-                              className={`h-5 w-5 ${i < Math.floor(course.rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`} 
-                            />
+                              <div className="text-sm text-muted-foreground">{lecture.duration}</div>
+                            </div>
                           ))}
                         </div>
-                        <p className="text-sm text-muted-foreground">Rating Kursus</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="instructor">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <img 
+                    src={courseData.instructorAvatar} 
+                    alt={courseData.instructor} 
+                    className="w-24 h-24 rounded-full"
+                  />
+                  
+                  <div>
+                    <h2 className="text-2xl font-bold mb-1">{courseData.instructor}</h2>
+                    <p className="text-muted-foreground mb-4">{courseData.instructorTitle}</p>
+                    
+                    <div className="flex gap-4 mb-4">
+                      <div className="flex items-center gap-1">
+                        <Star className="h-5 w-5 text-yellow-500" />
+                        <span className="font-medium">4.7</span>
+                        <span className="text-muted-foreground text-sm">Rating Instruktur</span>
                       </div>
                       
-                      <div className="flex-1 space-y-2">
-                        {[5, 4, 3, 2, 1].map((num) => {
-                          const percent = num === 5 ? 78 : num === 4 ? 15 : num === 3 ? 5 : num === 2 ? 1 : 1;
-                          return (
-                            <div key={num} className="flex items-center gap-2">
-                              <div className="flex items-center w-20">
-                                <span className="text-sm mr-1">{num}</span>
-                                <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                              </div>
-                              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div 
-                                  className="h-full bg-yellow-500 rounded-full" 
-                                  style={{ width: `${percent}%` }}
-                                ></div>
-                              </div>
-                              <span className="text-sm w-12">{percent}%</span>
-                            </div>
-                          );
-                        })}
+                      <div className="flex items-center gap-1">
+                        <Users className="h-5 w-5 text-primary" />
+                        <span className="font-medium">45,231</span>
+                        <span className="text-muted-foreground text-sm">Siswa</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1">
+                        <BookOpen className="h-5 w-5 text-primary" />
+                        <span className="font-medium">12</span>
+                        <span className="text-muted-foreground text-sm">Kursus</span>
                       </div>
                     </div>
                     
-                    <div className="space-y-6">
-                      <h3 className="font-bold text-lg">Ulasan Siswa</h3>
-                      
-                      {course.reviews.map((review) => (
-                        <div key={review.id} className="border-b pb-6">
-                          <div className="flex items-start gap-4">
-                            <img 
-                              src={review.avatar} 
-                              alt={review.user}
-                              className="w-12 h-12 rounded-full" 
-                            />
-                            <div>
-                              <p className="font-medium">{review.user}</p>
-                              <div className="flex items-center gap-2 mb-2">
-                                <div className="flex">
-                                  {[...Array(5)].map((_, i) => (
-                                    <Star 
-                                      key={i}
-                                      className={`h-4 w-4 ${i < review.rating ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`} 
-                                    />
-                                  ))}
-                                </div>
-                                <span className="text-sm text-muted-foreground">{review.date}</span>
-                              </div>
-                              <p>{review.comment}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                      
-                      <div className="text-center">
-                        <Button variant="outline">Lihat Lebih Banyak Ulasan</Button>
+                    <p className="text-muted-foreground">{courseData.instructorBio}</p>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="reviews">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  <div className="lg:col-span-1">
+                    <div className="text-center mb-6">
+                      <div className="text-5xl font-bold text-yellow-500 mb-2">{courseData.rating.toFixed(1)}</div>
+                      <div className="flex justify-center mb-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i}
+                            size={20} 
+                            className={i < Math.floor(courseData.rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"} 
+                          />
+                        ))}
                       </div>
+                      <div className="text-muted-foreground">{courseData.reviewCount} ulasan</div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {[5, 4, 3, 2, 1].map((rating) => {
+                        // Generate random percentages for this mock
+                        const percentage = rating === 5 ? 78 : 
+                                          rating === 4 ? 15 : 
+                                          rating === 3 ? 5 : 
+                                          rating === 2 ? 1 : 1;
+                        
+                        return (
+                          <div key={rating} className="flex items-center gap-3">
+                            <div className="flex items-center gap-1">
+                              <span>{rating}</span>
+                              <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                            </div>
+                            <Progress className="h-2 flex-1" value={percentage} />
+                            <span className="text-sm text-muted-foreground">{percentage}%</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                </TabsContent>
-              </Tabs>
-            </div>
+                  
+                  <div className="lg:col-span-2">
+                    <h2 className="text-2xl font-bold mb-6">Ulasan</h2>
+                    
+                    <div className="space-y-6">
+                      {courseData.reviews.map((review) => (
+                        <div key={review.id} className="border-b pb-6 last:border-b-0">
+                          <div className="flex justify-between mb-2">
+                            <div className="flex items-center gap-3">
+                              <img src={review.avatar} alt={review.user} className="w-10 h-10 rounded-full" />
+                              <div>
+                                <div className="font-medium">{review.user}</div>
+                                <div className="flex items-center gap-2">
+                                  <div className="flex">
+                                    {[...Array(5)].map((_, i) => (
+                                      <Star 
+                                        key={i}
+                                        size={14} 
+                                        className={i < review.rating ? "fill-yellow-500 text-yellow-500" : "text-gray-300"} 
+                                      />
+                                    ))}
+                                  </div>
+                                  <span className="text-sm text-muted-foreground">{review.date}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <p className="text-muted-foreground">{review.comment}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
       </main>

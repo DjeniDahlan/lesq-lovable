@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Menu, X, BookOpen, User } from 'lucide-react';
+import CategoryMenu from './CategoryMenu';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,17 +20,15 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link to="/categories" className="text-sm font-medium hover:text-primary">
-            Kategori
-          </Link>
+        <div className="hidden md:flex items-center gap-6">
+          <CategoryMenu />
           <Link to="/search" className="text-sm font-medium hover:text-primary">
             Jelajahi Kursus
           </Link>
           <Link to="/become-instructor" className="text-sm font-medium hover:text-primary">
             Jadi Instruktur
           </Link>
-        </nav>
+        </div>
 
         <div className="hidden md:flex items-center gap-4">
           <div className="relative">
@@ -69,35 +68,23 @@ const Navbar = () => {
             />
           </div>
           <nav className="flex flex-col space-y-4">
-            <Link 
-              to="/categories"
-              className="text-sm font-medium hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/categories" className="text-sm font-medium hover:text-primary">
               Kategori
             </Link>
-            <Link 
-              to="/search" 
-              className="text-sm font-medium hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/search" className="text-sm font-medium hover:text-primary">
               Jelajahi Kursus
             </Link>
-            <Link 
-              to="/become-instructor" 
-              className="text-sm font-medium hover:text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/become-instructor" className="text-sm font-medium hover:text-primary">
               Jadi Instruktur
             </Link>
             <div className="flex gap-4 pt-2">
               <Link to="/login" className="flex-1">
-                <Button variant="outline" className="w-full" size="sm" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="outline" className="w-full" size="sm">
                   Masuk
                 </Button>
               </Link>
               <Link to="/register" className="flex-1">
-                <Button className="w-full" size="sm" onClick={() => setIsMenuOpen(false)}>
+                <Button className="w-full" size="sm">
                   Daftar
                 </Button>
               </Link>
