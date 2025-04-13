@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,8 @@ import {
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -35,18 +38,45 @@ const Login = () => {
     
     setIsLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
       
-      // In a real app, you would check credentials and handle login logic here
-      // This is just a placeholder simulation
-      if (email === 'demo@example.com' && password === 'password') {
+      if (signInError) throw signInError;
+      
+      if (data.user) {
+        toast({
+          title: "Login berhasil",
+          description: "Anda berhasil masuk ke akun Anda",
+        });
         window.location.href = '/dashboard/student';
-      } else {
-        setError('Email atau kata sandi tidak valid');
       }
-    }, 1500);
+    } catch (err: any) {
+      setError(err.message || 'Email atau kata sandi tidak valid');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleOAuthSignIn = async (provider: 'google' | 'facebook') => {
+    setError('');
+    setIsLoading(true);
+    
+    try {
+      const { error: signInError } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/dashboard/student`,
+        },
+      });
+      
+      if (signInError) throw signInError;
+    } catch (err: any) {
+      setError(err.message || `Login dengan ${provider} gagal`);
+      setIsLoading(false);
+    }
   };
   
   return (
@@ -139,7 +169,13 @@ const Login = () => {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <Button variant="outline" className="w-full" type="button">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  type="button"
+                  onClick={() => handleOAuthSignIn('google')}
+                  disabled={isLoading}
+                >
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                     <path
                       d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -160,7 +196,13 @@ const Login = () => {
                   </svg>
                   Google
                 </Button>
-                <Button variant="outline" className="w-full" type="button">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  type="button"
+                  onClick={() => handleOAuthSignIn('facebook')}
+                  disabled={isLoading}
+                >
                   <svg className="mr-2 h-4 w-4" fill="#1877F2" viewBox="0 0 24 24">
                     <path
                       d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z"
