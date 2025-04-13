@@ -6,15 +6,12 @@ const Footer = () => {
     <footer className="bg-gray-50 border-t">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <BookOpen className="h-6 w-6 text-primary" />
               <span className="font-poppins text-xl font-bold">Les-Q</span>
             </Link>
-            <p className="text-gray-600 mb-6 max-w-md">
-              Platform pembelajaran online terbaik untuk mengembangkan keterampilan Anda dan meningkatkan karir
-            </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 ml-auto">
               <a href="#" className="text-gray-400 hover:text-primary">
                 <Facebook size={20} />
               </a>
