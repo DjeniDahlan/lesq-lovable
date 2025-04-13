@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -22,6 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { toast } from "@/hooks/use-toast";
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
@@ -33,6 +35,7 @@ const Register = () => {
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,17 +48,42 @@ const Register = () => {
     
     setIsLoading(true);
     
-    // Simulate registration process
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      // Register the user with Supabase
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            fullName,
+            role
+          }
+        }
+      });
       
-      // In a real app, you would handle registration logic here
-      if (email === 'demo@example.com') {
+      if (signUpError) {
+        throw signUpError;
+      }
+      
+      toast({
+        title: "Pendaftaran Berhasil!",
+        description: "Akun Anda telah berhasil dibuat.",
+      });
+      
+      // Redirect to dashboard based on role
+      navigate(role === 'student' ? '/dashboard/student' : '/dashboard/instructor');
+      
+    } catch (err: any) {
+      console.error("Registration error:", err);
+      
+      if (err.message === 'User already registered') {
         setError('Email sudah terdaftar');
       } else {
-        window.location.href = role === 'student' ? '/dashboard/student' : '/dashboard/instructor';
+        setError(`Pendaftaran gagal: ${err.message}`);
       }
-    }, 1500);
+    } finally {
+      setIsLoading(false);
+    }
   };
   
   return (
