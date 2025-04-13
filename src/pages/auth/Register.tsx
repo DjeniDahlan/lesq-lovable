@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -49,7 +48,6 @@ const Register = () => {
     setIsLoading(true);
     
     try {
-      // Register the user with Supabase
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -70,7 +68,6 @@ const Register = () => {
         description: "Akun Anda telah berhasil dibuat.",
       });
       
-      // Redirect to dashboard based on role
       navigate(role === 'student' ? '/dashboard/student' : '/dashboard/instructor');
       
     } catch (err: any) {
@@ -97,12 +94,12 @@ const Register = () => {
               <div className="flex justify-center mb-2">
                 <Link to="/" className="flex items-center gap-2">
                   <BookOpen className="h-8 w-8 text-primary" />
-                  <span className="font-poppins text-2xl font-bold">SkillScape</span>
+                  <span className="font-poppins text-2xl font-bold">Les-Q</span>
                 </Link>
               </div>
               <CardTitle className="text-2xl text-center">Buat Akun</CardTitle>
               <CardDescription className="text-center">
-                Daftar untuk mulai belajar atau mengajar di SkillScape
+                Daftar untuk mulai belajar atau mengajar di Les-Q
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

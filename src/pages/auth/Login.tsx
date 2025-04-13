@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -61,7 +60,7 @@ const Login = () => {
               <div className="flex justify-center mb-2">
                 <Link to="/" className="flex items-center gap-2">
                   <BookOpen className="h-8 w-8 text-primary" />
-                  <span className="font-poppins text-2xl font-bold">SkillScape</span>
+                  <span className="font-poppins text-2xl font-bold">Les-Q</span>
                 </Link>
               </div>
               <CardTitle className="text-2xl text-center">Masuk</CardTitle>

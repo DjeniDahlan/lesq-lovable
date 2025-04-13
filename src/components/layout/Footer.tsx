@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { BookOpen, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
@@ -10,7 +9,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <BookOpen className="h-6 w-6 text-primary" />
-              <span className="font-poppins text-xl font-bold">SkillScape</span>
+              <span className="font-poppins text-xl font-bold">Les-Q</span>
             </Link>
             <p className="text-gray-600 mb-6 max-w-md">
               Platform pembelajaran online terbaik untuk mengembangkan keterampilan Anda dan meningkatkan karir
@@ -70,7 +69,7 @@ const Footer = () => {
         
         <div className="border-t mt-12 pt-8">
           <p className="text-center text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} SkillScape. Seluruh hak cipta dilindungi.
+            &copy; {new Date().getFullYear()} Les-Q. Seluruh hak cipta dilindungi.
           </p>
         </div>
       </div>

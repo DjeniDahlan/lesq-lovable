@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
             <BookOpen className="h-6 w-6 text-primary" />
-            <span className="font-poppins text-xl font-bold">SkillScape</span>
+            <span className="font-poppins text-xl font-bold">Les-Q</span>
           </Link>
         </div>
 
