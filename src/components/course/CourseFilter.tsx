@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -40,10 +41,53 @@ const ratings = [
 ];
 
 const CourseFilter = () => {
-  const [category, setCategory] = useState("Semua Kategori");
-  const [level, setLevel] = useState("Semua Level");
-  const [rating, setRating] = useState("4.0");
-  const [priceRange, setPriceRange] = useState([0, 2000000]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const [category, setCategory] = useState(searchParams.get('category') || "Semua Kategori");
+  const [level, setLevel] = useState(searchParams.get('level') || "Semua Level");
+  const [rating, setRating] = useState(searchParams.get('rating') || "4.0");
+  
+  const minPriceParam = searchParams.get('minPrice');
+  const maxPriceParam = searchParams.get('maxPrice');
+  const [priceRange, setPriceRange] = useState([
+    minPriceParam ? parseInt(minPriceParam) : 0,
+    maxPriceParam ? parseInt(maxPriceParam) : 2000000
+  ]);
+
+  const applyFilters = () => {
+    setSearchParams(prev => {
+      const newParams = new URLSearchParams(prev);
+      
+      if (category !== "Semua Kategori") {
+        newParams.set('category', category);
+      } else {
+        newParams.delete('category');
+      }
+      
+      if (level !== "Semua Level") {
+        newParams.set('level', level);
+      } else {
+        newParams.delete('level');
+      }
+      
+      newParams.set('rating', rating);
+      newParams.set('minPrice', priceRange[0].toString());
+      newParams.set('maxPrice', priceRange[1].toString());
+      
+      return newParams;
+    });
+  };
+
+  // Listen for changes in search params to update local state
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    const levelParam = searchParams.get('level');
+    const ratingParam = searchParams.get('rating');
+    
+    if (categoryParam) setCategory(categoryParam);
+    if (levelParam) setLevel(levelParam);
+    if (ratingParam) setRating(ratingParam);
+  }, [searchParams]);
 
   return (
     <div className="space-y-6">
@@ -105,6 +149,10 @@ const CourseFilter = () => {
                   </div>
                 </div>
               </div>
+              
+              <Button className="w-full" onClick={applyFilters}>
+                Terapkan Filter
+              </Button>
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -188,7 +236,7 @@ const CourseFilter = () => {
           </AccordionItem>
         </Accordion>
         
-        <Button className="w-full">Terapkan Filter</Button>
+        <Button className="w-full" onClick={applyFilters}>Terapkan Filter</Button>
       </div>
     </div>
   );

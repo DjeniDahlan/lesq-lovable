@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from '@/hooks/useDebounce';
-import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CourseGrid from '@/components/course/CourseGrid';
@@ -12,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search as SearchIcon, SlidersHorizontal, X } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { mockCourses } from '@/data/mockCourses';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,38 +30,43 @@ const Search = () => {
   const searchCourses = async (searchQuery: string) => {
     setIsLoading(true);
     try {
-      let queryBuilder = supabase
-        .from('courses')
-        .select('*')
-        .order('created_at', { ascending: false });
-
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Filter the mock courses based on search criteria
+      let filteredCourses = [...mockCourses];
+      
       if (searchQuery) {
-        queryBuilder = queryBuilder.ilike('title', `%${searchQuery}%`);
+        filteredCourses = filteredCourses.filter(course => 
+          course.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
       }
 
-      if (category) {
-        queryBuilder = queryBuilder.eq('category', category);
+      if (category && category !== "Semua Kategori") {
+        filteredCourses = filteredCourses.filter(course => 
+          course.category === category
+        );
       }
 
-      if (level) {
-        queryBuilder = queryBuilder.eq('level', level);
+      if (level && level !== "Semua Level") {
+        filteredCourses = filteredCourses.filter(course => 
+          course.level === level
+        );
       }
 
       if (minPrice) {
-        queryBuilder = queryBuilder.gte('price', parseInt(minPrice));
+        filteredCourses = filteredCourses.filter(course => 
+          (course.discountPrice || course.price) >= parseInt(minPrice)
+        );
       }
 
       if (maxPrice) {
-        queryBuilder = queryBuilder.lte('price', parseInt(maxPrice));
+        filteredCourses = filteredCourses.filter(course => 
+          (course.discountPrice || course.price) <= parseInt(maxPrice)
+        );
       }
 
-      const { data, error } = await queryBuilder;
-
-      if (error) {
-        throw error;
-      }
-
-      setSearchResults(data || []);
+      setSearchResults(filteredCourses);
     } catch (error: any) {
       console.error('Error searching courses:', error);
       toast({
@@ -82,13 +87,21 @@ const Search = () => {
   // Effect to handle debounced search
   useEffect(() => {
     if (debouncedQuery !== searchParams.get('q')) {
-      setSearchParams({ q: debouncedQuery });
+      setSearchParams(prev => {
+        const newParams = new URLSearchParams(prev);
+        newParams.set('q', debouncedQuery);
+        return newParams;
+      });
     }
-  }, [debouncedQuery]);
+  }, [debouncedQuery, setSearchParams]);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSearchParams({ q: query });
+    setSearchParams(prev => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set('q', query);
+      return newParams;
+    });
   };
 
   return (
