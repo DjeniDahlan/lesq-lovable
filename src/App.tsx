@@ -22,6 +22,11 @@ import Pricing from "./pages/pricing/Pricing";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import Business from "./pages/business/Business";
 import Government from "./pages/government/Government";
+import Support from "./pages/support/Support";
+import Contact from "./pages/support/Contact";
+import Privacy from "./pages/support/Privacy";
+import Terms from "./pages/support/Terms";
+import Accessibility from "./pages/support/Accessibility";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +56,12 @@ const App = () => (
           <Route path="/become-instructor" element={<BecomeInstructor />} />
           <Route path="/for-business" element={<Business />} />
           <Route path="/for-government" element={<Government />} />
+          
+          <Route path="/support" element={<Support />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/accessibility" element={<Accessibility />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
