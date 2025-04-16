@@ -1,9 +1,8 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -13,6 +12,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Student from "./pages/dashboard/Student";
 import Instructor from "./pages/dashboard/Instructor";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import About from "./pages/company/About";
 import Careers from "./pages/company/Careers";
 import Media from "./pages/company/Media";
@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/student" element={<Student />} />
           <Route path="/dashboard/instructor" element={<Instructor />} />
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
           
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
