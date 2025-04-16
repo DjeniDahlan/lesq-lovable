@@ -1,8 +1,11 @@
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const plans = [
   {
@@ -52,6 +55,38 @@ const plans = [
 ];
 
 const Pricing = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handlePlanSelection = (planName: string) => {
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      setIsProcessing(false);
+      
+      if (planName === "Basic") {
+        toast({
+          title: "Paket Basic dipilih",
+          description: "Anda telah berhasil memilih paket Basic. Selamat belajar!",
+        });
+        navigate("/courses");
+      } else if (planName === "Pro") {
+        toast({
+          title: "Paket Pro dipilih",
+          description: "Anda telah berhasil berlangganan paket Pro. Nikmati akses penuh ke semua kursus!",
+        });
+        navigate("/dashboard/student");
+      } else if (planName === "Enterprise") {
+        toast({
+          title: "Permintaan Enterprise dikirim",
+          description: "Tim kami akan segera menghubungi Anda untuk mendiskusikan solusi khusus perusahaan Anda.",
+        });
+        navigate("/contact");
+      }
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -101,8 +136,10 @@ const Pricing = () => {
                   <Button
                     className="mt-8 w-full"
                     variant={plan.popular ? "default" : "outline"}
+                    onClick={() => handlePlanSelection(plan.name)}
+                    disabled={isProcessing}
                   >
-                    {plan.buttonText}
+                    {isProcessing ? "Memproses..." : plan.buttonText}
                   </Button>
                 </div>
               ))}

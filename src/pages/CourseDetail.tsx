@@ -12,6 +12,7 @@ import {
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useToast } from '@/hooks/use-toast';
+import PurchaseDialog from '@/components/course/PurchaseDialog';
 
 // Mock course data
 const courseData = {
@@ -127,6 +128,8 @@ const CourseDetail = () => {
   const { id } = useParams();
   const [activeSection, setActiveSection] = useState<number | null>(null);
   const { toast } = useToast();
+  const [isPurchaseDialogOpen, setIsPurchaseDialogOpen] = useState(false);
+  const [isTrialDialogOpen, setIsTrialDialogOpen] = useState(false);
   
   const toggleSection = (sectionId: number) => {
     if (activeSection === sectionId) {
@@ -149,6 +152,14 @@ const CourseDetail = () => {
       title: "Link disalin",
       description: "Link kursus telah disalin ke clipboard",
     });
+  };
+
+  const handleBuyNow = () => {
+    setIsPurchaseDialogOpen(true);
+  };
+
+  const handleFreeTrial = () => {
+    setIsTrialDialogOpen(true);
   };
   
   return (
@@ -261,8 +272,8 @@ const CourseDetail = () => {
                   </div>
                   
                   <div className="space-y-3">
-                    <Button className="w-full">Beli Sekarang</Button>
-                    <Button variant="outline" className="w-full">
+                    <Button className="w-full" onClick={handleBuyNow}>Beli Sekarang</Button>
+                    <Button variant="outline" className="w-full" onClick={handleFreeTrial}>
                       Coba Gratis 7 Hari
                     </Button>
                   </div>
@@ -522,6 +533,25 @@ const CourseDetail = () => {
       </main>
       
       <Footer />
+
+      {/* Purchase Dialog */}
+      <PurchaseDialog
+        isOpen={isPurchaseDialogOpen}
+        onClose={() => setIsPurchaseDialogOpen(false)}
+        courseTitle={courseData.title}
+        courseId={id || '1'}
+        isTrial={false}
+        price={courseData.discountPrice || courseData.price}
+      />
+
+      {/* Trial Dialog */}
+      <PurchaseDialog
+        isOpen={isTrialDialogOpen}
+        onClose={() => setIsTrialDialogOpen(false)}
+        courseTitle={courseData.title}
+        courseId={id || '1'}
+        isTrial={true}
+      />
     </div>
   );
 };
