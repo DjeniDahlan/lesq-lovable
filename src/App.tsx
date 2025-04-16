@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,9 +25,9 @@ import Business from "./pages/business/Business";
 import Government from "./pages/government/Government";
 import Support from "./pages/support/Support";
 import Contact from "./pages/support/Contact";
-import Privacy from "./pages/support/Privacy";
-import Terms from "./pages/support/Terms";
-import Accessibility from "./pages/support/Accessibility";
+import Privacy from "./pages/legal/Privacy";
+import Terms from "./pages/legal/Terms";
+import Accessibility from "./pages/legal/Accessibility";
 
 const queryClient = new QueryClient();
 
