@@ -30,28 +30,36 @@ const PurchasesTable = () => {
     async function fetchPurchases() {
       try {
         setIsLoading(true);
-        // Get course purchases and join with profiles to get user names
-        const { data, error } = await supabase
+        
+        // First fetch all purchases
+        const { data: purchaseData, error: purchaseError } = await supabase
           .from('course_purchases')
-          .select(`
-            *,
-            profiles:user_id (full_name)
-          `)
+          .select('*')
           .order('purchase_date', { ascending: false });
 
-        if (error) {
-          console.error("Error fetching purchases:", error);
+        if (purchaseError) {
+          console.error("Error fetching purchases:", purchaseError);
           toast.error("Gagal memuat data pembelian kursus");
           return;
         }
 
-        // Transform the data to flatten the profiles join
-        const formattedData = data?.map(item => ({
-          ...item,
-          full_name: item.profiles?.full_name
-        }));
+        // Then for each purchase, get the user profile
+        const purchasesWithUserInfo = await Promise.all(
+          (purchaseData || []).map(async (purchase) => {
+            const { data: profileData } = await supabase
+              .from('profiles')
+              .select('full_name')
+              .eq('id', purchase.user_id)
+              .single();
+              
+            return {
+              ...purchase,
+              full_name: profileData?.full_name || "Tidak diketahui"
+            };
+          })
+        );
 
-        setPurchases(formattedData || []);
+        setPurchases(purchasesWithUserInfo || []);
       } catch (error) {
         console.error("Unexpected error:", error);
         toast.error("Terjadi kesalahan saat memuat data");
@@ -118,7 +126,7 @@ const PurchasesTable = () => {
             purchases.map((purchase) => (
               <TableRow key={purchase.id}>
                 <TableCell>{getCourseNameById(purchase.course_id)}</TableCell>
-                <TableCell>{purchase.full_name || "Tidak diketahui"}</TableCell>
+                <TableCell>{purchase.full_name}</TableCell>
                 <TableCell>{formatDate(purchase.purchase_date)}</TableCell>
                 <TableCell>{formatPrice(purchase.price)}</TableCell>
               </TableRow>
