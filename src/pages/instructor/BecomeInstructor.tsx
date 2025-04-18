@@ -2,7 +2,9 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, DollarSign, Award } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen, Users, DollarSign, Award, Laptop, BookUser, PenTool, Presentation } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BecomeInstructor = () => {
   return (
@@ -10,7 +12,7 @@ const BecomeInstructor = () => {
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gray-50 py-16">
+        <section className="bg-gradient-to-b from-primary/10 to-background py-16">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -19,7 +21,9 @@ const BecomeInstructor = () => {
               <p className="text-lg text-gray-600 mb-8">
                 Bagikan pengetahuan Anda dan bantu ribuan pembelajar mencapai tujuan mereka sambil membangun karir yang menguntungkan
               </p>
-              <Button size="lg">Mulai Mengajar</Button>
+              <Link to="/register">
+                <Button size="lg" className="px-8">Daftar Sekarang</Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -28,34 +32,34 @@ const BecomeInstructor = () => {
         <section className="py-16">
           <div className="container">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Mengapa Menjadi Instruktur?
+              Keuntungan Menjadi Instruktur
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <BookOpen className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Platform Terpercaya</h3>
-                <p className="text-gray-600">
-                  Bergabung dengan platform pembelajaran online terkemuka di Indonesia
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Jangkau Lebih Banyak</h3>
-                <p className="text-gray-600">
-                  Akses ke ribuan pembelajar yang aktif mencari pengetahuan baru
-                </p>
-              </div>
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                   <DollarSign className="h-8 w-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Penghasilan Menarik</h3>
                 <p className="text-gray-600">
-                  Dapatkan penghasilan dari setiap kursus yang Anda buat dan jual
+                  Dapatkan komisi hingga 70% dari setiap penjualan kursus Anda
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Jangkau Lebih Luas</h3>
+                <p className="text-gray-600">
+                  Akses ke ribuan pembelajar aktif yang mencari ilmu baru
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Laptop className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Fleksibel</h3>
+                <p className="text-gray-600">
+                  Ajar dari mana saja dan kapan saja sesuai jadwal Anda
                 </p>
               </div>
               <div className="text-center">
@@ -64,15 +68,59 @@ const BecomeInstructor = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Bangun Reputasi</h3>
                 <p className="text-gray-600">
-                  Kembangkan personal brand Anda sebagai ahli di bidang Anda
+                  Kembangkan personal brand sebagai ahli di bidang Anda
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* How It Works Section */}
+        {/* Features Section */}
         <section className="py-16 bg-gray-50">
+          <div className="container">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Apa yang Bisa Anda Lakukan
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="mb-4">
+                    <BookUser className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">Buat Kursus Video</h3>
+                  <p className="text-gray-600">
+                    Rekam dan unggah video pembelajaran berkualitas tinggi untuk ditonton kapan saja
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="mb-4">
+                    <Presentation className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">Sesi Live</h3>
+                  <p className="text-gray-600">
+                    Adakan kelas langsung interaktif dan jawab pertanyaan siswa secara real-time
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="mb-4">
+                    <PenTool className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">Tugas & Ujian</h3>
+                  <p className="text-gray-600">
+                    Buat berbagai jenis tugas dan ujian untuk mengevaluasi pemahaman siswa
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-16">
           <div className="container">
             <h2 className="text-3xl font-bold text-center mb-12">
               Cara Menjadi Instruktur
@@ -84,9 +132,9 @@ const BecomeInstructor = () => {
                     1
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Daftar sebagai Instruktur</h3>
+                    <h3 className="text-xl font-semibold mb-2">Daftar & Verifikasi</h3>
                     <p className="text-gray-600">
-                      Lengkapi profil dan verifikasi identitas Anda sebagai instruktur
+                      Lengkapi profil dan verifikasi identitas Anda sebagai instruktur profesional
                     </p>
                   </div>
                 </div>
@@ -95,9 +143,9 @@ const BecomeInstructor = () => {
                     2
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Buat Kursus Anda</h3>
+                    <h3 className="text-xl font-semibold mb-2">Siapkan Kursus</h3>
                     <p className="text-gray-600">
-                      Rancang dan upload materi pembelajaran berkualitas tinggi
+                      Rancang silabus dan buat konten pembelajaran yang menarik dan berkualitas
                     </p>
                   </div>
                 </div>
@@ -106,9 +154,9 @@ const BecomeInstructor = () => {
                     3
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Review dan Publikasi</h3>
+                    <h3 className="text-xl font-semibold mb-2">Review & Publikasi</h3>
                     <p className="text-gray-600">
-                      Tim kami akan mereview kursus Anda sebelum dipublikasikan
+                      Tim kami akan mereview kursus Anda untuk memastikan kualitas sebelum dipublikasikan
                     </p>
                   </div>
                 </div>
@@ -119,11 +167,28 @@ const BecomeInstructor = () => {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Mulai Mengajar</h3>
                     <p className="text-gray-600">
-                      Interaksi dengan pembelajar dan dapatkan penghasilan dari kursus Anda
+                      Interaksi dengan pembelajar dan dapatkan penghasilan dari setiap kursus yang terjual
                     </p>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-primary/10">
+          <div className="container">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">
+                Siap Untuk Mulai Mengajar?
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Bergabunglah dengan komunitas instruktur Les-Q dan mulai bagikan pengetahuan Anda
+              </p>
+              <Link to="/register">
+                <Button size="lg" className="px-8">Daftar Sekarang</Button>
+              </Link>
             </div>
           </div>
         </section>
