@@ -36,6 +36,89 @@ export type Database = {
         }
         Relationships: []
       }
+      instructor_applications: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          education: string
+          email: string
+          experience: string
+          expertise: string[]
+          full_name: string
+          id: string
+          status: Database["public"]["Enums"]["instructor_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          education: string
+          email: string
+          experience: string
+          expertise: string[]
+          full_name: string
+          id?: string
+          status?: Database["public"]["Enums"]["instructor_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          education?: string
+          email?: string
+          experience?: string
+          expertise?: string[]
+          full_name?: string
+          id?: string
+          status?: Database["public"]["Enums"]["instructor_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      instructor_documents: {
+        Row: {
+          application_id: string
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          project_url: string | null
+          title: string
+          type: string
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          project_url?: string | null
+          title: string
+          type: string
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          project_url?: string | null
+          title?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "instructor_documents_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "instructor_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -71,7 +154,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      instructor_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -186,6 +269,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      instructor_status: ["pending", "approved", "rejected"],
+    },
   },
 } as const

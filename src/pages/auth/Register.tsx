@@ -84,9 +84,8 @@ const Register = () => {
   };
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      
       <main className="flex-grow py-12 bg-gray-50">
         <div className="container max-w-md">
           <Card className="w-full">
@@ -110,6 +109,28 @@ const Register = () => {
                 </Alert>
               )}
               
+              <div className="space-y-4 mb-6">
+                <h2 className="text-lg font-medium text-center">Pilih Jenis Akun</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <Button
+                    variant={role === 'student' ? 'default' : 'outline'}
+                    className="w-full"
+                    onClick={() => setRole('student')}
+                  >
+                    Siswa
+                  </Button>
+                  <Button
+                    variant={role === 'instructor' ? 'default' : 'outline'}
+                    className="w-full"
+                    onClick={() => {
+                      navigate('/register/instructor');
+                    }}
+                  >
+                    Instruktur
+                  </Button>
+                </div>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <div className="relative">
