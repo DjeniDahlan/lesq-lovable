@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +11,7 @@ import CourseDetail from "./pages/CourseDetail";
 import Search from "./pages/Search";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import InstructorRegister from "./pages/instructor/Register";
 import Student from "./pages/dashboard/Student";
 import Instructor from "./pages/dashboard/Instructor";
 import AdminDashboard from "./pages/admin/AdminDashboard";
