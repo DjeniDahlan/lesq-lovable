@@ -24,7 +24,7 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  if (!profile) return <div className="p-4">Loading...</div>;
+  if (!profile) return <div className="p-4">Memuat...</div>;
 
   return (
     <div className="container max-w-4xl py-8">
