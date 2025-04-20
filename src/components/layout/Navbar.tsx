@@ -1,13 +1,25 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Menu, X, BookOpen, User } from 'lucide-react';
 import CategoryMenu from './CategoryMenu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { supabase } from '@/integrations/supabase/client';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    window.location.href = '/login';
+  };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -39,12 +51,29 @@ const Navbar = () => {
               className="w-[200px] pl-8 rounded-full bg-muted"
             />
           </div>
-          <Link to="/login">
-            <Button variant="outline" size="sm">Masuk</Button>
-          </Link>
-          <Link to="/register">
-            <Button size="sm">Daftar</Button>
-          </Link>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <User className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem asChild>
+                <Link to="/account/profile">Profil Saya</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/account/settings">Pengaturan</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/account/purchases">Pembelian</Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                Keluar
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Mobile Menu Button */}
@@ -77,18 +106,18 @@ const Navbar = () => {
             <Link to="/become-instructor" className="text-sm font-medium hover:text-primary">
               Jadi Instruktur
             </Link>
-            <div className="flex gap-4 pt-2">
-              <Link to="/login" className="flex-1">
-                <Button variant="outline" className="w-full" size="sm">
-                  Masuk
-                </Button>
-              </Link>
-              <Link to="/register" className="flex-1">
-                <Button className="w-full" size="sm">
-                  Daftar
-                </Button>
-              </Link>
-            </div>
+            <Link to="/account/profile" className="text-sm font-medium hover:text-primary">
+              Profil Saya
+            </Link>
+            <Link to="/account/settings" className="text-sm font-medium hover:text-primary">
+              Pengaturan
+            </Link>
+            <Link to="/account/purchases" className="text-sm font-medium hover:text-primary">
+              Pembelian
+            </Link>
+            <Button onClick={handleLogout} variant="ghost" className="justify-start px-0">
+              Keluar
+            </Button>
           </nav>
         </div>
       )}

@@ -31,6 +31,11 @@ import Terms from "./pages/legal/Terms";
 import Accessibility from "./pages/legal/Accessibility";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
+// Account Pages
+import Profile from "./pages/account/Profile";
+import Settings from "./pages/account/Settings";
+import Purchases from "./pages/account/Purchases";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -46,6 +51,12 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/instructor" element={<InstructorRegister />} />
+          
+          {/* Account Routes */}
+          <Route path="/account/profile" element={<Profile />} />
+          <Route path="/account/settings" element={<Settings />} />
+          <Route path="/account/purchases" element={<Purchases />} />
+          
           <Route path="/dashboard/student" element={<Student />} />
           <Route path="/dashboard/instructor" element={<Instructor />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
