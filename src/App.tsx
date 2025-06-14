@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,7 @@ import Media from "./pages/company/Media";
 import Blog from "./pages/company/Blog";
 import Affiliates from "./pages/company/Affiliates";
 import Courses from "./pages/courses/Courses";
+import Categories from "./pages/categories/Categories";
 import Pricing from "./pages/pricing/Pricing";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import Business from "./pages/business/Business";
