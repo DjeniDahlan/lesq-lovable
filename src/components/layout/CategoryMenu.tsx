@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -87,13 +86,6 @@ const CategoryMenu = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
-        <NavigationMenuItem>
-          <Link to="/categories">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Semua Kategori
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );
