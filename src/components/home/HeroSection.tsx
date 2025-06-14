@@ -37,7 +37,7 @@ const HeroSection = () => {
 
           <div className="flex justify-center gap-4">
             <Link to="/login">
-              <Button variant="secondary" className="flex items-center gap-2 py-3 px-6">
+              <Button className="flex items-center gap-2 py-3 px-6">
                 <LogIn className="h-4 w-4" />
                 Masuk
               </Button>
