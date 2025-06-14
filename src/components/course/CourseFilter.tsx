@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown } from 'lucide-react';
@@ -20,15 +19,13 @@ import {
 
 const categories = [
   "Semua Kategori",
-  "Pengembangan Web",
-  "Bisnis",
-  "Desain Grafis",
-  "Pemasaran Digital",
-  "Pengembangan Pribadi",
-  "Fotografi",
-  "Musik",
-  "Data Science",
-  "Mobile Development",
+  "Sekolah Dasar (SD)",
+  "Sekolah Menengah Pertama (SMP)",
+  "Sekolah Menengah Atas (SMA) - Umum",
+  "Sekolah Menengah Atas (SMA) - IPA",
+  "Sekolah Menengah Atas (SMA) - IPS",
+  "SNBT UTBK",
+  "Ujian Mandiri",
 ];
 
 const levels = ["Semua Level", "Pemula", "Menengah", "Mahir"];
