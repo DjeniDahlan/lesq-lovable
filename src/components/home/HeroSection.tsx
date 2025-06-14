@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Search, LogIn } from 'lucide-react';
 
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,7 +19,7 @@ const HeroSection = () => {
             Platform pembelajaran online untuk siswa SD, SMP, SMA hingga persiapan SNBT UTBK dan Ujian Mandiri PTN
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6">
             <div className="relative flex-grow">
               <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
               <Input 
@@ -32,6 +32,15 @@ const HeroSection = () => {
             </div>
             <Link to={`/search?q=${searchQuery}`}>
               <Button className="w-full sm:w-auto py-6 px-8">Cari</Button>
+            </Link>
+          </div>
+
+          <div className="flex justify-center">
+            <Link to="/login">
+              <Button variant="outline" className="flex items-center gap-2 py-3 px-6">
+                <LogIn className="h-4 w-4" />
+                Masuk
+              </Button>
             </Link>
           </div>
         </div>
