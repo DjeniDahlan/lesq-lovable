@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { BookOpen, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
@@ -49,7 +50,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li><Link to="/courses" className="text-gray-600 hover:text-primary text-sm">Katalog Kursus</Link></li>
               <li><Link to="/pricing" className="text-gray-600 hover:text-primary text-sm">Harga Berlangganan</Link></li>
-              <li><Link to="/become-instructor" className="text-gray-600 hover:text-primary text-sm">Jadi Instruktur</Link></li>
+              <li><Link to="/become-instructor" className="text-gray-600 hover:text-primary text-sm">Jadi Pengajar</Link></li>
               <li><Link to="/for-business" className="text-gray-600 hover:text-primary text-sm">Untuk Bisnis</Link></li>
               <li><Link to="/for-government" className="text-gray-600 hover:text-primary text-sm">Untuk Pemerintah</Link></li>
             </ul>
