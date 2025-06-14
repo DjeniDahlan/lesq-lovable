@@ -3,36 +3,36 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BadgeCheck, Briefcase, MapPin } from "lucide-react";
+import { MapPin, Clock, Users } from "lucide-react";
 
-const careers = [
+const jobs = [
   {
-    title: "Senior Software Engineer",
-    department: "Engineering",
+    title: "Guru Matematika SMA",
+    department: "Pendidikan",
     location: "Jakarta",
-    type: "Full Time",
-    description: "Memimpin pengembangan fitur-fitur baru platform pembelajaran kami."
+    type: "Full-time",
+    description: "Mencari guru matematika berpengalaman untuk mengajar siswa SMA secara online."
   },
   {
-    title: "Content Marketing Manager",
+    title: "Content Creator",
     department: "Marketing",
-    location: "Jakarta",
-    type: "Full Time",
-    description: "Mengembangkan dan mengelola strategi konten untuk platform kami."
-  },
-  {
-    title: "Curriculum Developer",
-    department: "Education",
     location: "Remote",
-    type: "Full Time",
-    description: "Merancang kurikulum pembelajaran yang efektif dan berkualitas."
+    type: "Part-time",
+    description: "Membuat konten edukatif dan engaging untuk media sosial dan platform pembelajaran."
   },
   {
-    title: "Customer Success Specialist",
-    department: "Support",
+    title: "Software Engineer",
+    department: "Technology",
     location: "Bandung",
-    type: "Full Time",
-    description: "Membantu pengguna memaksimalkan pengalaman belajar mereka."
+    type: "Full-time",
+    description: "Mengembangkan dan memelihara platform pembelajaran online Les-Q."
+  },
+  {
+    title: "Customer Success Manager",
+    department: "Customer Service",
+    location: "Surabaya",
+    type: "Full-time",
+    description: "Membantu siswa dan orangtua untuk mendapatkan pengalaman terbaik di Les-Q."
   }
 ];
 
@@ -41,69 +41,81 @@ const Careers = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="bg-gray-50 py-16">
           <div className="container">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Karir di Les-Q</h1>
-            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
-              Bergabunglah dengan tim kami untuk membangun masa depan pendidikan digital di Indonesia
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
+              Bergabunglah dengan Tim Kami
+            </h1>
+            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
+              Wujudkan misi mulia mencerdaskan bangsa bersama Les-Q
             </p>
           </div>
         </section>
 
-        {/* Benefits Section */}
         <section className="py-16">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">Mengapa Bergabung dengan Kami?</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <BadgeCheck className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Lingkungan Inovatif</h3>
-                <p className="text-gray-600">Bekerja dengan teknologi terkini dan tim yang berpengalaman.</p>
-              </div>
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <Briefcase className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Pengembangan Karir</h3>
-                <p className="text-gray-600">Kesempatan belajar dan berkembang bersama perusahaan.</p>
-              </div>
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <MapPin className="h-12 w-12 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Fleksibilitas</h3>
-                <p className="text-gray-600">Kebijakan kerja hybrid dan remote yang mendukung work-life balance.</p>
-              </div>
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold text-center mb-6">Lowongan Kerja Terbuka</h2>
+              <p className="text-center text-gray-600 max-w-2xl mx-auto">
+                Kami selalu mencari talenta terbaik untuk bergabung dalam misi memajukan pendidikan Indonesia
+              </p>
+            </div>
+
+            <div className="grid gap-6">
+              {jobs.map((job, index) => (
+                <Card key={index} className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between">
+                    <div className="flex-grow">
+                      <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
+                      <p className="text-gray-600 mb-4">{job.description}</p>
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Users className="h-4 w-4" />
+                          {job.department}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-4 w-4" />
+                          {job.location}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {job.type}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 md:mt-0 md:ml-6">
+                      <Button>Lamar Sekarang</Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Open Positions */}
-        <section className="bg-gray-50 py-16">
+        <section className="py-16 bg-gray-50">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">Posisi yang Tersedia</h2>
-            <div className="grid gap-6 max-w-4xl mx-auto">
-              {careers.map((job, index) => (
-                <Card key={index} className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                        <span>{job.department}</span>
-                        <span>•</span>
-                        <span>{job.location}</span>
-                        <span>•</span>
-                        <span>{job.type}</span>
-                      </div>
-                      <p className="mt-2 text-gray-600">{job.description}</p>
-                    </div>
-                    <Button className="mt-4 md:mt-0">Lamar Sekarang</Button>
-                  </div>
-                </Card>
-              ))}
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">Budaya Kerja Kami</h2>
+              <p className="text-gray-600 mb-8">
+                Di Les-Q, kami menciptakan lingkungan kerja yang mendukung pertumbuhan, 
+                inovasi, dan kolaborasi. Setiap anggota tim memiliki kesempatan untuk 
+                berkembang dan memberikan dampak positif pada pendidikan Indonesia.
+              </p>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div>
+                  <h3 className="font-semibold mb-2">Work-Life Balance</h3>
+                  <p className="text-sm text-gray-600">Fleksibilitas waktu dan dukungan kesejahteraan karyawan</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Pembelajaran Berkelanjutan</h3>
+                  <p className="text-sm text-gray-600">Program pengembangan dan pelatihan rutin</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Tim yang Solid</h3>
+                  <p className="text-sm text-gray-600">Budaya saling mendukung dan kolaboratif</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

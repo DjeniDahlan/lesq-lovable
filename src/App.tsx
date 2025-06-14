@@ -82,18 +82,22 @@ const App = () => (
           <Route path="/dashboard/instructor" element={<Instructor />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
           
+          {/* Company Routes */}
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
-          <Route path="/media" element={<Media />} />
+          <Route path="/press" element={<Media />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/affiliates" element={<Affiliates />} />
           
+          {/* Learning Routes */}
           <Route path="/courses" element={<Courses />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/become-instructor" element={<BecomeInstructor />} />
           <Route path="/for-business" element={<Business />} />
           <Route path="/for-government" element={<Government />} />
           
+          {/* Support Routes */}
           <Route path="/support" element={<Support />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

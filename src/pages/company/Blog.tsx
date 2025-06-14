@@ -2,68 +2,124 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Calendar, User, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
-    title: "Trend Teknologi yang Harus Dikuasai di 2025",
-    excerpt: "Perkembangan teknologi yang semakin pesat menuntut kita untuk terus belajar dan mengembangkan diri...",
-    author: "Dr. Maya Patel",
-    date: "15 April 2025",
+    id: 1,
+    title: "Tips Efektif Mempersiapkan SNBT UTBK 2024",
+    excerpt: "Strategi jitu untuk menghadapi Seleksi Nasional Berdasarkan Tes dan meraih skor maksimal.",
+    author: "Dr. Ahmad Wijaya",
+    date: "15 Januari 2024",
+    category: "Tips Belajar",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 2,
+    title: "Pentingnya Pembelajaran Interaktif di Era Digital",
+    excerpt: "Bagaimana teknologi mengubah cara siswa belajar dan memahami materi pelajaran.",
+    author: "Sari Indah, M.Pd",
+    date: "10 Januari 2024",
+    category: "Pendidikan",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 3,
+    title: "Mengatasi Kesulitan Belajar Matematika",
+    excerpt: "Metode praktis untuk membantu siswa memahami konsep matematika dengan mudah.",
+    author: "Prof. Bambang Suharjo",
+    date: "5 Januari 2024",
+    category: "Matematika",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 4,
+    title: "Persiapan Ujian Nasional: Strategi dan Tips",
+    excerpt: "Panduan lengkap mempersiapkan diri menghadapi ujian nasional dengan percaya diri.",
+    author: "Dra. Maya Sari",
+    date: "2 Januari 2024",
+    category: "Tips Belajar",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 5,
+    title: "Teknologi AI dalam Pembelajaran Modern",
+    excerpt: "Eksplorasi penggunaan artificial intelligence untuk meningkatkan efektivitas belajar.",
+    author: "Budi Santoso",
+    date: "28 Desember 2023",
     category: "Teknologi",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1740"
+    image: "/placeholder.svg"
   },
   {
-    title: "Tips Sukses Menjadi Data Scientist",
-    excerpt: "Langkah-langkah dan keterampilan yang diperlukan untuk memulai karir sebagai Data Scientist...",
-    author: "Andi Wijaya",
-    date: "10 April 2025",
-    category: "Karir",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1740"
-  },
-  {
-    title: "Pentingnya Cybersecurity di Era Digital",
-    excerpt: "Keamanan siber menjadi semakin krusial seiring dengan meningkatnya transformasi digital...",
-    author: "Rini Kusuma",
-    date: "5 April 2025",
-    category: "Keamanan",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=1740"
+    id: 6,
+    title: "Membangun Motivasi Belajar yang Berkelanjutan",
+    excerpt: "Cara mempertahankan semangat belajar dan mencapai target akademik jangka panjang.",
+    author: "Drs. Hendra Pratama",
+    date: "25 Desember 2023",
+    category: "Motivasi",
+    image: "/placeholder.svg"
   }
 ];
+
+const categories = ["Semua", "Tips Belajar", "Pendidikan", "Matematika", "Teknologi", "Motivasi"];
 
 const Blog = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="bg-gray-50 py-16">
           <div className="container">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Blog Les-Q</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
+              Blog Les-Q
+            </h1>
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Wawasan, tips, dan update terbaru seputar teknologi dan pembelajaran online
+              Artikel, tips, dan insight terbaru seputar pendidikan dan pembelajaran
             </p>
           </div>
         </section>
 
-        {/* Blog Posts */}
         <section className="py-16">
           <div className="container">
+            {/* Categories Filter */}
+            <div className="flex flex-wrap gap-2 mb-12 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className="px-4 py-2 rounded-full border hover:bg-primary hover:text-white transition-colors"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            {/* Blog Posts Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post, index) => (
-                <Card key={index} className="overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                  />
+              {blogPosts.map((post) => (
+                <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-video bg-gray-200"></div>
                   <div className="p-6">
-                    <Badge className="mb-4">{post.category}</Badge>
-                    <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <span>{post.author}</span>
-                      <span>{post.date}</span>
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                      <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                        {post.category}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {post.date}
+                      </div>
+                    </div>
+                    <h3 className="font-semibold text-lg mb-3 line-clamp-2">{post.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <User className="h-3 w-3" />
+                        {post.author}
+                      </div>
+                      <Link to={`/blog/${post.id}`} className="flex items-center gap-1 text-primary hover:gap-2 transition-all">
+                        <span className="text-sm">Baca</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
                     </div>
                   </div>
                 </Card>
