@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
@@ -13,116 +13,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useToast } from '@/hooks/use-toast';
 import PurchaseDialog from '@/components/course/PurchaseDialog';
-
-// Mock course data
-const courseData = {
-  id: '1',
-  title: 'Pengembangan Web Frontend dengan React & TypeScript',
-  description: 'Pelajari cara membuat aplikasi web modern dengan React, TypeScript, dan tools terkini. Kursus ini dirancang untuk pemula hingga menengah dan akan membantu Anda menjadi developer frontend yang kompeten.',
-  longDescription: `
-    <p>Dalam kursus ini, Anda akan mempelajari:</p>
-    <ul>
-      <li>Fundamental React dan konsep component-based architecture</li>
-      <li>TypeScript untuk pengembangan yang lebih aman dan terstruktur</li>
-      <li>State management dengan Redux dan Context API</li>
-      <li>Styling dengan CSS-in-JS dan component libraries</li>
-      <li>Testing dan debugging aplikasi React</li>
-      <li>Performance optimization dan best practices</li>
-      <li>Deployment dan continuous integration</li>
-    </ul>
-    <p>Kursus ini mencakup berbagai proyek praktis yang akan membantu Anda mengaplikasikan pengetahuan baru Anda dan membangun portofolio yang mengesankan.</p>
-  `,
-  instructor: 'Budi Santoso',
-  instructorTitle: 'Senior Frontend Developer',
-  instructorBio: 'Budi adalah seorang pengembang frontend berpengalaman dengan lebih dari 8 tahun pengalaman di berbagai startup dan perusahaan teknologi. Dia telah mengajar lebih dari 50,000 siswa online.',
-  instructorAvatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-  thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1740&auto=format&fit=crop',
-  price: 599000,
-  discountPrice: 299000,
-  rating: 4.8,
-  reviewCount: 1250,
-  studentCount: 15420,
-  lastUpdated: 'November 2023',
-  language: 'Bahasa Indonesia',
-  level: 'Menengah',
-  duration: '20 jam',
-  lectures: 42,
-  category: 'Pengembangan Web',
-  tags: ['React', 'TypeScript', 'Frontend', 'Web Development'],
-  isBestseller: true,
-  isNew: false,
-  whatYouWillLearn: [
-    'Membangun aplikasi React modern dari dasar hingga deployment',
-    'Mengaplikasikan TypeScript untuk kode yang lebih aman dan maintainable',
-    'Menerapkan state management yang efektif dengan Redux dan Context API',
-    'Menggunakan hooks dan fitur-fitur React terbaru',
-    'Mengoptimalkan performa aplikasi web Anda',
-    'Menguji aplikasi React dengan Jest dan React Testing Library'
-  ],
-  requirements: [
-    'Pengetahuan dasar HTML, CSS, dan JavaScript',
-    'Pemahaman dasar konsep pemrograman',
-    'Komputer dengan koneksi internet yang stabil'
-  ],
-  curriculum: [
-    {
-      id: 1,
-      title: 'Pengenalan React dan TypeScript',
-      lectures: [
-        { id: '1-1', title: 'Selamat Datang di Kursus', duration: '5:20', preview: true },
-        { id: '1-2', title: 'Apa itu React dan Mengapa Menggunakannya?', duration: '10:15', preview: true },
-        { id: '1-3', title: 'Setup Development Environment', duration: '12:30', preview: false },
-        { id: '1-4', title: 'TypeScript Basics', duration: '15:45', preview: false }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Fundamental React',
-      lectures: [
-        { id: '2-1', title: 'Component dan JSX', duration: '14:20', preview: false },
-        { id: '2-2', title: 'Props dan State', duration: '18:45', preview: false },
-        { id: '2-3', title: 'Event Handling', duration: '12:10', preview: false },
-        { id: '2-4', title: 'Conditional Rendering', duration: '9:35', preview: false },
-        { id: '2-5', title: 'List dan Keys', duration: '11:25', preview: false }
-      ]
-    },
-    {
-      id: 3,
-      title: 'TypeScript dengan React',
-      lectures: [
-        { id: '3-1', title: 'TypeScript dengan Functional Components', duration: '16:40', preview: false },
-        { id: '3-2', title: 'Type Props dan Event Handlers', duration: '13:55', preview: false },
-        { id: '3-3', title: 'Custom Types dan Interfaces', duration: '18:20', preview: false }
-      ]
-    }
-  ],
-  reviews: [
-    {
-      id: 1,
-      user: 'Ahmad Fauzi',
-      avatar: 'https://randomuser.me/api/portraits/men/42.jpg',
-      rating: 5,
-      date: '2 bulan yang lalu',
-      comment: 'Kursus yang sangat komprehensif! Saya belajar banyak dan sekarang sudah bisa membuat aplikasi React sendiri. Penjelasannya sangat jelas dan contoh-contohnya relevan dengan kebutuhan industri saat ini.'
-    },
-    {
-      id: 2,
-      user: 'Siti Nuraini',
-      avatar: 'https://randomuser.me/api/portraits/women/52.jpg',
-      rating: 4,
-      date: '1 bulan yang lalu',
-      comment: 'Materi sangat bagus dan terstruktur. Saya suka bagaimana instruktur menjelaskan konsep-konsep kompleks dengan cara yang mudah dipahami. Alasan saya memberi 4 bintang adalah karena beberapa bagian terlalu cepat untuk pemula seperti saya.'
-    },
-    {
-      id: 3,
-      user: 'Rudi Hermawan',
-      avatar: 'https://randomuser.me/api/portraits/men/62.jpg',
-      rating: 5,
-      date: '3 minggu yang lalu',
-      comment: 'Salah satu kursus terbaik tentang React dan TypeScript yang pernah saya ikuti. Proyek-proyeknya sangat membantu untuk mengaplikasikan pengetahuan yang didapat. Sangat direkomendasikan!'
-    }
-  ]
-};
+import { mockCourses } from '@/data/mockCourses';
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -130,6 +21,113 @@ const CourseDetail = () => {
   const { toast } = useToast();
   const [isPurchaseDialogOpen, setIsPurchaseDialogOpen] = useState(false);
   const [isTrialDialogOpen, setIsTrialDialogOpen] = useState(false);
+  
+  // Find the course by ID
+  const course = mockCourses.find(c => c.id === id);
+  
+  // If course not found, redirect to 404
+  if (!course) {
+    return <Navigate to="/404" replace />;
+  }
+
+  // Generate dynamic course data based on the actual course
+  const courseData = {
+    ...course,
+    description: `Pelajari ${course.title} dengan metode pembelajaran yang komprehensif dan mudah dipahami. Kursus ini dirancang khusus untuk membantu Anda menguasai materi dengan efektif.`,
+    longDescription: `
+      <p>Dalam kursus ${course.title}, Anda akan mempelajari:</p>
+      <ul>
+        <li>Konsep dasar dan fundamental yang penting</li>
+        <li>Teknik dan strategi pembelajaran yang efektif</li>
+        <li>Latihan soal dan pembahasan mendalam</li>
+        <li>Tips dan trik untuk menghadapi ujian</li>
+        <li>Materi terbaru sesuai kurikulum yang berlaku</li>
+      </ul>
+      <p>Kursus ini mencakup berbagai metode pembelajaran interaktif yang akan membantu Anda memahami materi dengan lebih baik dan mempersiapkan diri untuk mencapai hasil terbaik.</p>
+    `,
+    instructorTitle: course.category.includes('SD') ? 'Guru Sekolah Dasar Berpengalaman' :
+                     course.category.includes('SMP') ? 'Guru Sekolah Menengah Pertama Berpengalaman' :
+                     course.category.includes('SMA') ? 'Guru Sekolah Menengah Atas Berpengalaman' :
+                     course.category.includes('SNBT') ? 'Konsultan SNBT UTBK Berpengalaman' :
+                     'Tentor Ujian Mandiri Berpengalaman',
+    instructorBio: `${course.instructor} adalah seorang pendidik berpengalaman dengan lebih dari 8 tahun pengalaman mengajar. Beliau telah membantu ribuan siswa mencapai hasil terbaik dalam pembelajaran mereka.`,
+    instructorAvatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    lastUpdated: 'November 2023',
+    language: 'Bahasa Indonesia',
+    lectures: Math.floor(parseInt(course.duration) * 2.5), // Estimate lectures based on duration
+    tags: course.category.split(' ').slice(0, 3),
+    whatYouWillLearn: [
+      `Menguasai konsep dasar ${course.title}`,
+      'Menyelesaikan soal-soal dengan cepat dan tepat',
+      'Mengaplikasikan strategi pembelajaran yang efektif',
+      'Mempersiapkan diri untuk ujian dengan percaya diri',
+      'Memahami pola soal yang sering muncul',
+      'Mengembangkan kemampuan analisis dan pemecahan masalah'
+    ],
+    requirements: [
+      'Motivasi belajar yang tinggi',
+      'Buku catatan untuk mencatat materi penting',
+      'Komputer atau smartphone dengan koneksi internet yang stabil',
+      course.level === 'Pemula' ? 'Tidak diperlukan pengetahuan khusus sebelumnya' : 'Pengetahuan dasar materi sebelumnya'
+    ],
+    curriculum: [
+      {
+        id: 1,
+        title: 'Pengenalan dan Konsep Dasar',
+        lectures: [
+          { id: '1-1', title: 'Selamat Datang di Kursus', duration: '5:20', preview: true },
+          { id: '1-2', title: 'Pengenalan Materi', duration: '10:15', preview: true },
+          { id: '1-3', title: 'Konsep Dasar', duration: '12:30', preview: false },
+          { id: '1-4', title: 'Strategi Pembelajaran', duration: '15:45', preview: false }
+        ]
+      },
+      {
+        id: 2,
+        title: 'Materi Inti',
+        lectures: [
+          { id: '2-1', title: 'Pembahasan Materi Utama', duration: '18:20', preview: false },
+          { id: '2-2', title: 'Latihan Soal Dasar', duration: '16:45', preview: false },
+          { id: '2-3', title: 'Pembahasan Soal', duration: '14:10', preview: false },
+          { id: '2-4', title: 'Tips dan Trik', duration: '12:35', preview: false }
+        ]
+      },
+      {
+        id: 3,
+        title: 'Latihan dan Evaluasi',
+        lectures: [
+          { id: '3-1', title: 'Latihan Soal Lanjutan', duration: '20:40', preview: false },
+          { id: '3-2', title: 'Simulasi Ujian', duration: '25:55', preview: false },
+          { id: '3-3', title: 'Evaluasi dan Pembahasan', duration: '18:20', preview: false }
+        ]
+      }
+    ],
+    reviews: [
+      {
+        id: 1,
+        user: 'Ahmad Fauzi',
+        avatar: 'https://randomuser.me/api/portraits/men/42.jpg',
+        rating: 5,
+        date: '2 bulan yang lalu',
+        comment: `Kursus ${course.title} sangat membantu! Penjelasannya jelas dan mudah dipahami. Saya merasa lebih percaya diri setelah mengikuti kursus ini.`
+      },
+      {
+        id: 2,
+        user: 'Siti Nuraini',
+        avatar: 'https://randomuser.me/api/portraits/women/52.jpg',
+        rating: 4,
+        date: '1 bulan yang lalu',
+        comment: 'Materi sangat bagus dan terstruktur. Instruktur mengajar dengan sabar dan detail. Sangat direkomendasikan untuk yang ingin belajar materi ini.'
+      },
+      {
+        id: 3,
+        user: 'Rudi Hermawan',
+        avatar: 'https://randomuser.me/api/portraits/men/62.jpg',
+        rating: 5,
+        date: '3 minggu yang lalu',
+        comment: 'Salah satu kursus terbaik yang pernah saya ikuti. Metode pengajarannya sangat efektif dan mudah dipahami. Terima kasih!'
+      }
+    ]
+  };
   
   const toggleSection = (sectionId: number) => {
     if (activeSection === sectionId) {
@@ -161,6 +159,20 @@ const CourseDetail = () => {
   const handleFreeTrial = () => {
     setIsTrialDialogOpen(true);
   };
+
+  // Generate category breadcrumb
+  const getCategoryPath = () => {
+    if (course.category.includes('SD')) return { path: '/category/sd', name: 'Sekolah Dasar' };
+    if (course.category.includes('SMP')) return { path: '/category/smp', name: 'Sekolah Menengah Pertama' };
+    if (course.category.includes('SMA') && course.category.includes('Umum')) return { path: '/category/sma-umum', name: 'SMA Umum' };
+    if (course.category.includes('SMA') && course.category.includes('IPA')) return { path: '/category/sma-ipa', name: 'SMA IPA' };
+    if (course.category.includes('SMA') && course.category.includes('IPS')) return { path: '/category/sma-ips', name: 'SMA IPS' };
+    if (course.category.includes('SNBT')) return { path: '/category/snbt-utbk', name: 'SNBT UTBK' };
+    if (course.category.includes('Ujian Mandiri')) return { path: '/category/ujian-mandiri', name: 'Ujian Mandiri' };
+    return { path: '/courses', name: 'Kursus' };
+  };
+
+  const categoryPath = getCategoryPath();
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -173,12 +185,8 @@ const CourseDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-2 mb-4">
-                  <Link to="/category/web" className="text-blue-300 hover:underline text-sm">
-                    Pengembangan Web
-                  </Link>
-                  <span className="text-gray-400">›</span>
-                  <Link to="/category/frontend" className="text-blue-300 hover:underline text-sm">
-                    Frontend
+                  <Link to={categoryPath.path} className="text-blue-300 hover:underline text-sm">
+                    {categoryPath.name}
                   </Link>
                 </div>
                 
@@ -217,9 +225,9 @@ const CourseDetail = () => {
                 
                 <div className="flex items-center text-sm text-gray-300 mb-6">
                   <span>Dibuat oleh</span>
-                  <Link to="/instructor/budi-santoso" className="text-blue-300 hover:underline ml-1">
+                  <span className="text-blue-300 ml-1">
                     {courseData.instructor}
-                  </Link>
+                  </span>
                 </div>
                 
                 <div className="flex flex-wrap gap-4 text-sm text-gray-300">
@@ -256,7 +264,7 @@ const CourseDetail = () => {
                   <div className="mb-4">
                     <div className="flex items-baseline mb-2">
                       <span className="text-2xl font-bold">
-                        Rp {courseData.discountPrice?.toLocaleString()}
+                        Rp {(courseData.discountPrice || courseData.price).toLocaleString()}
                       </span>
                       {courseData.discountPrice && (
                         <span className="text-base text-muted-foreground line-through ml-2">
@@ -266,7 +274,7 @@ const CourseDetail = () => {
                     </div>
                     {courseData.discountPrice && (
                       <div className="text-sm text-red-500">
-                        {Math.round((1 - courseData.discountPrice / courseData.price) * 100)}% diskon! Berakhir dalam 2 hari
+                        {Math.round((1 - courseData.discountPrice / courseData.price) * 100)}% diskon!
                       </div>
                     )}
                   </div>
@@ -359,10 +367,10 @@ const CourseDetail = () => {
                 <div>
                   <h2 className="text-2xl font-bold mb-4">Ditujukan untuk</h2>
                   <ul className="list-disc pl-5 space-y-2">
-                    <li>Pengembang yang ingin belajar React dan TypeScript</li>
-                    <li>Frontend developer yang ingin meningkatkan keterampilan mereka</li>
-                    <li>Developer yang ingin beralih ke teknologi modern</li>
-                    <li>Pemula yang memiliki pengetahuan dasar JavaScript</li>
+                    <li>Siswa yang ingin menguasai {courseData.title}</li>
+                    <li>Pelajar yang membutuhkan panduan belajar yang terstruktur</li>
+                    <li>Siapa saja yang ingin meningkatkan pemahaman materi</li>
+                    <li>Peserta yang mempersiapkan diri untuk ujian</li>
                   </ul>
                 </div>
               </TabsContent>
@@ -438,13 +446,13 @@ const CourseDetail = () => {
                       
                       <div className="flex items-center gap-1">
                         <Users className="h-5 w-5 text-primary" />
-                        <span className="font-medium">45,231</span>
+                        <span className="font-medium">{(courseData.studentCount * 3).toLocaleString()}</span>
                         <span className="text-muted-foreground text-sm">Siswa</span>
                       </div>
                       
                       <div className="flex items-center gap-1">
                         <BookOpen className="h-5 w-5 text-primary" />
-                        <span className="font-medium">12</span>
+                        <span className="font-medium">8</span>
                         <span className="text-muted-foreground text-sm">Kursus</span>
                       </div>
                     </div>
@@ -473,7 +481,6 @@ const CourseDetail = () => {
                     
                     <div className="space-y-3">
                       {[5, 4, 3, 2, 1].map((rating) => {
-                        // Generate random percentages for this mock
                         const percentage = rating === 5 ? 78 : 
                                           rating === 4 ? 15 : 
                                           rating === 3 ? 5 : 
