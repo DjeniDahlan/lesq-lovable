@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, LogIn } from 'lucide-react';
+import { Search, LogIn, UserPlus } from 'lucide-react';
 
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,11 +35,17 @@ const HeroSection = () => {
             </Link>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <Link to="/login">
-              <Button variant="outline" className="flex items-center gap-2 py-3 px-6">
+              <Button variant="secondary" className="flex items-center gap-2 py-3 px-6">
                 <LogIn className="h-4 w-4" />
                 Masuk
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button className="flex items-center gap-2 py-3 px-6">
+                <UserPlus className="h-4 w-4" />
+                Daftar
               </Button>
             </Link>
           </div>
