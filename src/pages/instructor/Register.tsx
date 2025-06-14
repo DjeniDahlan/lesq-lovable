@@ -20,14 +20,16 @@ export default function InstructorRegister() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    phoneNumber: '',
     expertise: [] as string[],
     education: '',
     experience: '',
   });
   
   const [files, setFiles] = useState<{
+    ijazah?: File;
     certificate?: File;
-    portfolio?: File;
+    cv?: File;
   }>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,6 +65,7 @@ export default function InstructorRegister() {
           user_id: session.user.id,
           full_name: formData.fullName,
           email: formData.email,
+          phone_number: formData.phoneNumber,
           expertise: formData.expertise,
           education: formData.education,
           experience: formData.experience,
@@ -74,6 +77,16 @@ export default function InstructorRegister() {
 
       // Upload documents
       const documents = [];
+      if (files.ijazah) {
+        const ijazahPath = await uploadFile(files.ijazah, `ijazah/${files.ijazah.name}`);
+        documents.push({
+          application_id: application.id,
+          type: 'ijazah',
+          title: 'Ijazah',
+          file_url: ijazahPath,
+        });
+      }
+
       if (files.certificate) {
         const certificatePath = await uploadFile(files.certificate, `certificates/${files.certificate.name}`);
         documents.push({
@@ -84,13 +97,13 @@ export default function InstructorRegister() {
         });
       }
 
-      if (files.portfolio) {
-        const portfolioPath = await uploadFile(files.portfolio, `portfolio/${files.portfolio.name}`);
+      if (files.cv) {
+        const cvPath = await uploadFile(files.cv, `cv/${files.cv.name}`);
         documents.push({
           application_id: application.id,
-          type: 'portfolio',
-          title: 'Portfolio',
-          file_url: portfolioPath,
+          type: 'cv',
+          title: 'Curriculum Vitae (CV)',
+          file_url: cvPath,
         });
       }
 
@@ -148,15 +161,29 @@ export default function InstructorRegister() {
                     />
                   </div>
 
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="phoneNumber">No HP/WA</Label>
+                      <Input
+                        id="phoneNumber"
+                        type="tel"
+                        value={formData.phoneNumber}
+                        onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                        placeholder="08xxxxxxxxxx"
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -190,6 +217,17 @@ export default function InstructorRegister() {
                   </div>
 
                   <div>
+                    <Label>Ijazah</Label>
+                    <FileUpload
+                      label="Upload ijazah (PDF, DOC, DOCX)"
+                      accept=".pdf,.doc,.docx"
+                      onFileSelect={(file) => setFiles({ ...files, ijazah: file })}
+                      selectedFile={files.ijazah}
+                      onRemove={() => setFiles({ ...files, ijazah: undefined })}
+                    />
+                  </div>
+
+                  <div>
                     <Label>Sertifikat Keahlian</Label>
                     <FileUpload
                       label="Upload sertifikat keahlian (PDF, DOC, DOCX)"
@@ -201,13 +239,13 @@ export default function InstructorRegister() {
                   </div>
 
                   <div>
-                    <Label>Portfolio</Label>
+                    <Label>Curriculum Vitae (CV)</Label>
                     <FileUpload
-                      label="Upload portfolio (PDF)"
+                      label="Upload Curriculum Vitae (PDF)"
                       accept=".pdf"
-                      onFileSelect={(file) => setFiles({ ...files, portfolio: file })}
-                      selectedFile={files.portfolio}
-                      onRemove={() => setFiles({ ...files, portfolio: undefined })}
+                      onFileSelect={(file) => setFiles({ ...files, cv: file })}
+                      selectedFile={files.cv}
+                      onRemove={() => setFiles({ ...files, cv: undefined })}
                     />
                   </div>
                 </div>
