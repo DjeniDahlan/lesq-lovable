@@ -14,13 +14,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { toast } from "@/hooks/use-toast";
 import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/layout/Navbar';
@@ -126,7 +119,7 @@ const Register = () => {
                       navigate('/register/instructor');
                     }}
                   >
-                    Instruktur
+                    Pengajar
                   </Button>
                 </div>
               </div>
@@ -169,18 +162,6 @@ const Register = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Select value={role} onValueChange={setRole}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Pilih peran Anda" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="student">Saya ingin belajar</SelectItem>
-                      <SelectItem value="instructor">Saya ingin mengajar</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
                 
                 <div className="flex items-center space-x-2">
