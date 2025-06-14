@@ -121,24 +121,36 @@ export type Database = {
       }
       profiles: {
         Row: {
+          bio: string | null
           created_at: string
+          education: string | null
           email: string
+          experience: string | null
+          expertise: string | null
           full_name: string
           id: string
           role: string
           updated_at: string
         }
         Insert: {
+          bio?: string | null
           created_at?: string
+          education?: string | null
           email: string
+          experience?: string | null
+          expertise?: string | null
           full_name: string
           id: string
           role: string
           updated_at?: string
         }
         Update: {
+          bio?: string | null
           created_at?: string
+          education?: string | null
           email?: string
+          experience?: string | null
+          expertise?: string | null
           full_name?: string
           id?: string
           role?: string
