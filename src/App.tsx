@@ -1,4 +1,3 @@
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -41,6 +40,15 @@ import Purchases from "./pages/account/Purchases";
 import InstructorProfile from "./pages/instructor/Profile";
 import InstructorSettings from "./pages/instructor/Settings";
 import InstructorPayouts from "./pages/instructor/Payouts";
+
+// Category Pages
+import SekolahDasar from "./pages/categories/SekolahDasar";
+import SekolahMenengahPertama from "./pages/categories/SekolahMenengahPertama";
+import SMAUmum from "./pages/categories/SMAUmum";
+import SMAIPA from "./pages/categories/SMAIPA";
+import SMAIPS from "./pages/categories/SMAIPS";
+import SNBTUTBK from "./pages/categories/SNBTUTBK";
+import UjianMandiri from "./pages/categories/UjianMandiri";
 
 const queryClient = new QueryClient();
 
