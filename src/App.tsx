@@ -91,6 +91,16 @@ const App = () => (
           <Route path="/accessibility" element={<Accessibility />} />
           
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
+          {/* Category Routes */}
+          <Route path="/category/sd" element={<SekolahDasar />} />
+          <Route path="/category/smp" element={<SekolahMenengahPertama />} />
+          <Route path="/category/sma-umum" element={<SMAUmum />} />
+          <Route path="/category/sma-ipa" element={<SMAIPA />} />
+          <Route path="/category/sma-ips" element={<SMAIPS />} />
+          <Route path="/category/snbt-utbk" element={<SNBTUTBK />} />
+          <Route path="/category/ujian-mandiri" element={<UjianMandiri />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </TooltipProvider>
