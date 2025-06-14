@@ -129,10 +129,10 @@ export default function InstructorRegister() {
           <Card>
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl text-center">
-                Daftar sebagai Instruktur
+                Daftar sebagai Pengajar
               </CardTitle>
               <CardDescription className="text-center">
-                Lengkapi formulir berikut untuk menjadi instruktur di Les-Q
+                Lengkapi formulir berikut untuk menjadi pengajar di Les-Q
               </CardDescription>
             </CardHeader>
             <CardContent>

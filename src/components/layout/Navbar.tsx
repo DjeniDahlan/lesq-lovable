@@ -37,7 +37,7 @@ const Navbar = () => {
               Jelajahi Kursus
             </Link>
             <Link to="/become-instructor" className="text-sm font-medium hover:text-primary">
-              Jadi Instruktur
+              Jadi Pengajar
             </Link>
           </div>
         </div>
@@ -104,7 +104,7 @@ const Navbar = () => {
               Jelajahi Kursus
             </Link>
             <Link to="/become-instructor" className="text-sm font-medium hover:text-primary">
-              Jadi Instruktur
+              Jadi Pengajar
             </Link>
             <Link to="/account/profile" className="text-sm font-medium hover:text-primary">
               Profil Saya

@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,7 @@ const BecomeInstructor = () => {
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Jadilah Instruktur Les-Q
+                Jadilah Pengajar Les-Q
               </h1>
               <p className="text-lg text-gray-600 mb-8">
                 Bagikan pengetahuan Anda dan bantu ribuan pembelajar mencapai tujuan mereka sambil membangun karir yang menguntungkan
@@ -32,7 +31,7 @@ const BecomeInstructor = () => {
         <section className="py-16">
           <div className="container">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Keuntungan Menjadi Instruktur
+              Keuntungan Menjadi Pengajar
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
               <div className="text-center">
@@ -123,7 +122,7 @@ const BecomeInstructor = () => {
         <section className="py-16">
           <div className="container">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Cara Menjadi Instruktur
+              Cara Menjadi Pengajar
             </h2>
             <div className="max-w-4xl mx-auto">
               <div className="grid gap-8">
@@ -134,7 +133,7 @@ const BecomeInstructor = () => {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Daftar & Verifikasi</h3>
                     <p className="text-gray-600">
-                      Lengkapi profil dan verifikasi identitas Anda sebagai instruktur profesional
+                      Lengkapi profil dan verifikasi identitas Anda sebagai pengajar profesional
                     </p>
                   </div>
                 </div>
@@ -184,7 +183,7 @@ const BecomeInstructor = () => {
                 Siap Untuk Mulai Mengajar?
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Bergabunglah dengan komunitas instruktur Les-Q dan mulai bagikan pengetahuan Anda
+                Bergabunglah dengan komunitas pengajar Les-Q dan mulai bagikan pengetahuan Anda
               </p>
               <Link to="/register">
                 <Button size="lg" className="px-8">Daftar Sekarang</Button>

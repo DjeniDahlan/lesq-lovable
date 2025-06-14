@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -13,7 +14,7 @@ import { BookOpen, GraduationCap, School, Users, Award, Target } from 'lucide-re
 
 const categories = [
   {
-    label: "Sekolah Dasar (SD)",
+    label: "SD",
     icon: School,
     subcategories: [
       { name: "Matematika", link: "/category/sd", courses: 3 },
