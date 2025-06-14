@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -137,8 +136,8 @@ const newCourses: CourseType[] = [
 const categories = [
   { id: 'sd', name: 'Sekolah Dasar (SD)', icon: School, courses: 115 },
   { id: 'smp', name: 'Sekolah Menengah Pertama (SMP)', icon: BookOpen, courses: 156 },
-  { id: 'sma', name: 'Sekolah Menengah Atas (SMA)', icon: GraduationCap, courses: 212 },
-  { id: 'snbt', name: 'SNBT UTBK', icon: Award, courses: 41 }
+  { id: 'sma-umum', name: 'Sekolah Menengah Atas (SMA)', icon: GraduationCap, courses: 212 },
+  { id: 'snbt-utbk', name: 'SNBT UTBK', icon: Award, courses: 41 }
 ];
 
 const Index = () => {
