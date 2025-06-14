@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -187,7 +186,7 @@ export default function InstructorRegister() {
                   </div>
 
                   <div>
-                    <Label>Bidang Keahlian (Pilih maksimal 3)</Label>
+                    <Label>Materi Kursus termasuk jenjangnya (Pilih maksimal 3)</Label>
                     <ExpertiseSelect
                       selected={formData.expertise}
                       onChange={(expertise) => setFormData({ ...formData, expertise })}
