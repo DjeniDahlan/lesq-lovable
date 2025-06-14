@@ -10,69 +10,51 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { BookOpen, PenTool, ShoppingBag, Database, Code, Lightbulb, Languages, Music } from 'lucide-react';
+import { BookOpen, GraduationCap, School, Users, Award, Target } from 'lucide-react';
 
 const categories = [
   {
-    label: "Pengembangan Web",
+    label: "Sekolah Dasar (SD)",
+    icon: School,
+    subcategories: [
+      { name: "Matematika SD", link: "/category/matematika-sd", courses: 45 },
+      { name: "IPA SD", link: "/category/ipa-sd", courses: 32 },
+      { name: "Bahasa Indonesia SD", link: "/category/bahasa-indonesia-sd", courses: 38 },
+    ]
+  },
+  {
+    label: "SMP",
     icon: BookOpen,
     subcategories: [
-      { name: "HTML & CSS", link: "/category/html-css", courses: 245 },
-      { name: "JavaScript", link: "/category/javascript", courses: 321 },
-      { name: "React", link: "/category/react", courses: 187 },
-      { name: "Vue", link: "/category/vue", courses: 121 },
-      { name: "Angular", link: "/category/angular", courses: 98 },
-      { name: "PHP", link: "/category/php", courses: 154 },
-      { name: "Node.js", link: "/category/nodejs", courses: 143 },
-      { name: "WordPress", link: "/category/wordpress", courses: 132 },
+      { name: "Matematika SMP", link: "/category/matematika-smp", courses: 52 },
+      { name: "IPA SMP", link: "/category/ipa-smp", courses: 41 },
+      { name: "Bahasa Indonesia SMP", link: "/category/bahasa-indonesia-smp", courses: 34 },
+      { name: "Bahasa Inggris SMP", link: "/category/bahasa-inggris-smp", courses: 29 },
     ]
   },
   {
-    label: "Desain",
-    icon: PenTool,
+    label: "SMA",
+    icon: GraduationCap,
     subcategories: [
-      { name: "UI/UX Design", link: "/category/ui-ux", courses: 178 },
-      { name: "Graphic Design", link: "/category/graphic-design", courses: 203 },
-      { name: "Photoshop", link: "/category/photoshop", courses: 132 },
-      { name: "Illustrator", link: "/category/illustrator", courses: 98 },
-      { name: "Figma", link: "/category/figma", courses: 87 },
-      { name: "3D & Animation", link: "/category/3d-animation", courses: 65 },
+      { name: "SMA Umum", link: "/category/sma-umum", courses: 67 },
+      { name: "SMA IPA", link: "/category/sma-ipa", courses: 89 },
+      { name: "SMA IPS", link: "/category/sma-ips", courses: 56 },
     ]
   },
   {
-    label: "Bisnis",
-    icon: ShoppingBag,
+    label: "SNBT UTBK",
+    icon: Target,
     subcategories: [
-      { name: "Entrepreneurship", link: "/category/entrepreneurship", courses: 143 },
-      { name: "Digital Marketing", link: "/category/digital-marketing", courses: 187 },
-      { name: "Sales", link: "/category/sales", courses: 98 },
-      { name: "Finance", link: "/category/finance", courses: 112 },
-      { name: "Project Management", link: "/category/project-management", courses: 76 },
-      { name: "E-commerce", link: "/category/ecommerce", courses: 93 },
+      { name: "Tes Potensi Skolastik", link: "/category/tps-snbt", courses: 23 },
+      { name: "Tes Literasi", link: "/category/literasi-snbt", courses: 18 },
     ]
   },
   {
-    label: "Data Science",
-    icon: Database,
+    label: "Ujian Mandiri",
+    icon: Award,
     subcategories: [
-      { name: "Machine Learning", link: "/category/machine-learning", courses: 87 },
-      { name: "Python", link: "/category/python", courses: 132 },
-      { name: "Data Analysis", link: "/category/data-analysis", courses: 76 },
-      { name: "SQL", link: "/category/sql", courses: 54 },
-      { name: "Big Data", link: "/category/big-data", courses: 43 },
-      { name: "R", link: "/category/r-programming", courses: 32 },
-    ]
-  },
-  {
-    label: "Mobile",
-    icon: Code,
-    subcategories: [
-      { name: "Flutter", link: "/category/flutter", courses: 76 },
-      { name: "React Native", link: "/category/react-native", courses: 65 },
-      { name: "Swift", link: "/category/swift", courses: 43 },
-      { name: "Kotlin", link: "/category/kotlin", courses: 54 },
-      { name: "Android Development", link: "/category/android", courses: 87 },
-      { name: "iOS Development", link: "/category/ios", courses: 76 },
+      { name: "UM UGM", link: "/category/um-ugm", courses: 15 },
+      { name: "UM UNDIP", link: "/category/um-undip", courses: 12 },
     ]
   },
 ];
