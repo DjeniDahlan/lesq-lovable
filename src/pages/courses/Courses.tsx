@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseGrid from "@/components/course/CourseGrid";
 import CourseFilter from "@/components/course/CourseFilter";
+import { mockCourses } from "@/data/mockCourses";
 
 const Courses = () => {
   return (
@@ -27,7 +28,7 @@ const Courses = () => {
                 <CourseFilter />
               </div>
               <div className="lg:w-3/4">
-                <CourseGrid />
+                <CourseGrid courses={mockCourses} />
               </div>
             </div>
           </div>
