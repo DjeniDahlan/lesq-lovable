@@ -37,6 +37,11 @@ import Profile from "./pages/account/Profile";
 import Settings from "./pages/account/Settings";
 import Purchases from "./pages/account/Purchases";
 
+// Instructor Account Pages
+import InstructorProfile from "./pages/instructor/Profile";
+import InstructorSettings from "./pages/instructor/Settings";
+import InstructorPayouts from "./pages/instructor/Payouts";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -57,6 +62,11 @@ const App = () => (
           <Route path="/account/profile" element={<Profile />} />
           <Route path="/account/settings" element={<Settings />} />
           <Route path="/account/purchases" element={<Purchases />} />
+          
+          {/* Instructor Account Routes */}
+          <Route path="/instructor/profile" element={<InstructorProfile />} />
+          <Route path="/instructor/settings" element={<InstructorSettings />} />
+          <Route path="/instructor/payouts" element={<InstructorPayouts />} />
           
           <Route path="/dashboard/student" element={<Student />} />
           <Route path="/dashboard/instructor" element={<Instructor />} />
