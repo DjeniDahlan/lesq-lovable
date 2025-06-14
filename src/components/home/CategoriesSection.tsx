@@ -1,6 +1,5 @@
 
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 import { School, BookOpen, Award, Users, GraduationCap } from 'lucide-react';
 
 const categories = [
@@ -31,12 +30,6 @@ const CategoriesSection = () => {
               </div>
             </Link>
           ))}
-        </div>
-        
-        <div className="text-center mt-10">
-          <Link to="/categories">
-            <Button variant="outline">Lihat Semua Kategori</Button>
-          </Link>
         </div>
       </div>
     </section>
