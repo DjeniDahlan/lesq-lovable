@@ -47,6 +47,7 @@ import InstructorPayouts from "./pages/instructor/Payouts";
 import SekolahDasar from "./pages/categories/SekolahDasar";
 import SekolahMenengahPertama from "./pages/categories/SekolahMenengahPertama";
 import SDKelas123 from "./pages/categories/SDKelas123";
+import SDKelas456 from "./pages/categories/SDKelas456";
 import SMAIPA from "./pages/categories/SMAIPA";
 import SMAIPS from "./pages/categories/SMAIPS";
 import SNBTUTBK from "./pages/categories/SNBTUTBK";
@@ -114,6 +115,7 @@ const App = () => (
           <Route path="/category/sd-kelas-5" element={<SekolahDasar />} />
           <Route path="/category/sd-kelas-6" element={<SekolahDasar />} />
           <Route path="/category/sd-kelas-1-3" element={<SDKelas123 />} />
+          <Route path="/category/sd-kelas-4-6" element={<SDKelas456 />} />
           <Route path="/category/smp-kelas-7" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-8" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-9" element={<SekolahMenengahPertama />} />

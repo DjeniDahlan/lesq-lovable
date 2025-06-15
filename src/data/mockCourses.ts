@@ -150,6 +150,34 @@ export const mockCourses: CourseType[] = [
     isBestseller: true
   },
   {
+    id: "sd4-2",
+    title: "Bahasa Indonesia untuk Kelas 4 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 189000,
+    discountPrice: 139000,
+    rating: 4.7,
+    reviewCount: 134,
+    level: "Pemula",
+    duration: "14 jam",
+    studentCount: 1134,
+    category: "SD Kelas 4"
+  },
+  {
+    id: "4",
+    title: "IPA Terpadu SD: Sains untuk Anak",
+    instructor: "Ibu Maya Dewi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 229000,
+    rating: 4.6,
+    reviewCount: 156,
+    level: "Pemula",
+    duration: "16 jam",
+    studentCount: 876,
+    category: "SD Kelas 4",
+    isNew: true
+  },
+  {
     id: "2",
     title: "Matematika untuk Kelas 5 SD",
     instructor: "Pak Budi Santoso, S.Pd",
@@ -161,6 +189,33 @@ export const mockCourses: CourseType[] = [
     level: "Menengah",
     duration: "16 jam",
     studentCount: 1087,
+    category: "SD Kelas 5"
+  },
+  {
+    id: "sd5-2",
+    title: "Bahasa Indonesia untuk Kelas 5 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 209000,
+    discountPrice: 159000,
+    rating: 4.6,
+    reviewCount: 147,
+    level: "Menengah",
+    duration: "15 jam",
+    studentCount: 976,
+    category: "SD Kelas 5"
+  },
+  {
+    id: "sd5-3",
+    title: "IPA untuk Kelas 5 SD",
+    instructor: "Ibu Maya Dewi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 199000,
+    rating: 4.5,
+    reviewCount: 138,
+    level: "Menengah",
+    duration: "14 jam",
+    studentCount: 865,
     category: "SD Kelas 5"
   },
   {
@@ -178,32 +233,31 @@ export const mockCourses: CourseType[] = [
     category: "SD Kelas 6"
   },
   {
-    id: "4",
-    title: "IPA Terpadu SD: Sains untuk Anak",
+    id: "sd6-2",
+    title: "Bahasa Indonesia untuk Kelas 6 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 239000,
+    discountPrice: 189000,
+    rating: 4.6,
+    reviewCount: 187,
+    level: "Menengah",
+    duration: "17 jam",
+    studentCount: 876,
+    category: "SD Kelas 6"
+  },
+  {
+    id: "sd6-3",
+    title: "IPA untuk Kelas 6 SD",
     instructor: "Ibu Maya Dewi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
     price: 229000,
-    rating: 4.6,
-    reviewCount: 156,
-    level: "Pemula",
-    duration: "16 jam",
-    studentCount: 876,
-    category: "SD Kelas 4",
-    isNew: true
-  },
-  {
-    id: "5",
-    title: "Bahasa Indonesia SD: Membaca dan Menulis",
-    instructor: "Ibu Rina Kusuma, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
-    price: 189000,
-    discountPrice: 139000,
     rating: 4.5,
-    reviewCount: 203,
-    level: "Pemula",
-    duration: "14 jam",
-    studentCount: 1134,
-    category: "SD Kelas 4"
+    reviewCount: 176,
+    level: "Menengah",
+    duration: "16 jam",
+    studentCount: 765,
+    category: "SD Kelas 6"
   },
   
   // Kategori SMP Kelas 7-9
