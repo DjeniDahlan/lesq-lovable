@@ -155,8 +155,11 @@ const Student = () => {
           console.log("Courses with purchases error:", error);
           
           if (coursesWithPurchases && coursesWithPurchases.length > 0) {
+            // Filter: hanya tampilkan course yang courses-nya tidak null (benar-benar ada di tabel courses)
+            const filteredCoursesWithPurchases = coursesWithPurchases.filter(purchase => purchase.courses !== null);
+
             // Transform the joined data into the expected format
-            const coursesData: CourseWithPurchase[] = coursesWithPurchases.map(purchase => {
+            const coursesData: CourseWithPurchase[] = filteredCoursesWithPurchases.map(purchase => {
               const courseData = purchase.courses as any;
               return {
                 id: purchase.course_id,
@@ -174,6 +177,8 @@ const Student = () => {
             });
             
             setEnrolledCourses(coursesData);
+          } else {
+            setEnrolledCourses([]);
           }
         }
       } catch (error) {
