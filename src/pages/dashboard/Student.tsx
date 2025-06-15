@@ -6,7 +6,8 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Play, BookOpen, Award, Bell, User, LogOut, Search,
-  Clock, BarChart, MessageCircle, Heart, Star, FileText, Settings, CreditCard
+  Clock, BarChart, MessageCircle, Heart, Star, FileText, Settings, CreditCard,
+  CheckCircle, XCircle, AlertCircle
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -16,16 +17,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 
-// Sample data for enrolled courses - kosongkan array
-const enrolledCourses = [];
-
-// Sample data for wishlist - kosongkan array
-const wishlistCourses = [];
-
-// Sample data for completed courses - kosongkan array
-const completedCourses = [];
+// Types
+interface CourseWithPurchase {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  status: string;
+  purchase_date: string;
+  thumbnail_url?: string;
+  education_level?: string;
+  category?: string;
+}
 
 // Sample data for notifications
 const notifications = [
@@ -60,12 +66,13 @@ const Student = () => {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const [enrolledCourses, setEnrolledCourses] = useState<CourseWithPurchase[]>([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Get current session
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         console.log("Session:", session);
         console.log("Session error:", sessionError);
@@ -75,7 +82,6 @@ const Student = () => {
           console.log("User ID:", session.user.id);
           console.log("User metadata:", session.user.user_metadata);
           
-          // Try to get profile from database
           const { data: profileData, error: profileError } = await supabase
             .from('profiles')
             .select('*')
@@ -88,7 +94,6 @@ const Student = () => {
           if (profileData) {
             setProfile(profileData);
           } else if (session.user.user_metadata) {
-            // If no profile in DB, create one from user metadata
             const { data: newProfile, error: insertError } = await supabase
               .from('profiles')
               .insert({
@@ -118,6 +123,50 @@ const Student = () => {
     fetchProfile();
   }, []);
 
+  useEffect(() => {
+    const fetchEnrolledCourses = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session?.user) {
+          console.log("Fetching courses for user:", session.user.id);
+          
+          const { data: purchases, error } = await supabase
+            .from('course_purchases')
+            .select('*')
+            .eq('user_id', session.user.id)
+            .order('purchase_date', { ascending: false });
+            
+          console.log("Course purchases data:", purchases);
+          console.log("Course purchases error:", error);
+          
+          if (purchases && purchases.length > 0) {
+            // Transform purchase data into course format
+            const coursesData: CourseWithPurchase[] = purchases.map(purchase => ({
+              id: purchase.course_id,
+              title: `Kursus ${purchase.course_id}`, // Default title since courses table might not have data
+              description: `Kursus yang dibeli pada ${new Date(purchase.purchase_date).toLocaleDateString('id-ID')}`,
+              price: purchase.price,
+              status: purchase.status,
+              purchase_date: purchase.purchase_date,
+              thumbnail_url: '',
+              education_level: 'Unknown',
+              category: 'Unknown'
+            }));
+            
+            setEnrolledCourses(coursesData);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching enrolled courses:", error);
+      } finally {
+        setCoursesLoading(false);
+      }
+    };
+
+    fetchEnrolledCourses();
+  }, []);
+
   const getUserName = () => {
     if (loading) return "Loading...";
     if (profile?.full_name) return profile.full_name;
@@ -132,10 +181,70 @@ const Student = () => {
       navigate('/login');
     } catch (error) {
       console.error("Error logging out:", error);
-      // Force redirect even if logout fails
       navigate('/login');
     }
   };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return <Badge variant="default" className="bg-green-500"><CheckCircle className="h-3 w-3 mr-1" />Sudah Dibayar</Badge>;
+      case 'pending':
+        return <Badge variant="secondary"><AlertCircle className="h-3 w-3 mr-1" />Belum Dibayar</Badge>;
+      case 'failed':
+        return <Badge variant="destructive"><XCircle className="h-3 w-3 mr-1" />Gagal</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
+    }
+  };
+
+  const CourseCard = ({ course }: { course: CourseWithPurchase }) => (
+    <div className="bg-white rounded-lg border p-4 hover:shadow-md transition-shadow">
+      <div className="aspect-video bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <BookOpen className="h-12 w-12 text-gray-400" />
+      </div>
+      
+      <div className="space-y-3">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-medium text-sm line-clamp-2">{course.title}</h3>
+          {getStatusBadge(course.status)}
+        </div>
+        
+        <p className="text-xs text-muted-foreground line-clamp-2">
+          {course.description}
+        </p>
+        
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <span>Rp {course.price.toLocaleString()}</span>
+          <span>{new Date(course.purchase_date).toLocaleDateString('id-ID')}</span>
+        </div>
+        
+        <div className="flex gap-2">
+          {course.status === 'completed' ? (
+            <Button size="sm" className="flex-1">
+              <Play className="h-3 w-3 mr-1" />
+              Mulai Belajar
+            </Button>
+          ) : (
+            <Button size="sm" variant="outline" className="flex-1">
+              <Clock className="h-3 w-3 mr-1" />
+              Menunggu Verifikasi
+            </Button>
+          )}
+        </div>
+        
+        {course.status === 'completed' && (
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs">
+              <span>Progress</span>
+              <span>0%</span>
+            </div>
+            <Progress value={0} className="h-1" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -269,7 +378,7 @@ const Student = () => {
           <TabsList className="mb-6 bg-gray-100 p-1 w-full">
             <TabsTrigger value="learning" className="flex-1">
               <BookOpen className="h-4 w-4 mr-2" />
-              Kursus Saya
+              Kursus Saya ({enrolledCourses.length})
             </TabsTrigger>
             <TabsTrigger value="wishlist" className="flex-1">
               <Heart className="h-4 w-4 mr-2" />
@@ -288,16 +397,29 @@ const Student = () => {
           <TabsContent value="learning" className="space-y-6">
             <h2 className="text-xl font-bold mb-4">Kursus yang Sedang Dipelajari</h2>
             
-            <div className="text-center py-12 bg-white rounded-lg border">
-              <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-medium mb-2">Belum ada kursus yang diikuti</h3>
-              <p className="text-muted-foreground mb-4">
-                Mulai perjalanan belajar Anda dengan mendaftar di kursus pertama
-              </p>
-              <Link to="/search">
-                <Button>Jelajahi Kursus</Button>
-              </Link>
-            </div>
+            {coursesLoading ? (
+              <div className="text-center py-12 bg-white rounded-lg border">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                <p>Memuat kursus Anda...</p>
+              </div>
+            ) : enrolledCourses.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {enrolledCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-white rounded-lg border">
+                <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium mb-2">Belum ada kursus yang diikuti</h3>
+                <p className="text-muted-foreground mb-4">
+                  Mulai perjalanan belajar Anda dengan mendaftar di kursus pertama
+                </p>
+                <Link to="/search">
+                  <Button>Jelajahi Kursus</Button>
+                </Link>
+              </div>
+            )}
           </TabsContent>
           
           <TabsContent value="wishlist" className="space-y-6">
@@ -344,17 +466,17 @@ const Student = () => {
               
               <div className="bg-white rounded-lg p-6 border">
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">Kursus Aktif</h3>
-                <p className="text-3xl font-bold">0</p>
+                <p className="text-3xl font-bold">{enrolledCourses.filter(c => c.status === 'completed').length}</p>
                 <div className="mt-2 text-xs text-muted-foreground">
-                  Belum ada kursus aktif
+                  Kursus yang sudah diverifikasi
                 </div>
               </div>
               
               <div className="bg-white rounded-lg p-6 border">
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">Kursus Selesai</h3>
-                <p className="text-3xl font-bold">0</p>
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Total Pembelian</h3>
+                <p className="text-3xl font-bold">{enrolledCourses.length}</p>
                 <div className="mt-2 text-xs text-muted-foreground">
-                  Belum ada kursus selesai
+                  Kursus yang sudah dibeli
                 </div>
               </div>
             </div>
