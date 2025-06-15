@@ -42,12 +42,10 @@ const expertiseOptions: ExpertiseOption[] = [
   // Persiapan Ujian
   { id: 'snbt-utbk', label: 'SNBT-UTBK' },
   { id: 'ujian-mandiri', label: 'Ujian Mandiri PTN' },
-  
-  // Keterampilan
-  { id: 'programming', label: 'Pemrograman' },
-  { id: 'design', label: 'Desain Grafis' },
-  { id: 'music', label: 'Musik' },
-  { id: 'business', label: 'Bisnis & Kewirausahaan' },
+  { id: 'tpa-tps', label: 'TPA/TPS' },
+  { id: 'literasi-indonesia', label: 'Literasi Bahasa Indonesia' },
+  { id: 'literasi-english', label: 'Literasi Bahasa Inggris' },
+  { id: 'penalaran-math', label: 'Penalaran Matematika' },
 ];
 
 interface ExpertiseSelectProps {
