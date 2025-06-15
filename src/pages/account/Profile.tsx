@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
+import AccountLayout from "@/components/layout/AccountLayout";
 
 const Profile = () => {
   const [profile, setProfile] = useState<any>(null);
@@ -32,8 +33,17 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  if (loading) return <div className="p-4">Memuat...</div>;
-  if (!profile) return <div className="p-4">Profil tidak ditemukan</div>;
+  if (loading) return (
+    <AccountLayout>
+      <div className="p-4">Memuat...</div>
+    </AccountLayout>
+  );
+
+  if (!profile) return (
+    <AccountLayout>
+      <div className="p-4">Profil tidak ditemukan</div>
+    </AccountLayout>
+  );
 
   // Helper function to get role badge styling
   const getRoleBadgeStyle = (role: string) => {
@@ -55,12 +65,12 @@ const Profile = () => {
       case 'instructor':
         return "Instruktur";
       default:
-        return "Pengguna";
+        return "Siswa";
     }
   };
 
   return (
-    <div className="container max-w-4xl py-8">
+    <AccountLayout>
       <Card>
         <CardHeader>
           <CardTitle>Profil Saya</CardTitle>
@@ -99,7 +109,7 @@ const Profile = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </AccountLayout>
   );
 };
 

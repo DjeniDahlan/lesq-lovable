@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Play, BookOpen, Award, Bell, User, LogOut, Search,
-  Clock, BarChart, MessageCircle, Heart, Star, FileText
+  Clock, BarChart, MessageCircle, Heart, Star, FileText, Settings, CreditCard
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -134,20 +135,20 @@ const Student = () => {
                 <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/profile" className="flex items-center gap-2">
+                  <Link to="/account/profile" className="flex items-center gap-2">
                     <User className="h-4 w-4" />
                     <span>Profil</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/settings" className="flex items-center gap-2">
-                    <Bell className="h-4 w-4" />
+                  <Link to="/account/settings" className="flex items-center gap-2">
+                    <Settings className="h-4 w-4" />
                     <span>Pengaturan</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/purchases" className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
+                  <Link to="/account/purchases" className="flex items-center gap-2">
+                    <CreditCard className="h-4 w-4" />
                     <span>Pembelian</span>
                   </Link>
                 </DropdownMenuItem>
