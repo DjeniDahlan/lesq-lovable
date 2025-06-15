@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -10,14 +9,6 @@ import { SlidersHorizontal, X } from "lucide-react";
 
 const SNBTUTBK = () => {
   const [showFilter, setShowFilter] = useState(false);
-  
-  // Filter kursus untuk kategori SNBT UTBK
-  const snbtCourses = mockCourses.filter(course => 
-    course.category === "SNBT - TPS" || 
-    course.category === "SNBT - Literasi Indonesia" ||
-    course.category === "SNBT - Literasi Inggris" ||
-    course.category === "SNBT - Penalaran Matematika"
-  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -37,7 +28,7 @@ const SNBTUTBK = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {snbtCourses.length} kursus tersedia
+                Kursus untuk SNBT UTBK
               </p>
             </div>
             
@@ -57,7 +48,7 @@ const SNBTUTBK = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={snbtCourses} />
+              <CourseGrid category="SNBT/UTBK" />
             </div>
           </div>
         </div>

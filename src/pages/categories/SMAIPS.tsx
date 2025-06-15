@@ -1,21 +1,13 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseGrid from "@/components/course/CourseGrid";
 import CourseFilter from "@/components/course/CourseFilter";
-import { mockCourses } from '@/data/mockCourses';
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, X } from "lucide-react";
 
 const SMAIPS = () => {
   const [showFilter, setShowFilter] = useState(false);
-  
-  // Filter kursus untuk kategori SMA Kelas 11 IPS dan Kelas 12 IPS
-  const smaIPSCourses = mockCourses.filter(course => 
-    course.category === "SMA Kelas 11 IPS" || 
-    course.category === "SMA Kelas 12 IPS"
-  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -35,7 +27,7 @@ const SMAIPS = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {smaIPSCourses.length} kursus tersedia
+                Kursus untuk SMA IPS
               </p>
             </div>
             
@@ -55,7 +47,7 @@ const SMAIPS = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={smaIPSCourses} />
+              <CourseGrid />
             </div>
           </div>
         </div>

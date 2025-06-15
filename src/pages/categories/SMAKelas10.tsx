@@ -1,20 +1,13 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseGrid from "@/components/course/CourseGrid";
 import CourseFilter from "@/components/course/CourseFilter";
-import { mockCourses } from '@/data/mockCourses';
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, X } from "lucide-react";
 
 const SMAKelas10 = () => {
   const [showFilter, setShowFilter] = useState(false);
-  
-  // Filter kursus untuk kategori SMA Kelas 10
-  const smaKelas10Courses = mockCourses.filter(course => 
-    course.category === "SMA Kelas 10"
-  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -34,7 +27,7 @@ const SMAKelas10 = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {smaKelas10Courses.length} kursus tersedia
+                Kursus untuk SMA Kelas 10
               </p>
             </div>
             
@@ -54,7 +47,7 @@ const SMAKelas10 = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={smaKelas10Courses} />
+              <CourseGrid category="SMA Kelas 10" />
             </div>
           </div>
         </div>

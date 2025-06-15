@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -36,7 +35,7 @@ const SDKelas123 = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {sdKelas123Courses.length} kursus tersedia
+                Kursus untuk SD Kelas 1-3
               </p>
             </div>
             
@@ -56,7 +55,7 @@ const SDKelas123 = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={sdKelas123Courses} />
+              <CourseGrid />
             </div>
           </div>
         </div>

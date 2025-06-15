@@ -1,20 +1,13 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseGrid from "@/components/course/CourseGrid";
 import CourseFilter from "@/components/course/CourseFilter";
-import { mockCourses } from '@/data/mockCourses';
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, X } from "lucide-react";
 
 const UjianMandiri = () => {
   const [showFilter, setShowFilter] = useState(false);
-  
-  // Filter kursus untuk kategori Ujian Mandiri
-  const ujianMandiriCourses = mockCourses.filter(course => 
-    course.category === "Ujian Mandiri"
-  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -34,7 +27,7 @@ const UjianMandiri = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {ujianMandiriCourses.length} kursus tersedia
+                Kursus untuk Ujian Mandiri
               </p>
             </div>
             
@@ -54,7 +47,7 @@ const UjianMandiri = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={ujianMandiriCourses} />
+              <CourseGrid />
             </div>
           </div>
         </div>

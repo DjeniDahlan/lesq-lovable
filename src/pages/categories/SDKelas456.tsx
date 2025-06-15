@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -10,13 +9,6 @@ import { SlidersHorizontal, X } from "lucide-react";
 
 const SDKelas456 = () => {
   const [showFilter, setShowFilter] = useState(false);
-  
-  // Filter kursus untuk kategori SD Kelas 4-6
-  const sdKelas456Courses = mockCourses.filter(course => 
-    course.category === "SD Kelas 4" || 
-    course.category === "SD Kelas 5" || 
-    course.category === "SD Kelas 6"
-  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -36,7 +28,7 @@ const SDKelas456 = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {sdKelas456Courses.length} kursus tersedia
+                Kursus untuk SD Kelas 4-6
               </p>
             </div>
             
@@ -56,7 +48,7 @@ const SDKelas456 = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={sdKelas456Courses} />
+              <CourseGrid />
             </div>
           </div>
         </div>

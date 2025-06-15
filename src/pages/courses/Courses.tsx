@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -119,7 +118,7 @@ const Courses = () => {
                 <CourseFilter />
               </div>
               <div className="lg:w-3/4">
-                <CourseGrid courses={mockCourses} />
+                <CourseGrid />
               </div>
             </div>
           </div>
