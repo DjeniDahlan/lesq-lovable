@@ -36,6 +36,118 @@ export type Database = {
         }
         Relationships: []
       }
+      course_stats: {
+        Row: {
+          average_rating: number | null
+          course_id: string | null
+          id: string
+          last_updated: string
+          total_enrollments: number | null
+          total_revenue: number | null
+          total_reviews: number | null
+        }
+        Insert: {
+          average_rating?: number | null
+          course_id?: string | null
+          id?: string
+          last_updated?: string
+          total_enrollments?: number | null
+          total_revenue?: number | null
+          total_reviews?: number | null
+        }
+        Update: {
+          average_rating?: number | null
+          course_id?: string | null
+          id?: string
+          last_updated?: string
+          total_enrollments?: number | null
+          total_revenue?: number | null
+          total_reviews?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_stats_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          category: string
+          created_at: string
+          curriculum: Json | null
+          description: string | null
+          discount_percentage: number | null
+          education_level: string
+          id: string
+          instructor_id: string | null
+          is_active: boolean | null
+          materials: Json | null
+          overview: string | null
+          price: number
+          questions: Json | null
+          reviews: Json | null
+          subject: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          what_you_will_learn: string[] | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          curriculum?: Json | null
+          description?: string | null
+          discount_percentage?: number | null
+          education_level: string
+          id?: string
+          instructor_id?: string | null
+          is_active?: boolean | null
+          materials?: Json | null
+          overview?: string | null
+          price?: number
+          questions?: Json | null
+          reviews?: Json | null
+          subject: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          what_you_will_learn?: string[] | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          curriculum?: Json | null
+          description?: string | null
+          discount_percentage?: number | null
+          education_level?: string
+          id?: string
+          instructor_id?: string | null
+          is_active?: boolean | null
+          materials?: Json | null
+          overview?: string | null
+          price?: number
+          questions?: Json | null
+          reviews?: Json | null
+          subject?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          what_you_will_learn?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_instructor_id_fkey"
+            columns: ["instructor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       instructor_applications: {
         Row: {
           admin_notes: string | null

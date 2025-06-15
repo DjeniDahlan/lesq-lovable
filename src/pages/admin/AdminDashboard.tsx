@@ -7,6 +7,9 @@ import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RegistrantsTable from "@/components/admin/RegistrantsTable";
 import PurchasesTable from "@/components/admin/PurchasesTable";
+import CoursesTable from "@/components/admin/CoursesTable";
+import UsersTable from "@/components/admin/UsersTable";
+import StatsCards from "@/components/admin/StatsCards";
 import { supabase } from "@/integrations/supabase/client";
 
 const AdminDashboard = () => {
@@ -81,21 +84,55 @@ const AdminDashboard = () => {
               Panel Admin
             </h1>
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Kelola pendaftar dan pembelian kursus
+              Kelola kursus, pengguna, dan lihat statistik platform
             </p>
           </div>
         </section>
 
         <section className="py-8">
           <div className="container">
-            <Tabs defaultValue="registrants" className="w-full">
-              <TabsList className="mb-8">
+            <Tabs defaultValue="dashboard" className="w-full">
+              <TabsList className="mb-8 grid w-full grid-cols-5">
+                <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+                <TabsTrigger value="courses">Kursus</TabsTrigger>
+                <TabsTrigger value="users">Pengguna</TabsTrigger>
                 <TabsTrigger value="registrants">Pendaftar</TabsTrigger>
-                <TabsTrigger value="purchases">Pembelian Kursus</TabsTrigger>
+                <TabsTrigger value="purchases">Pembelian</TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="dashboard" className="space-y-6">
+                <StatsCards />
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="bg-white p-6 rounded-lg border">
+                    <h3 className="text-lg font-semibold mb-4">Ringkasan Platform</h3>
+                    <p className="text-muted-foreground">
+                      Dashboard ini memberikan gambaran menyeluruh tentang aktivitas platform pembelajaran online Anda.
+                    </p>
+                  </div>
+                  <div className="bg-white p-6 rounded-lg border">
+                    <h3 className="text-lg font-semibold mb-4">Fitur Admin</h3>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Kelola kursus dan konten pembelajaran</li>
+                      <li>• Manajemen pengguna dan role</li>
+                      <li>• Pantau pendaftaran dan pembelian</li>
+                      <li>• Analisis statistik platform</li>
+                    </ul>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="courses">
+                <CoursesTable />
+              </TabsContent>
+              
+              <TabsContent value="users">
+                <UsersTable />
+              </TabsContent>
+              
               <TabsContent value="registrants">
                 <RegistrantsTable />
               </TabsContent>
+              
               <TabsContent value="purchases">
                 <PurchasesTable />
               </TabsContent>
