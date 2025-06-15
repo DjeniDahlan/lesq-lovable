@@ -94,8 +94,30 @@ const categories = [
           { name: "IPA-Biologi", link: "/category/smp-kelas-7/ipa-biologi" }
         ]
       },
-      { name: "SMP Kelas 8", link: "/category/smp-kelas-8", courses: 12 },
-      { name: "SMP Kelas 9", link: "/category/smp-kelas-9", courses: 12 },
+      { 
+        name: "SMP Kelas 8", 
+        link: "/category/smp-kelas-8", 
+        courses: 12,
+        subjects: [
+          { name: "Matematika", link: "/category/smp-kelas-8/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/smp-kelas-8/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/smp-kelas-8/bahasa-inggris" },
+          { name: "IPA-Fisika", link: "/category/smp-kelas-8/ipa-fisika" },
+          { name: "IPA-Biologi", link: "/category/smp-kelas-8/ipa-biologi" }
+        ]
+      },
+      { 
+        name: "SMP Kelas 9", 
+        link: "/category/smp-kelas-9", 
+        courses: 12,
+        subjects: [
+          { name: "Matematika", link: "/category/smp-kelas-9/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/smp-kelas-9/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/smp-kelas-9/bahasa-inggris" },
+          { name: "IPA-Fisika", link: "/category/smp-kelas-9/ipa-fisika" },
+          { name: "IPA-Biologi", link: "/category/smp-kelas-9/ipa-biologi" }
+        ]
+      },
     ]
   },
   {
@@ -155,7 +177,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu for SD classes and SMP Kelas 7 */}
+                    {/* Show subjects submenu for SD classes and all SMP classes */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
