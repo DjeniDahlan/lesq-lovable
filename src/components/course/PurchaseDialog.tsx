@@ -76,12 +76,12 @@ const PurchaseDialog = ({
       const { data: { session } } = await supabase.auth.getSession();
       
       if (session?.user) {
-        // Create a course purchase record
+        // Create a purchase record with text course_id since our table accepts text
         const { error } = await supabase
           .from('course_purchases')
           .insert({
             user_id: session.user.id,
-            course_id: courseId,
+            course_id: courseId, // Keep as string since database column accepts text
             price: price || 0,
             status: 'pending'
           });
