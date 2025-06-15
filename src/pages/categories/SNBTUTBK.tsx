@@ -13,7 +13,10 @@ const SNBTUTBK = () => {
   
   // Filter kursus untuk kategori SNBT UTBK
   const snbtCourses = mockCourses.filter(course => 
-    course.category === "SNBT UTBK"
+    course.category === "SNBT - TPS" || 
+    course.category === "SNBT - Literasi Indonesia" ||
+    course.category === "SNBT - Literasi Inggris" ||
+    course.category === "SNBT - Penalaran Matematika"
   );
 
   return (
