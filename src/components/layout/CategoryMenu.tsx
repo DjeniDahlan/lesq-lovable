@@ -82,7 +82,18 @@ const categories = [
     label: "SMP",
     icon: BookOpen,
     subcategories: [
-      { name: "SMP Kelas 7", link: "/category/smp-kelas-7", courses: 12 },
+      { 
+        name: "SMP Kelas 7", 
+        link: "/category/smp-kelas-7", 
+        courses: 12,
+        subjects: [
+          { name: "Matematika", link: "/category/smp-kelas-7/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/smp-kelas-7/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/smp-kelas-7/bahasa-inggris" },
+          { name: "IPA-Fisika", link: "/category/smp-kelas-7/ipa-fisika" },
+          { name: "IPA-Biologi", link: "/category/smp-kelas-7/ipa-biologi" }
+        ]
+      },
       { name: "SMP Kelas 8", link: "/category/smp-kelas-8", courses: 12 },
       { name: "SMP Kelas 9", link: "/category/smp-kelas-9", courses: 12 },
     ]
@@ -144,7 +155,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu for all SD classes */}
+                    {/* Show subjects submenu for SD classes and SMP Kelas 7 */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
