@@ -68,7 +68,7 @@ export type Database = {
           {
             foreignKeyName: "course_stats_course_id_fkey"
             columns: ["course_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "courses"
             referencedColumns: ["id"]
           },
@@ -275,7 +275,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_current_user_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       instructor_status: "pending" | "approved" | "rejected"

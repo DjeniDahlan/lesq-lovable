@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -31,6 +30,8 @@ interface CourseWithPurchase {
   thumbnail_url?: string;
   education_level?: string;
   category?: string;
+  subject?: string;
+  overview?: string;
 }
 
 // Sample data for notifications
@@ -131,28 +132,46 @@ const Student = () => {
         if (session?.user) {
           console.log("Fetching courses for user:", session.user.id);
           
-          const { data: purchases, error } = await supabase
+          // Join course_purchases with courses to get complete course information
+          const { data: coursesWithPurchases, error } = await supabase
             .from('course_purchases')
-            .select('*')
+            .select(`
+              *,
+              courses:course_id (
+                id,
+                title,
+                description,
+                thumbnail_url,
+                education_level,
+                category,
+                subject,
+                overview
+              )
+            `)
             .eq('user_id', session.user.id)
             .order('purchase_date', { ascending: false });
             
-          console.log("Course purchases data:", purchases);
-          console.log("Course purchases error:", error);
+          console.log("Courses with purchases data:", coursesWithPurchases);
+          console.log("Courses with purchases error:", error);
           
-          if (purchases && purchases.length > 0) {
-            // Transform purchase data into course format
-            const coursesData: CourseWithPurchase[] = purchases.map(purchase => ({
-              id: purchase.course_id,
-              title: `Kursus ${purchase.course_id}`, // Default title since courses table might not have data
-              description: `Kursus yang dibeli pada ${new Date(purchase.purchase_date).toLocaleDateString('id-ID')}`,
-              price: purchase.price,
-              status: purchase.status,
-              purchase_date: purchase.purchase_date,
-              thumbnail_url: '',
-              education_level: 'Unknown',
-              category: 'Unknown'
-            }));
+          if (coursesWithPurchases && coursesWithPurchases.length > 0) {
+            // Transform the joined data into the expected format
+            const coursesData: CourseWithPurchase[] = coursesWithPurchases.map(purchase => {
+              const courseData = purchase.courses;
+              return {
+                id: purchase.course_id,
+                title: courseData?.title || `Kursus ${purchase.course_id}`,
+                description: courseData?.description || `Kursus yang dibeli pada ${new Date(purchase.purchase_date).toLocaleDateString('id-ID')}`,
+                price: purchase.price,
+                status: purchase.status,
+                purchase_date: purchase.purchase_date,
+                thumbnail_url: courseData?.thumbnail_url || '',
+                education_level: courseData?.education_level || 'Unknown',
+                category: courseData?.category || 'Unknown',
+                subject: courseData?.subject || 'Unknown',
+                overview: courseData?.overview || ''
+              };
+            });
             
             setEnrolledCourses(coursesData);
           }
@@ -201,7 +220,15 @@ const Student = () => {
   const CourseCard = ({ course }: { course: CourseWithPurchase }) => (
     <div className="bg-white rounded-lg border p-4 hover:shadow-md transition-shadow">
       <div className="aspect-video bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-        <BookOpen className="h-12 w-12 text-gray-400" />
+        {course.thumbnail_url ? (
+          <img 
+            src={course.thumbnail_url} 
+            alt={course.title}
+            className="w-full h-full object-cover rounded-lg"
+          />
+        ) : (
+          <BookOpen className="h-12 w-12 text-gray-400" />
+        )}
       </div>
       
       <div className="space-y-3">
@@ -213,6 +240,12 @@ const Student = () => {
         <p className="text-xs text-muted-foreground line-clamp-2">
           {course.description}
         </p>
+
+        <div className="flex flex-wrap gap-1">
+          <Badge variant="outline" className="text-xs">{course.category}</Badge>
+          <Badge variant="outline" className="text-xs">{course.subject}</Badge>
+          <Badge variant="outline" className="text-xs">{course.education_level}</Badge>
+        </div>
         
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Rp {course.price.toLocaleString()}</span>
