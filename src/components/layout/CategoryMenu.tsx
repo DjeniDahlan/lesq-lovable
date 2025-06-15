@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -9,6 +10,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { BookOpen, GraduationCap, School, Users, Award, Target } from 'lucide-react';
 
 const categories = [
@@ -227,36 +229,38 @@ const CategoryMenu = () => {
               {category.label}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[700px] lg:grid-cols-3">
-                {category.subcategories.map((subcategory) => (
-                  <div key={subcategory.name} className="space-y-2">
-                    <Link
-                      to={subcategory.link}
-                      className="block select-none space-y-1 rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
-                    >
-                      <div className="font-medium">{subcategory.name}</div>
-                      <p className="text-sm text-muted-foreground">
-                        {subcategory.courses} kursus
-                      </p>
-                    </Link>
-                    
-                    {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, SMA Kelas 11 IPA, SMA Kelas 11 IPS, SMA Kelas 12 IPA, and SMA Kelas 12 IPS */}
-                    {subcategory.subjects && (
-                      <div className="ml-4 space-y-1">
-                        {subcategory.subjects.map((subject) => (
-                          <Link
-                            key={subject.name}
-                            to={subject.link}
-                            className="block text-sm text-muted-foreground hover:text-primary hover:underline p-1"
-                          >
-                            • {subject.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <ScrollArea className="h-[400px] w-[400px] md:w-[500px] lg:w-[700px]">
+                <div className="grid gap-3 p-4 md:grid-cols-2 lg:grid-cols-3">
+                  {category.subcategories.map((subcategory) => (
+                    <div key={subcategory.name} className="space-y-2">
+                      <Link
+                        to={subcategory.link}
+                        className="block select-none space-y-1 rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <div className="font-medium">{subcategory.name}</div>
+                        <p className="text-sm text-muted-foreground">
+                          {subcategory.courses} kursus
+                        </p>
+                      </Link>
+                      
+                      {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, SMA Kelas 11 IPA, SMA Kelas 11 IPS, SMA Kelas 12 IPA, and SMA Kelas 12 IPS */}
+                      {subcategory.subjects && (
+                        <div className="ml-4 space-y-1">
+                          {subcategory.subjects.map((subject) => (
+                            <Link
+                              key={subject.name}
+                              to={subject.link}
+                              className="block text-sm text-muted-foreground hover:text-primary hover:underline p-1"
+                            >
+                              • {subject.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
