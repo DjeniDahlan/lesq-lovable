@@ -46,7 +46,6 @@ import InstructorPayouts from "./pages/instructor/Payouts";
 // Category Pages
 import SekolahDasar from "./pages/categories/SekolahDasar";
 import SekolahMenengahPertama from "./pages/categories/SekolahMenengahPertama";
-import SMAUmum from "./pages/categories/SMAUmum";
 import SMAIPA from "./pages/categories/SMAIPA";
 import SMAIPS from "./pages/categories/SMAIPS";
 import SNBTUTBK from "./pages/categories/SNBTUTBK";
@@ -116,28 +115,7 @@ const App = () => (
           <Route path="/category/smp-kelas-7" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-8" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-9" element={<SekolahMenengahPertama />} />
-          <Route path="/category/sma-kelas-10" element={<SMAUmum />} />
-          <Route path="/category/sma-kelas-11-ipa" element={<SMAIPA />} />
-          <Route path="/category/sma-kelas-11-ips" element={<SMAIPS />} />
-          <Route path="/category/sma-kelas-12-ipa" element={<SMAIPA />} />
-          <Route path="/category/sma-kelas-12-ips" element={<SMAIPS />} />
-          <Route path="/category/snbt-tps" element={<SNBTUTBK />} />
-          <Route path="/category/snbt-literasi-indonesia" element={<SNBTUTBK />} />
-          <Route path="/category/snbt-literasi-inggris" element={<SNBTUTBK />} />
-          <Route path="/category/snbt-penalaran-matematika" element={<SNBTUTBK />} />
-          <Route path="/category/ujian-mandiri-ugm" element={<UjianMandiri />} />
-          <Route path="/category/ujian-mandiri-undip" element={<UjianMandiri />} />
-          <Route path="/category/ujian-mandiri-unair" element={<UjianMandiri />} />
-          <Route path="/category/ujian-mandiri-itb" element={<UjianMandiri />} />
-          
-          {/* Legacy Category Routes (for backward compatibility) */}
-          <Route path="/category/sd-kelas-4" element={<SekolahDasar />} />
-          <Route path="/category/sd-kelas-5" element={<SekolahDasar />} />
-          <Route path="/category/sd-kelas-6" element={<SekolahDasar />} />
-          <Route path="/category/smp-kelas-7" element={<SekolahMenengahPertama />} />
-          <Route path="/category/smp-kelas-8" element={<SekolahMenengahPertama />} />
-          <Route path="/category/smp-kelas-9" element={<SekolahMenengahPertama />} />
-          <Route path="/category/sma-kelas-10" element={<SMAUmum />} />
+          <Route path="/category/sma-kelas-10" element={<Categories />} />
           <Route path="/category/sma-kelas-11-ipa" element={<SMAIPA />} />
           <Route path="/category/sma-kelas-11-ips" element={<SMAIPS />} />
           <Route path="/category/sma-kelas-12-ipa" element={<SMAIPA />} />
@@ -154,7 +132,6 @@ const App = () => (
           {/* Legacy Category Routes (for backward compatibility) */}
           <Route path="/category/sd" element={<SekolahDasar />} />
           <Route path="/category/smp" element={<SekolahMenengahPertama />} />
-          <Route path="/category/sma-umum" element={<SMAUmum />} />
           <Route path="/category/sma-ipa" element={<SMAIPA />} />
           <Route path="/category/sma-ips" element={<SMAIPS />} />
           <Route path="/category/snbt-utbk" element={<SNBTUTBK />} />
