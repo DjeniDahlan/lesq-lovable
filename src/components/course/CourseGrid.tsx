@@ -10,52 +10,40 @@ interface CourseGridProps {
 }
 
 const fetchCourses = async ({ category, limit }: { category?: string, limit?: number }): Promise<CourseType[]> => {
-  console.log('Fetching courses with TanStack Query. Category:', category, 'limit:', limit);
-  
-  // Mengubah select('*') menjadi select dengan kolom spesifik untuk menghindari join implisit
-  const selectColumns = 'id, title, thumbnail_url, price, discount_percentage, education_level, category, created_at';
+  console.log('Fetching courses via RPC. Category:', category, 'limit:', limit);
 
-  let query = supabase
-    .from('courses')
-    .select(selectColumns)
-    .eq('is_active', true);
-
-  if (category) {
-    query = query.eq('category', category);
-  }
-
-  if (limit) {
-    query = query.limit(limit);
-  }
-
-  const { data, error } = await query;
-
-  console.log('Courses query result:', { data, error });
+  // Panggil fungsi database 'get_active_courses' yang telah kita buat
+  const { data, error } = await supabase.rpc('get_active_courses', {
+    p_category: category,
+    p_limit: limit,
+  });
 
   if (error) {
+    console.error('Error fetching courses via RPC:', error);
     // React Query akan menangkap error ini
     throw error;
   }
 
   if (data) {
+    // Format data yang diterima dari fungsi agar sesuai dengan tipe CourseType
     const formattedCourses: CourseType[] = data.map(course => ({
       id: course.id,
       title: course.title,
-      instructor: 'Les-Q Team', // Default instructor
+      instructor: course.instructor_name || 'Les-Q Team', // Menggunakan nama instruktur dari RPC
       thumbnail: course.thumbnail_url || '/placeholder.svg',
       price: course.price,
-      discountPrice: course.discount_percentage ? 
+      discountPrice: course.discount_percentage && course.discount_percentage > 0 ? 
         Math.round(course.price * (1 - course.discount_percentage / 100)) : undefined,
       rating: 4.5, // Default rating
       reviewCount: 124, // Default review count
       level: course.education_level as any || 'Semua Level',
-      duration: '8 jam',
-      studentCount: 1250,
+      duration: '8 jam', // Default duration
+      studentCount: 1250, // Default student count
       category: course.category,
       isBestseller: course.price > 200000,
       isNew: new Date(course.created_at).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000
     }));
-    console.log('Formatted courses:', formattedCourses);
+    console.log('Formatted courses from RPC:', formattedCourses);
     return formattedCourses;
   }
   return [];

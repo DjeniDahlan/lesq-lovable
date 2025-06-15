@@ -283,7 +283,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_active_courses: {
+        Args: { p_category: string; p_limit: number }
+        Returns: {
+          id: string
+          title: string
+          thumbnail_url: string
+          price: number
+          discount_percentage: number
+          education_level: string
+          category: string
+          created_at: string
+          instructor_name: string
+        }[]
+      }
     }
     Enums: {
       instructor_status: "pending" | "approved" | "rejected"
