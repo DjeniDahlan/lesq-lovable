@@ -287,6 +287,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_user_id_securely: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       instructor_status: "pending" | "approved" | "rejected"
