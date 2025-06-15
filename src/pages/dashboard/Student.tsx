@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -137,7 +138,7 @@ const Student = () => {
             .from('course_purchases')
             .select(`
               *,
-              courses:course_id (
+              courses (
                 id,
                 title,
                 description,
