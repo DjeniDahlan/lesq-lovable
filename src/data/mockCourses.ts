@@ -1,4 +1,3 @@
-
 import { CourseType } from "@/components/course/CourseCard";
 
 export const mockCourses: CourseType[] = [
@@ -46,45 +45,6 @@ export const mockCourses: CourseType[] = [
     category: "SD Kelas 1",
     isNew: true
   },
-  {
-    id: "sd1-4",
-    title: "Seni Budaya dan Prakarya SD Kelas 1",
-    instructor: "Ibu Dewi Sartika, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&q=80&w=1740",
-    price: 119000,
-    rating: 4.4,
-    reviewCount: 52,
-    level: "Pemula",
-    duration: "5 jam",
-    studentCount: 298,
-    category: "SD Kelas 1"
-  },
-  {
-    id: "sd1-5",
-    title: "Pendidikan Jasmani SD Kelas 1",
-    instructor: "Pak Agus Susanto, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1740",
-    price: 109000,
-    rating: 4.3,
-    reviewCount: 41,
-    level: "Pemula",
-    duration: "4 jam",
-    studentCount: 234,
-    category: "SD Kelas 1"
-  },
-  {
-    id: "sd1-6",
-    title: "Pendidikan Kewarganegaraan SD Kelas 1",
-    instructor: "Ibu Siti Nurhaliza, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=1740",
-    price: 99000,
-    rating: 4.2,
-    reviewCount: 35,
-    level: "Pemula",
-    duration: "4 jam",
-    studentCount: 187,
-    category: "SD Kelas 1"
-  },
 
   // Kategori SD Kelas 2
   {
@@ -126,45 +86,6 @@ export const mockCourses: CourseType[] = [
     level: "Pemula",
     duration: "8 jam",
     studentCount: 456,
-    category: "SD Kelas 2"
-  },
-  {
-    id: "sd2-4",
-    title: "Seni Budaya dan Prakarya SD Kelas 2",
-    instructor: "Ibu Dewi Sartika, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&q=80&w=1740",
-    price: 129000,
-    rating: 4.4,
-    reviewCount: 62,
-    level: "Pemula",
-    duration: "7 jam",
-    studentCount: 398,
-    category: "SD Kelas 2"
-  },
-  {
-    id: "sd2-5",
-    title: "Pendidikan Jasmani SD Kelas 2",
-    instructor: "Pak Agus Susanto, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1740",
-    price: 119000,
-    rating: 4.3,
-    reviewCount: 51,
-    level: "Pemula",
-    duration: "6 jam",
-    studentCount: 334,
-    category: "SD Kelas 2"
-  },
-  {
-    id: "sd2-6",
-    title: "Pendidikan Kewarganegaraan SD Kelas 2",
-    instructor: "Ibu Siti Nurhaliza, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=1740",
-    price: 109000,
-    rating: 4.2,
-    reviewCount: 45,
-    level: "Pemula",
-    duration: "6 jam",
-    studentCount: 287,
     category: "SD Kelas 2"
   },
 
@@ -209,45 +130,6 @@ export const mockCourses: CourseType[] = [
     level: "Pemula",
     duration: "10 jam",
     studentCount: 567,
-    category: "SD Kelas 3"
-  },
-  {
-    id: "sd3-4",
-    title: "Seni Budaya dan Prakarya SD Kelas 3",
-    instructor: "Ibu Dewi Sartika, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&q=80&w=1740",
-    price: 139000,
-    rating: 4.5,
-    reviewCount: 72,
-    level: "Pemula",
-    duration: "9 jam",
-    studentCount: 498,
-    category: "SD Kelas 3"
-  },
-  {
-    id: "sd3-5",
-    title: "Pendidikan Jasmani SD Kelas 3",
-    instructor: "Pak Agus Susanto, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1740",
-    price: 129000,
-    rating: 4.4,
-    reviewCount: 61,
-    level: "Pemula",
-    duration: "8 jam",
-    studentCount: 434,
-    category: "SD Kelas 3"
-  },
-  {
-    id: "sd3-6",
-    title: "Pendidikan Kewarganegaraan SD Kelas 3",
-    instructor: "Ibu Siti Nurhaliza, S.Pd",
-    thumbnail: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=1740",
-    price: 119000,
-    rating: 4.3,
-    reviewCount: 55,
-    level: "Pemula",
-    duration: "8 jam",
-    studentCount: 387,
     category: "SD Kelas 3"
   },
 
