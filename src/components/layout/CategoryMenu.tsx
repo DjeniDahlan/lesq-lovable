@@ -177,7 +177,21 @@ const categories = [
           { name: "TPA", link: "/category/sma-kelas-12-ipa/tpa" }
         ]
       },
-      { name: "SMA Kelas 12 IPS", link: "/category/sma-kelas-12-ips", courses: 8 },
+      { 
+        name: "SMA Kelas 12 IPS", 
+        link: "/category/sma-kelas-12-ips", 
+        courses: 8,
+        subjects: [
+          { name: "Bahasa Indonesia", link: "/category/sma-kelas-12-ips/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/sma-kelas-12-ips/bahasa-inggris" },
+          { name: "Matematika Dasar", link: "/category/sma-kelas-12-ips/matematika-dasar" },
+          { name: "Ekonomi", link: "/category/sma-kelas-12-ips/ekonomi" },
+          { name: "Geografi", link: "/category/sma-kelas-12-ips/geografi" },
+          { name: "Sejarah", link: "/category/sma-kelas-12-ips/sejarah" },
+          { name: "Sosiologi", link: "/category/sma-kelas-12-ips/sosiologi" },
+          { name: "TPA", link: "/category/sma-kelas-12-ips/tpa" }
+        ]
+      },
     ]
   },
   {
@@ -213,7 +227,7 @@ const CategoryMenu = () => {
               {category.label}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[700px] lg:grid-cols-3">
                 {category.subcategories.map((subcategory) => (
                   <div key={subcategory.name} className="space-y-2">
                     <Link
@@ -226,7 +240,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, SMA Kelas 11 IPA, SMA Kelas 11 IPS, and SMA Kelas 12 IPA */}
+                    {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, SMA Kelas 11 IPA, SMA Kelas 11 IPS, SMA Kelas 12 IPA, and SMA Kelas 12 IPS */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
