@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy, Check } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface PurchaseDialogProps {
   isOpen: boolean;
@@ -30,8 +32,10 @@ const PurchaseDialog = ({
   price,
 }: PurchaseDialogProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [step, setStep] = useState<'confirm' | 'payment' | 'trial-registered'>('confirm');
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Bank account details for payment
   const bankDetails = {
@@ -40,7 +44,7 @@ const PurchaseDialog = ({
     accountName: "Les-Q Education",
   };
 
-  const handlePurchase = () => {
+  const handlePurchase = async () => {
     if (isTrial) {
       // For trial, simulate immediate registration
       setStep('trial-registered');
@@ -66,14 +70,62 @@ const PurchaseDialog = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handlePaymentConfirmation = () => {
-    toast({
-      title: "Konfirmasi pembayaran diterima",
-      description: "Tim kami akan memverifikasi pembayaran Anda dalam 1-2 jam kerja. Anda akan mendapat notifikasi setelah akses kursus diaktifkan.",
-    });
+  const handlePaymentConfirmation = async () => {
+    setLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session?.user) {
+        // Create a course purchase record
+        const { error } = await supabase
+          .from('course_purchases')
+          .insert({
+            user_id: session.user.id,
+            course_id: courseId,
+            price: price || 0,
+            status: 'pending'
+          });
+
+        if (error) {
+          console.error('Error creating purchase record:', error);
+          toast({
+            title: "Error",
+            description: "Gagal mencatat pembelian. Silakan coba lagi.",
+            variant: "destructive"
+          });
+          return;
+        }
+
+        toast({
+          title: "Konfirmasi pembayaran diterima",
+          description: "Tim kami akan memverifikasi pembayaran Anda dalam 1-2 jam kerja. Anda akan mendapat notifikasi setelah akses kursus diaktifkan.",
+        });
+        
+        onClose();
+        // Reset step for next time
+        setTimeout(() => setStep('confirm'), 300);
+        
+        // Navigate to purchases page to see status
+        navigate('/account/purchases');
+      }
+    } catch (error) {
+      console.error('Error handling payment confirmation:', error);
+      toast({
+        title: "Error",
+        description: "Terjadi kesalahan. Silakan coba lagi.",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTrialComplete = () => {
     onClose();
     // Reset step for next time
     setTimeout(() => setStep('confirm'), 300);
+    // Navigate back to dashboard
+    navigate('/dashboard/student');
   };
 
   const handleClose = () => {
@@ -180,8 +232,8 @@ const PurchaseDialog = ({
               <Button variant="outline" onClick={handleClose}>
                 Batal
               </Button>
-              <Button onClick={handlePaymentConfirmation}>
-                Saya Sudah Transfer
+              <Button onClick={handlePaymentConfirmation} disabled={loading}>
+                {loading ? "Memproses..." : "Saya Sudah Transfer"}
               </Button>
             </DialogFooter>
           </>
@@ -216,7 +268,7 @@ const PurchaseDialog = ({
             </div>
 
             <DialogFooter>
-              <Button onClick={handleClose} className="w-full">
+              <Button onClick={handleTrialComplete} className="w-full">
                 Mulai Belajar Sekarang
               </Button>
             </DialogFooter>
