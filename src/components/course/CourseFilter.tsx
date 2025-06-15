@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown } from 'lucide-react';
@@ -19,12 +20,21 @@ import {
 
 const categories = [
   "Semua Kategori",
-  "Sekolah Dasar (SD)",
-  "Sekolah Menengah Pertama (SMP)",
-  "Sekolah Menengah Atas (SMA) - Umum",
-  "Sekolah Menengah Atas (SMA) - IPA",
-  "Sekolah Menengah Atas (SMA) - IPS",
-  "SNBT UTBK",
+  "SD Kelas 4",
+  "SD Kelas 5", 
+  "SD Kelas 6",
+  "SMP Kelas 7",
+  "SMP Kelas 8",
+  "SMP Kelas 9",
+  "SMA Kelas 10",
+  "SMA Kelas 11 IPA",
+  "SMA Kelas 11 IPS",
+  "SMA Kelas 12 IPA",
+  "SMA Kelas 12 IPS",
+  "SNBT - TPS",
+  "SNBT - Literasi Indonesia",
+  "SNBT - Literasi Inggris",
+  "SNBT - Penalaran Matematika",
   "Ujian Mandiri",
 ];
 

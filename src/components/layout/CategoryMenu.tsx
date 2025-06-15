@@ -17,44 +17,49 @@ const categories = [
     label: "SD",
     icon: School,
     subcategories: [
-      { name: "Matematika", link: "/category/sd", courses: 3 },
-      { name: "Ilmu Pengetahuan Alam (IPA)", link: "/category/sd", courses: 3 },
-      { name: "Bahasa Indonesia", link: "/category/sd", courses: 3 },
+      { name: "SD Kelas 4", link: "/category/sd-kelas-4", courses: 8 },
+      { name: "SD Kelas 5", link: "/category/sd-kelas-5", courses: 8 },
+      { name: "SD Kelas 6", link: "/category/sd-kelas-6", courses: 8 },
     ]
   },
   {
     label: "SMP",
     icon: BookOpen,
     subcategories: [
-      { name: "Matematika", link: "/category/smp", courses: 4 },
-      { name: "Ilmu Pengetahuan Alam (IPA)", link: "/category/smp", courses: 4 },
-      { name: "Bahasa Indonesia", link: "/category/smp", courses: 4 },
-      { name: "Bahasa Inggris", link: "/category/smp", courses: 4 },
+      { name: "SMP Kelas 7", link: "/category/smp-kelas-7", courses: 12 },
+      { name: "SMP Kelas 8", link: "/category/smp-kelas-8", courses: 12 },
+      { name: "SMP Kelas 9", link: "/category/smp-kelas-9", courses: 12 },
     ]
   },
   {
     label: "SMA",
     icon: GraduationCap,
     subcategories: [
-      { name: "SMA Umum", link: "/category/sma-umum", courses: 4 },
-      { name: "SMA IPA", link: "/category/sma-ipa", courses: 4 },
-      { name: "SMA IPS", link: "/category/sma-ips", courses: 4 },
+      { name: "SMA Kelas 10", link: "/category/sma-kelas-10", courses: 10 },
+      { name: "SMA Kelas 11 IPA", link: "/category/sma-kelas-11-ipa", courses: 8 },
+      { name: "SMA Kelas 11 IPS", link: "/category/sma-kelas-11-ips", courses: 8 },
+      { name: "SMA Kelas 12 IPA", link: "/category/sma-kelas-12-ipa", courses: 8 },
+      { name: "SMA Kelas 12 IPS", link: "/category/sma-kelas-12-ips", courses: 8 },
     ]
   },
   {
     label: "SNBT UTBK",
     icon: Target,
     subcategories: [
-      { name: "Tes Potensi Skolastik (TPS)", link: "/category/snbt-utbk", courses: 2 },
-      { name: "Tes Literasi", link: "/category/snbt-utbk", courses: 2 },
+      { name: "Tes Potensi Skolastik (TPS)", link: "/category/snbt-tps", courses: 4 },
+      { name: "Tes Literasi Indonesia", link: "/category/snbt-literasi-indonesia", courses: 3 },
+      { name: "Tes Literasi Inggris", link: "/category/snbt-literasi-inggris", courses: 3 },
+      { name: "Penalaran Matematika", link: "/category/snbt-penalaran-matematika", courses: 3 },
     ]
   },
   {
     label: "Ujian Mandiri",
     icon: Award,
     subcategories: [
-      { name: "UM UGM", link: "/category/ujian-mandiri", courses: 2 },
-      { name: "UM UNDIP", link: "/category/ujian-mandiri", courses: 2 },
+      { name: "UM UGM", link: "/category/ujian-mandiri-ugm", courses: 5 },
+      { name: "UM UNDIP", link: "/category/ujian-mandiri-undip", courses: 4 },
+      { name: "UM UNAIR", link: "/category/ujian-mandiri-unair", courses: 4 },
+      { name: "UM ITB", link: "/category/ujian-mandiri-itb", courses: 4 },
     ]
   },
 ];
