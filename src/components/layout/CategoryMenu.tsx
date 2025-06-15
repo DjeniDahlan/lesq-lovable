@@ -149,7 +149,21 @@ const categories = [
         ]
       },
       { name: "SMA Kelas 11 IPS", link: "/category/sma-kelas-11-ips", courses: 8 },
-      { name: "SMA Kelas 12 IPA", link: "/category/sma-kelas-12-ipa", courses: 8 },
+      { 
+        name: "SMA Kelas 12 IPA", 
+        link: "/category/sma-kelas-12-ipa", 
+        courses: 8,
+        subjects: [
+          { name: "Bahasa Indonesia", link: "/category/sma-kelas-12-ipa/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/sma-kelas-12-ipa/bahasa-inggris" },
+          { name: "Matematika Dasar", link: "/category/sma-kelas-12-ipa/matematika-dasar" },
+          { name: "Matematika IPA", link: "/category/sma-kelas-12-ipa/matematika-ipa" },
+          { name: "Fisika", link: "/category/sma-kelas-12-ipa/fisika" },
+          { name: "Kimia", link: "/category/sma-kelas-12-ipa/kimia" },
+          { name: "Biologi", link: "/category/sma-kelas-12-ipa/biologi" },
+          { name: "TPA", link: "/category/sma-kelas-12-ipa/tpa" }
+        ]
+      },
       { name: "SMA Kelas 12 IPS", link: "/category/sma-kelas-12-ips", courses: 8 },
     ]
   },
@@ -199,7 +213,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, and SMA Kelas 11 IPA */}
+                    {/* Show subjects submenu for SD classes, all SMP classes, SMA Kelas 10, SMA Kelas 11 IPA, and SMA Kelas 12 IPA */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
