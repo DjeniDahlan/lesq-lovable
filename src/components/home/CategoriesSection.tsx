@@ -7,7 +7,8 @@ const categories = [
   { id: 'sd-kelas-4', name: 'SD Kelas 4-6', icon: School, courses: 24 },
   { id: 'smp-kelas-7', name: 'SMP Kelas 7-9', icon: BookOpen, courses: 36 },
   { id: 'sma-kelas-10', name: 'SMA Kelas 10-12', icon: GraduationCap, courses: 42 },
-  { id: 'snbt-tps', name: 'SNBT UTBK', icon: Award, courses: 13 }
+  { id: 'snbt-tps', name: 'SNBT UTBK', icon: Award, courses: 13 },
+  { id: 'ujian-mandiri-ugm', name: 'Ujian Mandiri', icon: Target, courses: 17 }
 ];
 
 const CategoriesSection = () => {
