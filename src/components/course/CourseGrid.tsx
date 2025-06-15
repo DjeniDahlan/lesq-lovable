@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import CourseCard, { CourseType } from './CourseCard';
 import { supabase } from '@/integrations/supabase/client';
@@ -13,9 +12,12 @@ interface CourseGridProps {
 const fetchCourses = async ({ category, limit }: { category?: string, limit?: number }): Promise<CourseType[]> => {
   console.log('Fetching courses with TanStack Query. Category:', category, 'limit:', limit);
   
+  // Mengubah select('*') menjadi select dengan kolom spesifik untuk menghindari join implisit
+  const selectColumns = 'id, title, thumbnail_url, price, discount_percentage, education_level, category, created_at';
+
   let query = supabase
     .from('courses')
-    .select('*')
+    .select(selectColumns)
     .eq('is_active', true);
 
   if (category) {
