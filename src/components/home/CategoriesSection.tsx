@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { School, BookOpen, Award, Users, GraduationCap, Target } from 'lucide-react';
 
 const categories = [
+  { id: 'sd-kelas-1', name: 'SD Kelas 1-3', icon: School, courses: 18 },
   { id: 'sd-kelas-4', name: 'SD Kelas 4-6', icon: School, courses: 24 },
   { id: 'smp-kelas-7', name: 'SMP Kelas 7-9', icon: BookOpen, courses: 36 },
   { id: 'sma-kelas-10', name: 'SMA Kelas 10-12', icon: GraduationCap, courses: 42 },

@@ -17,6 +17,9 @@ const categories = [
     label: "SD",
     icon: School,
     subcategories: [
+      { name: "SD Kelas 1", link: "/category/sd-kelas-1", courses: 6 },
+      { name: "SD Kelas 2", link: "/category/sd-kelas-2", courses: 6 },
+      { name: "SD Kelas 3", link: "/category/sd-kelas-3", courses: 6 },
       { name: "SD Kelas 4", link: "/category/sd-kelas-4", courses: 8 },
       { name: "SD Kelas 5", link: "/category/sd-kelas-5", courses: 8 },
       { name: "SD Kelas 6", link: "/category/sd-kelas-6", courses: 8 },

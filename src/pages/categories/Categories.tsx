@@ -7,6 +7,30 @@ import Footer from '@/components/layout/Footer';
 
 const categories = [
   { 
+    id: 'sd-kelas-1', 
+    name: 'SD Kelas 1', 
+    icon: School, 
+    courses: 6,
+    description: 'Kursus untuk siswa SD kelas 1 dengan pembelajaran dasar yang menyenangkan',
+    subjects: ['Matematika Dasar Kelas 1', 'Bahasa Indonesia Kelas 1', 'IPA Sederhana Kelas 1']
+  },
+  { 
+    id: 'sd-kelas-2', 
+    name: 'SD Kelas 2', 
+    icon: School, 
+    courses: 6,
+    description: 'Kursus untuk siswa SD kelas 2 dengan metode pembelajaran yang interaktif',
+    subjects: ['Matematika Dasar Kelas 2', 'Bahasa Indonesia Kelas 2', 'IPA Sederhana Kelas 2']
+  },
+  { 
+    id: 'sd-kelas-3', 
+    name: 'SD Kelas 3', 
+    icon: School, 
+    courses: 6,
+    description: 'Kursus untuk siswa SD kelas 3 dengan materi yang lebih terstruktur',
+    subjects: ['Matematika Dasar Kelas 3', 'Bahasa Indonesia Kelas 3', 'IPA Sederhana Kelas 3']
+  },
+  { 
     id: 'sd-kelas-4', 
     name: 'SD Kelas 4', 
     icon: School, 

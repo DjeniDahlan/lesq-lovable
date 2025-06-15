@@ -2,10 +2,142 @@
 import { CourseType } from "@/components/course/CourseCard";
 
 export const mockCourses: CourseType[] = [
-  // Kategori SD
+  // Kategori SD Kelas 1
+  {
+    id: "sd1-1",
+    title: "Matematika Dasar untuk Kelas 1 SD",
+    instructor: "Ibu Sari Wulandari, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
+    price: 149000,
+    discountPrice: 99000,
+    rating: 4.7,
+    reviewCount: 89,
+    level: "Pemula",
+    duration: "10 jam",
+    studentCount: 567,
+    category: "SD Kelas 1",
+    isBestseller: true
+  },
+  {
+    id: "sd1-2",
+    title: "Bahasa Indonesia untuk Kelas 1 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 139000,
+    discountPrice: 89000,
+    rating: 4.6,
+    reviewCount: 78,
+    level: "Pemula",
+    duration: "8 jam",
+    studentCount: 456,
+    category: "SD Kelas 1"
+  },
+  {
+    id: "sd1-3",
+    title: "IPA Sederhana untuk Kelas 1 SD",
+    instructor: "Ibu Maya Dewi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 129000,
+    rating: 4.5,
+    reviewCount: 67,
+    level: "Pemula",
+    duration: "6 jam",
+    studentCount: 345,
+    category: "SD Kelas 1",
+    isNew: true
+  },
+
+  // Kategori SD Kelas 2
+  {
+    id: "sd2-1",
+    title: "Matematika Dasar untuk Kelas 2 SD",
+    instructor: "Pak Budi Santoso, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
+    price: 159000,
+    discountPrice: 109000,
+    rating: 4.7,
+    reviewCount: 95,
+    level: "Pemula",
+    duration: "12 jam",
+    studentCount: 678,
+    category: "SD Kelas 2"
+  },
+  {
+    id: "sd2-2",
+    title: "Bahasa Indonesia untuk Kelas 2 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 149000,
+    discountPrice: 99000,
+    rating: 4.6,
+    reviewCount: 87,
+    level: "Pemula",
+    duration: "10 jam",
+    studentCount: 567,
+    category: "SD Kelas 2"
+  },
+  {
+    id: "sd2-3",
+    title: "IPA Sederhana untuk Kelas 2 SD",
+    instructor: "Ibu Maya Dewi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 139000,
+    rating: 4.5,
+    reviewCount: 76,
+    level: "Pemula",
+    duration: "8 jam",
+    studentCount: 456,
+    category: "SD Kelas 2"
+  },
+
+  // Kategori SD Kelas 3
+  {
+    id: "sd3-1",
+    title: "Matematika Dasar untuk Kelas 3 SD",
+    instructor: "Pak Budi Santoso, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
+    price: 169000,
+    discountPrice: 119000,
+    rating: 4.8,
+    reviewCount: 103,
+    level: "Pemula",
+    duration: "14 jam",
+    studentCount: 789,
+    category: "SD Kelas 3",
+    isBestseller: true
+  },
+  {
+    id: "sd3-2",
+    title: "Bahasa Indonesia untuk Kelas 3 SD",
+    instructor: "Ibu Rina Kusuma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 159000,
+    discountPrice: 109000,
+    rating: 4.7,
+    reviewCount: 94,
+    level: "Pemula",
+    duration: "12 jam",
+    studentCount: 678,
+    category: "SD Kelas 3"
+  },
+  {
+    id: "sd3-3",
+    title: "IPA Sederhana untuk Kelas 3 SD",
+    instructor: "Ibu Maya Dewi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 149000,
+    rating: 4.6,
+    reviewCount: 85,
+    level: "Pemula",
+    duration: "10 jam",
+    studentCount: 567,
+    category: "SD Kelas 3"
+  },
+
+  // Kategori SD Kelas 4-6 (existing courses)
   {
     id: "1",
-    title: "Matematika Dasar untuk Kelas 1-3 SD",
+    title: "Matematika untuk Kelas 4 SD",
     instructor: "Ibu Sari Wulandari, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
     price: 199000,
@@ -15,12 +147,26 @@ export const mockCourses: CourseType[] = [
     level: "Pemula",
     duration: "15 jam",
     studentCount: 1250,
-    category: "Sekolah Dasar (SD)",
+    category: "SD Kelas 4",
     isBestseller: true
   },
   {
     id: "2",
-    title: "Matematika Lanjutan untuk Kelas 4-6 SD",
+    title: "Matematika untuk Kelas 5 SD",
+    instructor: "Pak Budi Santoso, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
+    price: 219000,
+    discountPrice: 169000,
+    rating: 4.7,
+    reviewCount: 158,
+    level: "Menengah",
+    duration: "16 jam",
+    studentCount: 1087,
+    category: "SD Kelas 5"
+  },
+  {
+    id: "3",
+    title: "Matematika untuk Kelas 6 SD",
     instructor: "Pak Budi Santoso, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=1740",
     price: 249000,
@@ -30,10 +176,10 @@ export const mockCourses: CourseType[] = [
     level: "Menengah",
     duration: "18 jam",
     studentCount: 987,
-    category: "Sekolah Dasar (SD)"
+    category: "SD Kelas 6"
   },
   {
-    id: "3",
+    id: "4",
     title: "IPA Terpadu SD: Sains untuk Anak",
     instructor: "Ibu Maya Dewi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
@@ -43,11 +189,11 @@ export const mockCourses: CourseType[] = [
     level: "Pemula",
     duration: "16 jam",
     studentCount: 876,
-    category: "Sekolah Dasar (SD)",
+    category: "SD Kelas 4",
     isNew: true
   },
   {
-    id: "4",
+    id: "5",
     title: "Bahasa Indonesia SD: Membaca dan Menulis",
     instructor: "Ibu Rina Kusuma, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
@@ -58,129 +204,356 @@ export const mockCourses: CourseType[] = [
     level: "Pemula",
     duration: "14 jam",
     studentCount: 1134,
-    category: "Sekolah Dasar (SD)"
+    category: "SD Kelas 4"
   },
   
-  // Kategori SMP
+  // Kategori SMP Kelas 7-9
   {
-    id: "5",
-    title: "Matematika SMP Kelas 7-9 Lengkap",
+    id: "6",
+    title: "Matematika SMP Kelas 7",
     instructor: "Pak Ahmad Fauzi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
-    price: 349000,
-    discountPrice: 299000,
+    price: 319000,
+    discountPrice: 269000,
     rating: 4.8,
-    reviewCount: 287,
+    reviewCount: 247,
     level: "Menengah",
-    duration: "25 jam",
-    studentCount: 1876,
-    category: "Sekolah Menengah Pertama (SMP)",
+    duration: "22 jam",
+    studentCount: 1576,
+    category: "SMP Kelas 7",
     isBestseller: true
   },
   {
-    id: "6",
-    title: "IPA SMP: Fisika, Kimia, Biologi Terpadu",
+    id: "7",
+    title: "Matematika SMP Kelas 8",
+    instructor: "Pak Ahmad Fauzi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
+    price: 339000,
+    discountPrice: 289000,
+    rating: 4.8,
+    reviewCount: 267,
+    level: "Menengah",
+    duration: "24 jam",
+    studentCount: 1676,
+    category: "SMP Kelas 8"
+  },
+  {
+    id: "8",
+    title: "Matematika SMP Kelas 9",
+    instructor: "Pak Ahmad Fauzi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
+    price: 369000,
+    discountPrice: 319000,
+    rating: 4.8,
+    reviewCount: 287,
+    level: "Menengah",
+    duration: "26 jam",
+    studentCount: 1876,
+    category: "SMP Kelas 9",
+    isBestseller: true
+  },
+  {
+    id: "9",
+    title: "IPA SMP: Fisika, Kimia, Biologi Terpadu Kelas 7",
     instructor: "Ibu Diana Pratiwi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1564859117-25b8151f6ee5?auto=format&fit=crop&q=80&w=1740",
-    price: 399000,
-    discountPrice: 349000,
+    price: 369000,
+    discountPrice: 319000,
+    rating: 4.7,
+    reviewCount: 214,
+    level: "Menengah",
+    duration: "28 jam",
+    studentCount: 1356,
+    category: "SMP Kelas 7"
+  },
+  {
+    id: "10",
+    title: "IPA SMP: Fisika, Kimia, Biologi Terpadu Kelas 8",
+    instructor: "Ibu Diana Pratiwi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1564859117-25b8151f6ee5?auto=format&fit=crop&q=80&w=1740",
+    price: 389000,
+    discountPrice: 339000,
     rating: 4.7,
     reviewCount: 234,
     level: "Menengah",
     duration: "30 jam",
     studentCount: 1456,
-    category: "Sekolah Menengah Pertama (SMP)"
+    category: "SMP Kelas 8"
   },
   {
-    id: "7",
-    title: "Bahasa Indonesia SMP: Sastra dan Tata Bahasa",
+    id: "11",
+    title: "IPA SMP: Fisika, Kimia, Biologi Terpadu Kelas 9",
+    instructor: "Ibu Diana Pratiwi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1564859117-25b8151f6ee5?auto=format&fit=crop&q=80&w=1740",
+    price: 419000,
+    discountPrice: 369000,
+    rating: 4.7,
+    reviewCount: 254,
+    level: "Menengah",
+    duration: "32 jam",
+    studentCount: 1556,
+    category: "SMP Kelas 9"
+  },
+  {
+    id: "12",
+    title: "Bahasa Indonesia SMP: Sastra dan Tata Bahasa Kelas 7",
     instructor: "Pak Hendra Gunawan, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1740",
-    price: 279000,
+    price: 249000,
+    rating: 4.6,
+    reviewCount: 158,
+    level: "Menengah",
+    duration: "18 jam",
+    studentCount: 898,
+    category: "SMP Kelas 7"
+  },
+  {
+    id: "13",
+    title: "Bahasa Indonesia SMP: Sastra dan Tata Bahasa Kelas 8",
+    instructor: "Pak Hendra Gunawan, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1740",
+    price: 269000,
     rating: 4.6,
     reviewCount: 178,
     level: "Menengah",
     duration: "20 jam",
     studentCount: 998,
-    category: "Sekolah Menengah Pertama (SMP)"
+    category: "SMP Kelas 8"
   },
   {
-    id: "8",
-    title: "Bahasa Inggris SMP: Grammar dan Conversation",
+    id: "14",
+    title: "Bahasa Indonesia SMP: Sastra dan Tata Bahasa Kelas 9",
+    instructor: "Pak Hendra Gunawan, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1740",
+    price: 289000,
+    rating: 4.6,
+    reviewCount: 198,
+    level: "Menengah",
+    duration: "22 jam",
+    studentCount: 1098,
+    category: "SMP Kelas 9"
+  },
+  {
+    id: "15",
+    title: "Bahasa Inggris SMP: Grammar dan Conversation Kelas 7",
     instructor: "Ibu Anita Sari, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
-    price: 319000,
-    discountPrice: 269000,
+    price: 289000,
+    discountPrice: 239000,
+    rating: 4.5,
+    reviewCount: 145,
+    level: "Menengah",
+    duration: "20 jam",
+    studentCount: 1023,
+    category: "SMP Kelas 7",
+    isNew: true
+  },
+  {
+    id: "16",
+    title: "Bahasa Inggris SMP: Grammar dan Conversation Kelas 8",
+    instructor: "Ibu Anita Sari, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 309000,
+    discountPrice: 259000,
     rating: 4.5,
     reviewCount: 165,
     level: "Menengah",
     duration: "22 jam",
     studentCount: 1123,
-    category: "Sekolah Menengah Pertama (SMP)",
-    isNew: true
+    category: "SMP Kelas 8"
   },
-  
-  // Kategori SMA - Umum
   {
-    id: "9",
-    title: "Matematika Dasar SMA: Aljabar dan Geometri",
+    id: "17",
+    title: "Bahasa Inggris SMP: Grammar dan Conversation Kelas 9",
+    instructor: "Ibu Anita Sari, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 329000,
+    discountPrice: 279000,
+    rating: 4.5,
+    reviewCount: 185,
+    level: "Menengah",
+    duration: "24 jam",
+    studentCount: 1223,
+    category: "SMP Kelas 9"
+  },
+
+  // Kategori SMA Kelas 10
+  {
+    id: "18",
+    title: "Matematika Wajib SMA Kelas 10",
     instructor: "Pak Bambang Supriyadi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&q=80&w=1740",
-    price: 449000,
-    discountPrice: 399000,
+    price: 419000,
+    discountPrice: 369000,
     rating: 4.8,
-    reviewCount: 312,
+    reviewCount: 282,
     level: "Mahir",
-    duration: "35 jam",
-    studentCount: 2145,
-    category: "Sekolah Menengah Atas (SMA) - Umum",
+    duration: "32 jam",
+    studentCount: 2045,
+    category: "SMA Kelas 10",
     isBestseller: true
   },
   {
-    id: "10",
-    title: "Bahasa Indonesia SMA: Literasi dan Komunikasi",
+    id: "19",
+    title: "Bahasa Indonesia SMA Kelas 10: Literasi dan Komunikasi",
     instructor: "Ibu Siti Rahma, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1740",
-    price: 379000,
+    price: 349000,
     rating: 4.7,
-    reviewCount: 245,
+    reviewCount: 225,
     level: "Mahir",
-    duration: "28 jam",
-    studentCount: 1534,
-    category: "Sekolah Menengah Atas (SMA) - Umum"
+    duration: "26 jam",
+    studentCount: 1434,
+    category: "SMA Kelas 10"
   },
   {
-    id: "11",
-    title: "Bahasa Inggris SMA: Advanced Grammar & Writing",
+    id: "20",
+    title: "Bahasa Inggris SMA Kelas 10: Foundation Grammar & Writing",
     instructor: "Pak Agus Wibowo, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=1740",
-    price: 399000,
-    discountPrice: 349000,
+    price: 369000,
+    discountPrice: 319000,
     rating: 4.6,
-    reviewCount: 198,
+    reviewCount: 178,
     level: "Mahir",
-    duration: "30 ham",
-    studentCount: 1287,
-    category: "Sekolah Menengah Atas (SMA) - Umum"
+    duration: "28 jam",
+    studentCount: 1187,
+    category: "SMA Kelas 10"
   },
   {
-    id: "12",
-    title: "Tes Potensi Akademik (TPA) SMA",
-    instructor: "Ibu Dewi Sartika, S.Psi",
-    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    id: "21",
+    title: "Sejarah Indonesia SMA Kelas 10",
+    instructor: "Ibu Diana Pratiwi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
     price: 329000,
+    rating: 4.5,
+    reviewCount: 147,
+    level: "Mahir",
+    duration: "24 jam",
+    studentCount: 876,
+    category: "SMA Kelas 10"
+  },
+
+  // Kategori SMA Kelas 11 IPA
+  {
+    id: "22",
+    title: "Matematika Peminatan SMA Kelas 11 IPA",
+    instructor: "Dr. Ir. Hendra Gunawan",
+    thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
+    price: 519000,
+    discountPrice: 469000,
+    rating: 4.9,
+    reviewCount: 267,
+    level: "Mahir",
+    duration: "38 jam",
+    studentCount: 1776,
+    category: "SMA Kelas 11 IPA",
+    isBestseller: true
+  },
+  {
+    id: "23",
+    title: "Fisika SMA Kelas 11: Mekanika dan Termodinamika",
+    instructor: "Dr. Ahmad Fauzi, S.Si",
+    thumbnail: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&q=80&w=1740",
+    price: 469000,
+    discountPrice: 419000,
+    rating: 4.8,
+    reviewCount: 214,
+    level: "Mahir",
+    duration: "36 jam",
+    studentCount: 1356,
+    category: "SMA Kelas 11 IPA"
+  },
+  {
+    id: "24",
+    title: "Kimia SMA Kelas 11: Struktur Atom dan Ikatan Kimia",
+    instructor: "Dr. Rini Kusuma, S.Si",
+    thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
+    price: 449000,
+    rating: 4.7,
+    reviewCount: 178,
+    level: "Mahir",
+    duration: "34 jam",
+    studentCount: 1187,
+    category: "SMA Kelas 11 IPA",
+    isNew: true
+  },
+  {
+    id: "25",
+    title: "Biologi SMA Kelas 11: Sel dan Jaringan",
+    instructor: "Dr. Maya Dewi, S.Si",
+    thumbnail: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=1740",
+    price: 429000,
+    discountPrice: 379000,
+    rating: 4.6,
+    reviewCount: 156,
+    level: "Mahir",
+    duration: "32 jam",
+    studentCount: 1023,
+    category: "SMA Kelas 11 IPA"
+  },
+
+  // Kategori SMA Kelas 11 IPS
+  {
+    id: "26",
+    title: "Ekonomi SMA Kelas 11: Mikro Ekonomi",
+    instructor: "Dr. Budi Santoso, S.E",
+    thumbnail: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=1740",
+    price: 399000,
+    discountPrice: 349000,
+    rating: 4.7,
+    reviewCount: 203,
+    level: "Mahir",
+    duration: "30 jam",
+    studentCount: 1245,
+    category: "SMA Kelas 11 IPS"
+  },
+  {
+    id: "27",
+    title: "Geografi SMA Kelas 11: Geografi Fisik",
+    instructor: "Pak Hendro Gunawan, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1519302959554-a75be0afc82a?auto=format&fit=crop&q=80&w=1740",
+    price: 359000,
     rating: 4.5,
     reviewCount: 167,
     level: "Mahir",
-    duration: "25 jam",
-    studentCount: 976,
-    category: "Sekolah Menengah Atas (SMA) - Umum"
+    duration: "28 jam",
+    studentCount: 887,
+    category: "SMA Kelas 11 IPS"
   },
-  
-  // Kategori SMA - IPA
   {
-    id: "13",
-    title: "Matematika IPA SMA: Kalkulus dan Trigonometri",
+    id: "28",
+    title: "Sejarah SMA Kelas 11: Sejarah Indonesia Abad XV-XVIII",
+    instructor: "Ibu Diana Pratiwi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
+    price: 339000,
+    discountPrice: 289000,
+    rating: 4.6,
+    reviewCount: 136,
+    level: "Mahir",
+    duration: "26 jam",
+    studentCount: 776,
+    category: "SMA Kelas 11 IPS"
+  },
+  {
+    id: "29",
+    title: "Sosiologi SMA Kelas 11: Struktur Sosial dan Diferensiasi",
+    instructor: "Dr. Anita Sari, S.Sos",
+    thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1740",
+    price: 319000,
+    rating: 4.4,
+    reviewCount: 114,
+    level: "Mahir",
+    duration: "24 jam",
+    studentCount: 645,
+    category: "SMA Kelas 11 IPS",
+    isNew: true
+  },
+
+  // Kategori SMA Kelas 12 IPA
+  {
+    id: "30",
+    title: "Matematika Peminatan SMA Kelas 12 IPA: Kalkulus dan Trigonometri",
     instructor: "Dr. Ir. Hendra Gunawan",
     thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
     price: 549000,
@@ -190,12 +563,12 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "40 jam",
     studentCount: 1876,
-    category: "Sekolah Menengah Atas (SMA) - IPA",
+    category: "SMA Kelas 12 IPA",
     isBestseller: true
   },
   {
-    id: "14",
-    title: "Fisika SMA: Mekanika hingga Gelombang",
+    id: "31",
+    title: "Fisika SMA Kelas 12: Gelombang dan Optik",
     instructor: "Dr. Ahmad Fauzi, S.Si",
     thumbnail: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&q=80&w=1740",
     price: 499000,
@@ -205,11 +578,11 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "38 jam",
     studentCount: 1456,
-    category: "Sekolah Menengah Atas (SMA) - IPA"
+    category: "SMA Kelas 12 IPA"
   },
   {
-    id: "15",
-    title: "Kimia SMA: Struktur Atom hingga Organik",
+    id: "32",
+    title: "Kimia SMA Kelas 12: Kimia Organik",
     instructor: "Dr. Rini Kusuma, S.Si",
     thumbnail: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1740",
     price: 479000,
@@ -218,12 +591,12 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "36 jam",
     studentCount: 1287,
-    category: "Sekolah Menengah Atas (SMA) - IPA",
+    category: "SMA Kelas 12 IPA",
     isNew: true
   },
   {
-    id: "16",
-    title: "Biologi SMA: Sel hingga Ekosistem",
+    id: "33",
+    title: "Biologi SMA Kelas 12: Genetika dan Evolusi",
     instructor: "Dr. Maya Dewi, S.Si",
     thumbnail: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=1740",
     price: 459000,
@@ -233,13 +606,13 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "34 jam",
     studentCount: 1123,
-    category: "Sekolah Menengah Atas (SMA) - IPA"
+    category: "SMA Kelas 12 IPA"
   },
   
-  // Kategori SMA - IPS
+  // Kategori SMA Kelas 12 IPS
   {
-    id: "17",
-    title: "Ekonomi SMA: Mikro dan Makro Ekonomi",
+    id: "34",
+    title: "Ekonomi SMA Kelas 12: Makro Ekonomi dan Pembangunan",
     instructor: "Dr. Budi Santoso, S.E",
     thumbnail: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=1740",
     price: 429000,
@@ -249,11 +622,11 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "32 jam",
     studentCount: 1345,
-    category: "Sekolah Menengah Atas (SMA) - IPS"
+    category: "SMA Kelas 12 IPS"
   },
   {
-    id: "18",
-    title: "Geografi SMA: Fisik dan Sosial",
+    id: "35",
+    title: "Geografi SMA Kelas 12: Geografi Regional dan Lingkungan",
     instructor: "Pak Hendro Gunawan, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1519302959554-a75be0afc82a?auto=format&fit=crop&q=80&w=1740",
     price: 389000,
@@ -262,11 +635,11 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "30 jam",
     studentCount: 987,
-    category: "Sekolah Menengah Atas (SMA) - IPS"
+    category: "SMA Kelas 12 IPS"
   },
   {
-    id: "19",
-    title: "Sejarah Indonesia SMA: Pra-sejarah hingga Modern",
+    id: "36",
+    title: "Sejarah SMA Kelas 12: Indonesia Modern",
     instructor: "Ibu Diana Pratiwi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=1740",
     price: 369000,
@@ -276,11 +649,11 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "28 jam",
     studentCount: 876,
-    category: "Sekolah Menengah Atas (SMA) - IPS"
+    category: "SMA Kelas 12 IPS"
   },
   {
-    id: "20",
-    title: "Sosiologi SMA: Masyarakat dan Interaksi Sosial",
+    id: "37",
+    title: "Sosiologi SMA Kelas 12: Perubahan Sosial",
     instructor: "Dr. Anita Sari, S.Sos",
     thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1740",
     price: 349000,
@@ -289,13 +662,13 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "26 jam",
     studentCount: 745,
-    category: "Sekolah Menengah Atas (SMA) - IPS",
+    category: "SMA Kelas 12 IPS",
     isNew: true
   },
   
   // Kategori SNBT UTBK
   {
-    id: "21",
+    id: "38",
     title: "Tes Potensi Skolastik (TPS) SNBT 2024",
     instructor: "Dr. Siti Rahma, S.Psi",
     thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
@@ -306,11 +679,11 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "45 jam",
     studentCount: 3245,
-    category: "SNBT UTBK",
+    category: "SNBT - TPS",
     isBestseller: true
   },
   {
-    id: "22",
+    id: "39",
     title: "Tes Literasi dalam Bahasa Indonesia SNBT",
     instructor: "Pak Agus Wibowo, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1740",
@@ -321,12 +694,40 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "40 jam",
     studentCount: 2876,
-    category: "SNBT UTBK"
+    category: "SNBT - Literasi Indonesia"
+  },
+  {
+    id: "40",
+    title: "Tes Literasi dalam Bahasa Inggris SNBT",
+    instructor: "Dr. Amanda Chen, M.A",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 569000,
+    discountPrice: 519000,
+    rating: 4.8,
+    reviewCount: 312,
+    level: "Mahir",
+    duration: "42 jam",
+    studentCount: 2654,
+    category: "SNBT - Literasi Inggris"
+  },
+  {
+    id: "41",
+    title: "Penalaran Matematika SNBT",
+    instructor: "Dr. Ir. Bambang Hartono",
+    thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1740",
+    price: 579000,
+    discountPrice: 529000,
+    rating: 4.9,
+    reviewCount: 234,
+    level: "Mahir",
+    duration: "38 jam",
+    studentCount: 2156,
+    category: "SNBT - Penalaran Matematika"
   },
   
   // Kategori Ujian Mandiri
   {
-    id: "23",
+    id: "42",
     title: "Persiapan UM UGM: Tes Kemampuan Dasar",
     instructor: "Dr. Bambang Supriyadi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=1740",
@@ -341,7 +742,7 @@ export const mockCourses: CourseType[] = [
     isBestseller: true
   },
   {
-    id: "24",
+    id: "43",
     title: "Persiapan UM UNDIP: Tes Potensi Akademik",
     instructor: "Dr. Maya Dewi, S.Pd",
     thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
@@ -352,6 +753,34 @@ export const mockCourses: CourseType[] = [
     level: "Mahir",
     duration: "45 jam",
     studentCount: 1456,
+    category: "Ujian Mandiri"
+  },
+  {
+    id: "44",
+    title: "Persiapan UM UNAIR: Tes Kemampuan Akademik",
+    instructor: "Dr. Hendro Gunawan, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 629000,
+    discountPrice: 579000,
+    rating: 4.7,
+    reviewCount: 176,
+    level: "Mahir",
+    duration: "43 jam",
+    studentCount: 1234,
+    category: "Ujian Mandiri"
+  },
+  {
+    id: "45",
+    title: "Persiapan UM ITB: Tes Kemampuan Dasar Sains dan Teknologi",
+    instructor: "Dr. Ir. Ahmad Fauzi",
+    thumbnail: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&q=80&w=1740",
+    price: 679000,
+    discountPrice: 629000,
+    rating: 4.8,
+    reviewCount: 156,
+    level: "Mahir",
+    duration: "47 jam",
+    studentCount: 1123,
     category: "Ujian Mandiri"
   }
 ];
