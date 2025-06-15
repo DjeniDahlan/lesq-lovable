@@ -124,7 +124,16 @@ const categories = [
     label: "SMA",
     icon: GraduationCap,
     subcategories: [
-      { name: "SMA Kelas 10", link: "/category/sma-kelas-10", courses: 10 },
+      { 
+        name: "SMA Kelas 10", 
+        link: "/category/sma-kelas-10", 
+        courses: 10,
+        subjects: [
+          { name: "Matematika", link: "/category/sma-kelas-10/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sma-kelas-10/bahasa-indonesia" },
+          { name: "Bahasa Inggris", link: "/category/sma-kelas-10/bahasa-inggris" }
+        ]
+      },
       { name: "SMA Kelas 11 IPA", link: "/category/sma-kelas-11-ipa", courses: 8 },
       { name: "SMA Kelas 11 IPS", link: "/category/sma-kelas-11-ips", courses: 8 },
       { name: "SMA Kelas 12 IPA", link: "/category/sma-kelas-12-ipa", courses: 8 },
@@ -177,7 +186,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu for SD classes and all SMP classes */}
+                    {/* Show subjects submenu for SD classes, all SMP classes, and SMA Kelas 10 */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
