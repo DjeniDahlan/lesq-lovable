@@ -22,7 +22,7 @@ const CategoriesSection = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
-            <Link to={`/categories`} key={category.id}>
+            <Link to={`/category/${category.id}`} key={category.id}>
               <div className="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow border">
                 <category.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="font-medium text-lg mb-2">{category.name}</h3>

@@ -106,7 +106,28 @@ const App = () => (
           
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* Category Routes */}
+          {/* Specific Category Routes */}
+          <Route path="/category/sd-kelas-4" element={<SekolahDasar />} />
+          <Route path="/category/sd-kelas-5" element={<SekolahDasar />} />
+          <Route path="/category/sd-kelas-6" element={<SekolahDasar />} />
+          <Route path="/category/smp-kelas-7" element={<SekolahMenengahPertama />} />
+          <Route path="/category/smp-kelas-8" element={<SekolahMenengahPertama />} />
+          <Route path="/category/smp-kelas-9" element={<SekolahMenengahPertama />} />
+          <Route path="/category/sma-kelas-10" element={<SMAUmum />} />
+          <Route path="/category/sma-kelas-11-ipa" element={<SMAIPA />} />
+          <Route path="/category/sma-kelas-11-ips" element={<SMAIPS />} />
+          <Route path="/category/sma-kelas-12-ipa" element={<SMAIPA />} />
+          <Route path="/category/sma-kelas-12-ips" element={<SMAIPS />} />
+          <Route path="/category/snbt-tps" element={<SNBTUTBK />} />
+          <Route path="/category/snbt-literasi-indonesia" element={<SNBTUTBK />} />
+          <Route path="/category/snbt-literasi-inggris" element={<SNBTUTBK />} />
+          <Route path="/category/snbt-penalaran-matematika" element={<SNBTUTBK />} />
+          <Route path="/category/ujian-mandiri-ugm" element={<UjianMandiri />} />
+          <Route path="/category/ujian-mandiri-undip" element={<UjianMandiri />} />
+          <Route path="/category/ujian-mandiri-unair" element={<UjianMandiri />} />
+          <Route path="/category/ujian-mandiri-itb" element={<UjianMandiri />} />
+          
+          {/* Legacy Category Routes (for backward compatibility) */}
           <Route path="/category/sd" element={<SekolahDasar />} />
           <Route path="/category/smp" element={<SekolahMenengahPertama />} />
           <Route path="/category/sma-umum" element={<SMAUmum />} />
