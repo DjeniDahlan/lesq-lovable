@@ -11,9 +11,11 @@ import { SlidersHorizontal, X } from "lucide-react";
 const SekolahMenengahPertama = () => {
   const [showFilter, setShowFilter] = useState(false);
   
-  // Filter kursus untuk kategori SMP
+  // Filter kursus untuk kategori SMP Kelas 7, 8, dan 9
   const smpCourses = mockCourses.filter(course => 
-    course.category === "Sekolah Menengah Pertama (SMP)"
+    course.category === "SMP Kelas 7" || 
+    course.category === "SMP Kelas 8" || 
+    course.category === "SMP Kelas 9"
   );
 
   return (
@@ -25,7 +27,7 @@ const SekolahMenengahPertama = () => {
           <div className="container">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Kursus Sekolah Menengah Pertama (SMP)</h1>
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Kursus pembelajaran untuk siswa SMP meliputi Matematika, IPA, Bahasa Indonesia, dan Bahasa Inggris
+              Kursus pembelajaran untuk siswa SMP kelas 7, 8, dan 9 meliputi Matematika, IPA-Fisika, IPA-Biologi, Bahasa Indonesia, dan Bahasa Inggris
             </p>
           </div>
         </section>
