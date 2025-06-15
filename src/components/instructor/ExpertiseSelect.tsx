@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,7 +12,6 @@ const expertiseOptions: ExpertiseOption[] = [
   { id: 'sd-math', label: 'Matematika SD' },
   { id: 'sd-science', label: 'IPA SD' },
   { id: 'sd-indonesian', label: 'Bahasa Indonesia SD' },
-  { id: 'sd-english', label: 'Bahasa Inggris SD' },
   
   // SMP
   { id: 'smp-math', label: 'Matematika SMP' },
