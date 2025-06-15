@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -481,7 +479,7 @@ const Student = () => {
               <p className="text-muted-foreground mb-4">
                 Selesaikan kursus untuk mendapatkan sertifikat dan meningkatkan keterampilan Anda
               </p>
-              <Link to="/my-courses">
+              <Link to="/dashboard/student">
                 <Button>Kembali ke Kursus Saya</Button>
               </Link>
             </div>
@@ -583,4 +581,3 @@ const Student = () => {
 };
 
 export default Student;
-
