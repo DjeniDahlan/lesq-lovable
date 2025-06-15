@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -39,10 +38,7 @@ const CourseDetail = () => {
 
       try {
         const { data, error } = await supabase
-          .from('courses')
-          .select('*')
-          .eq('id', id)
-          .eq('is_active', true)
+          .rpc('get_course_details_by_id', { p_course_id: id })
           .single();
 
         if (error) {

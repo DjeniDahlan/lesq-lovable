@@ -297,6 +297,23 @@ export type Database = {
           instructor_name: string
         }[]
       }
+      get_course_details_by_id: {
+        Args: { p_course_id: string }
+        Returns: {
+          id: string
+          title: string
+          description: string
+          price: number
+          thumbnail_url: string
+          education_level: string
+          category: string
+          subject: string
+          overview: string
+          what_you_will_learn: string[]
+          is_active: boolean
+          instructor_name: string
+        }[]
+      }
     }
     Enums: {
       instructor_status: "pending" | "approved" | "rejected"
