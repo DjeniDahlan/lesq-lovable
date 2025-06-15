@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -47,7 +48,7 @@ const SekolahMenengahPertama = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid />
+              <CourseGrid category="Sekolah Menengah Pertama (SMP)" />
             </div>
           </div>
         </div>
