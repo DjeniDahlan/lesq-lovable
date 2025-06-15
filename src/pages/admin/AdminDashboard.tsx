@@ -1,146 +1,172 @@
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import RegistrantsTable from "@/components/admin/RegistrantsTable";
-import PurchasesTable from "@/components/admin/PurchasesTable";
-import CoursesTable from "@/components/admin/CoursesTable";
-import UsersTable from "@/components/admin/UsersTable";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Users, BookOpen, DollarSign, TrendingUp, ShoppingCart } from "lucide-react";
 import StatsCards from "@/components/admin/StatsCards";
+import UsersTable from "@/components/admin/UsersTable";
+import CoursesTable from "@/components/admin/CoursesTable";
+import PurchasesTable from "@/components/admin/PurchasesTable";
+import RegistrantsTable from "@/components/admin/RegistrantsTable";
+import PurchaseVerification from "@/components/admin/PurchaseVerification";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function checkAdmin() {
+    const checkAdminAccess = async () => {
       try {
-        // First check if user is logged in
-        const { data: sessionData } = await supabase.auth.getSession();
+        const { data: { session } } = await supabase.auth.getSession();
         
-        if (!sessionData.session) {
-          toast.error("Anda harus login terlebih dahulu");
-          navigate("/login");
+        if (!session?.user) {
+          navigate('/login');
           return;
         }
-        
-        // Then check if user is an admin
-        const { data: userData, error } = await supabase
+
+        const { data: profile } = await supabase
           .from('profiles')
           .select('role')
-          .eq('id', sessionData.session.user.id)
+          .eq('id', session.user.id)
           .single();
-          
-        if (error || !userData) {
-          console.error("Error checking admin status:", error);
-          toast.error("Tidak dapat memverifikasi status admin");
-          navigate("/");
+
+        if (profile?.role !== 'admin') {
+          navigate('/');
           return;
         }
-        
-        if (userData.role !== 'admin') {
-          toast.error("Anda tidak memiliki akses ke halaman admin");
-          navigate("/");
-          return;
-        }
-        
+
         setIsAdmin(true);
       } catch (error) {
-        console.error("Unexpected error:", error);
-        toast.error("Terjadi kesalahan");
-        navigate("/");
+        console.error('Error checking admin access:', error);
+        navigate('/');
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
-    }
-    
-    checkAdmin();
+    };
+
+    checkAdminAccess();
   }, [navigate]);
 
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Memuat...</p>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   if (!isAdmin) {
-    return null; // Will redirect in the useEffect
+    return null;
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow">
-        <section className="bg-gray-50 py-16">
-          <div className="container">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
-              Panel Admin
-            </h1>
-            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Kelola kursus, pengguna, dan lihat statistik platform
-            </p>
-          </div>
-        </section>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">Dashboard Admin</h1>
+          <p className="text-muted-foreground">Kelola platform pembelajaran Les-Q</p>
+        </div>
 
-        <section className="py-8">
-          <div className="container">
-            <Tabs defaultValue="dashboard" className="w-full">
-              <TabsList className="mb-8 grid w-full grid-cols-5">
-                <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-                <TabsTrigger value="courses">Kursus</TabsTrigger>
-                <TabsTrigger value="users">Pengguna</TabsTrigger>
-                <TabsTrigger value="registrants">Pendaftar</TabsTrigger>
-                <TabsTrigger value="purchases">Pembelian</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="dashboard" className="space-y-6">
-                <StatsCards />
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="bg-white p-6 rounded-lg border">
-                    <h3 className="text-lg font-semibold mb-4">Ringkasan Platform</h3>
-                    <p className="text-muted-foreground">
-                      Dashboard ini memberikan gambaran menyeluruh tentang aktivitas platform pembelajaran online Anda.
-                    </p>
-                  </div>
-                  <div className="bg-white p-6 rounded-lg border">
-                    <h3 className="text-lg font-semibold mb-4">Fitur Admin</h3>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>• Kelola kursus dan konten pembelajaran</li>
-                      <li>• Manajemen pengguna dan role</li>
-                      <li>• Pantau pendaftaran dan pembelian</li>
-                      <li>• Analisis statistik platform</li>
-                    </ul>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="courses">
-                <CoursesTable />
-              </TabsContent>
-              
-              <TabsContent value="users">
+        <StatsCards />
+
+        <Tabs defaultValue="verification" className="mt-8">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="verification">Verifikasi Pembelian</TabsTrigger>
+            <TabsTrigger value="users">Pengguna</TabsTrigger>
+            <TabsTrigger value="courses">Kursus</TabsTrigger>
+            <TabsTrigger value="purchases">Pembelian</TabsTrigger>
+            <TabsTrigger value="registrants">Pendaftar Instruktur</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="verification" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShoppingCart className="h-5 w-5" />
+                  Verifikasi Pembelian Kursus
+                </CardTitle>
+                <CardDescription>
+                  Verifikasi pembayaran yang telah dilakukan oleh siswa
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <PurchaseVerification />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="users" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Manajemen Pengguna
+                </CardTitle>
+                <CardDescription>
+                  Kelola akun pengguna terdaftar di platform
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <UsersTable />
-              </TabsContent>
-              
-              <TabsContent value="registrants">
-                <RegistrantsTable />
-              </TabsContent>
-              
-              <TabsContent value="purchases">
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="courses" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5" />
+                  Manajemen Kursus
+                </CardTitle>
+                <CardDescription>
+                  Kelola kursus yang tersedia di platform
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CoursesTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="purchases" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <DollarSign className="h-5 w-5" />
+                  Riwayat Pembelian
+                </CardTitle>
+                <CardDescription>
+                  Lihat semua transaksi pembelian kursus
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <PurchasesTable />
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-      </main>
-      <Footer />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="registrants" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Pendaftar Instruktur
+                </CardTitle>
+                <CardDescription>
+                  Kelola aplikasi pendaftaran instruktur baru
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <RegistrantsTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
