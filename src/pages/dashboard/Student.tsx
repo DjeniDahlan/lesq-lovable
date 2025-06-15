@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -158,7 +159,7 @@ const Student = () => {
           if (coursesWithPurchases && coursesWithPurchases.length > 0) {
             // Transform the joined data into the expected format
             const coursesData: CourseWithPurchase[] = coursesWithPurchases.map(purchase => {
-              const courseData = purchase.courses;
+              const courseData = purchase.courses as any;
               return {
                 id: purchase.course_id,
                 title: courseData?.title || `Kursus ${purchase.course_id}`,
@@ -582,3 +583,4 @@ const Student = () => {
 };
 
 export default Student;
+
