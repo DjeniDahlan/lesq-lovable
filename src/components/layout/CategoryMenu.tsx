@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -17,7 +16,16 @@ const categories = [
     label: "SD",
     icon: School,
     subcategories: [
-      { name: "SD Kelas 1", link: "/category/sd-kelas-1", courses: 6 },
+      { 
+        name: "SD Kelas 1", 
+        link: "/category/sd-kelas-1", 
+        courses: 6,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-1/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-1/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-1/ipa" }
+        ]
+      },
       { name: "SD Kelas 2", link: "/category/sd-kelas-2", courses: 6 },
       { name: "SD Kelas 3", link: "/category/sd-kelas-3", courses: 6 },
       { name: "SD Kelas 4", link: "/category/sd-kelas-4", courses: 8 },
@@ -80,16 +88,32 @@ const CategoryMenu = () => {
             <NavigationMenuContent>
               <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                 {category.subcategories.map((subcategory) => (
-                  <Link
-                    key={subcategory.name}
-                    to={subcategory.link}
-                    className="block select-none space-y-1 rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <div className="font-medium">{subcategory.name}</div>
-                    <p className="text-sm text-muted-foreground">
-                      {subcategory.courses} kursus
-                    </p>
-                  </Link>
+                  <div key={subcategory.name} className="space-y-2">
+                    <Link
+                      to={subcategory.link}
+                      className="block select-none space-y-1 rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
+                    >
+                      <div className="font-medium">{subcategory.name}</div>
+                      <p className="text-sm text-muted-foreground">
+                        {subcategory.courses} kursus
+                      </p>
+                    </Link>
+                    
+                    {/* Show subjects submenu only for SD Kelas 1 */}
+                    {subcategory.subjects && (
+                      <div className="ml-4 space-y-1">
+                        {subcategory.subjects.map((subject) => (
+                          <Link
+                            key={subject.name}
+                            to={subject.link}
+                            className="block text-sm text-muted-foreground hover:text-primary hover:underline p-1"
+                          >
+                            • {subject.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </NavigationMenuContent>
