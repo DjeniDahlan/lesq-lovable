@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -59,19 +59,54 @@ const Student = () => {
   const [activeTab, setActiveTab] = useState('learning');
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        // Get current session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        console.log("Session:", session);
+        console.log("Session error:", sessionError);
+        
         if (session?.user) {
-          const { data } = await supabase
+          setUser(session.user);
+          console.log("User ID:", session.user.id);
+          console.log("User metadata:", session.user.user_metadata);
+          
+          // Try to get profile from database
+          const { data: profileData, error: profileError } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', session.user.id)
-            .single();
-          setProfile(data);
-          console.log("Profile data:", data);
+            .maybeSingle();
+            
+          console.log("Profile data from DB:", profileData);
+          console.log("Profile error:", profileError);
+          
+          if (profileData) {
+            setProfile(profileData);
+          } else if (session.user.user_metadata) {
+            // If no profile in DB, create one from user metadata
+            const { data: newProfile, error: insertError } = await supabase
+              .from('profiles')
+              .insert({
+                id: session.user.id,
+                full_name: session.user.user_metadata.fullName || session.user.user_metadata.full_name || 'Pengguna',
+                email: session.user.email || '',
+                role: session.user.user_metadata.role || 'student'
+              })
+              .select()
+              .single();
+              
+            console.log("New profile created:", newProfile);
+            console.log("Insert error:", insertError);
+            
+            if (newProfile) {
+              setProfile(newProfile);
+            }
+          }
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -86,7 +121,20 @@ const Student = () => {
   const getUserName = () => {
     if (loading) return "Loading...";
     if (profile?.full_name) return profile.full_name;
+    if (user?.user_metadata?.fullName) return user.user_metadata.fullName;
+    if (user?.user_metadata?.full_name) return user.user_metadata.full_name;
     return "Pengguna";
+  };
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate('/login');
+    } catch (error) {
+      console.error("Error logging out:", error);
+      // Force redirect even if logout fails
+      navigate('/login');
+    }
   };
   
   return (
@@ -185,11 +233,9 @@ const Student = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/logout" className="flex items-center gap-2 text-red-500">
-                    <LogOut className="h-4 w-4" />
-                    <span>Keluar</span>
-                  </Link>
+                <DropdownMenuItem onClick={handleLogout} className="flex items-center gap-2 text-red-500">
+                  <LogOut className="h-4 w-4" />
+                  <span>Keluar</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
