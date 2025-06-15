@@ -32,6 +32,7 @@ import Privacy from "./pages/legal/Privacy";
 import Terms from "./pages/legal/Terms";
 import Accessibility from "./pages/legal/Accessibility";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import ContinueLearning from "./pages/learning/ContinueLearning";
 
 // Account Pages
 import Profile from "./pages/account/Profile";
@@ -69,6 +70,9 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/instructor" element={<InstructorRegister />} />
+          
+          {/* Learning Routes */}
+          <Route path="/continue-learning" element={<ContinueLearning />} />
           
           {/* Account Routes */}
           <Route path="/account/profile" element={<Profile />} />
