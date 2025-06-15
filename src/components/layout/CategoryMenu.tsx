@@ -26,11 +26,56 @@ const categories = [
           { name: "IPA", link: "/category/sd-kelas-1/ipa" }
         ]
       },
-      { name: "SD Kelas 2", link: "/category/sd-kelas-2", courses: 6 },
-      { name: "SD Kelas 3", link: "/category/sd-kelas-3", courses: 6 },
-      { name: "SD Kelas 4", link: "/category/sd-kelas-4", courses: 8 },
-      { name: "SD Kelas 5", link: "/category/sd-kelas-5", courses: 8 },
-      { name: "SD Kelas 6", link: "/category/sd-kelas-6", courses: 8 },
+      { 
+        name: "SD Kelas 2", 
+        link: "/category/sd-kelas-2", 
+        courses: 6,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-2/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-2/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-2/ipa" }
+        ]
+      },
+      { 
+        name: "SD Kelas 3", 
+        link: "/category/sd-kelas-3", 
+        courses: 6,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-3/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-3/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-3/ipa" }
+        ]
+      },
+      { 
+        name: "SD Kelas 4", 
+        link: "/category/sd-kelas-4", 
+        courses: 8,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-4/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-4/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-4/ipa" }
+        ]
+      },
+      { 
+        name: "SD Kelas 5", 
+        link: "/category/sd-kelas-5", 
+        courses: 8,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-5/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-5/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-5/ipa" }
+        ]
+      },
+      { 
+        name: "SD Kelas 6", 
+        link: "/category/sd-kelas-6", 
+        courses: 8,
+        subjects: [
+          { name: "Matematika", link: "/category/sd-kelas-6/matematika" },
+          { name: "Bahasa Indonesia", link: "/category/sd-kelas-6/bahasa-indonesia" },
+          { name: "IPA", link: "/category/sd-kelas-6/ipa" }
+        ]
+      },
     ]
   },
   {
@@ -99,7 +144,7 @@ const CategoryMenu = () => {
                       </p>
                     </Link>
                     
-                    {/* Show subjects submenu only for SD Kelas 1 */}
+                    {/* Show subjects submenu for all SD classes */}
                     {subcategory.subjects && (
                       <div className="ml-4 space-y-1">
                         {subcategory.subjects.map((subject) => (
