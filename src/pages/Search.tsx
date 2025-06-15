@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from '@/hooks/useDebounce';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import CourseGrid from '@/components/course/CourseGrid';
+import CourseCard from '@/components/course/CourseCard';
 import CourseFilter from '@/components/course/CourseFilter';
 import { CourseType } from '@/components/course/CourseCard';
 import { Button } from '@/components/ui/button';
@@ -167,7 +168,11 @@ const Search = () => {
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               ) : searchResults.length > 0 ? (
-                <CourseGrid courses={searchResults} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {searchResults.map((course) => (
+                    <CourseCard key={course.id} course={course} />
+                  ))}
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <h2 className="text-xl font-semibold mb-2">Tidak ada hasil yang ditemukan</h2>
