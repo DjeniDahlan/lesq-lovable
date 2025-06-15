@@ -3,7 +3,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseGrid from "@/components/course/CourseGrid";
 import CourseFilter from "@/components/course/CourseFilter";
-import { mockCourses } from '@/data/mockCourses';
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, X } from "lucide-react";
 
@@ -48,7 +47,7 @@ const SDKelas456 = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid />
+              <CourseGrid category="SD Kelas 4-6" />
             </div>
           </div>
         </div>

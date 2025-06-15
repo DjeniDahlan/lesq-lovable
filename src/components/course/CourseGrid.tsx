@@ -14,18 +14,16 @@ const fetchCourses = async ({ category, limit }: { category?: string, limit?: nu
 
   // Panggil fungsi database 'get_active_courses' yang telah kita buat
   const { data, error } = await supabase.rpc('get_active_courses', {
-    p_category: category,
-    p_limit: limit,
+    p_category: category || null,
+    p_limit: limit === undefined ? null : limit,
   });
 
   if (error) {
     console.error('Error fetching courses via RPC:', error);
-    // React Query akan menangkap error ini
     throw error;
   }
 
   if (data) {
-    // Format data yang diterima dari fungsi agar sesuai dengan tipe CourseType
     const formattedCourses: CourseType[] = data.map(course => ({
       id: course.id,
       title: course.title,

@@ -47,7 +47,7 @@ const SMAIPS = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid />
+              <CourseGrid category="SMA IPS" />
             </div>
           </div>
         </div>
