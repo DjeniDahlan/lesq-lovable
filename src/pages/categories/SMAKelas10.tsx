@@ -8,13 +8,12 @@ import { mockCourses } from '@/data/mockCourses';
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, X } from "lucide-react";
 
-const SMAIPS = () => {
+const SMAKelas10 = () => {
   const [showFilter, setShowFilter] = useState(false);
   
-  // Filter kursus untuk kategori SMA Kelas 11 IPS dan Kelas 12 IPS
-  const smaIPSCourses = mockCourses.filter(course => 
-    course.category === "SMA Kelas 11 IPS" || 
-    course.category === "SMA Kelas 12 IPS"
+  // Filter kursus untuk kategori SMA Kelas 10
+  const smaKelas10Courses = mockCourses.filter(course => 
+    course.category === "SMA Kelas 10"
   );
 
   return (
@@ -24,9 +23,9 @@ const SMAIPS = () => {
         {/* Hero Section */}
         <section className="bg-gray-50 py-16">
           <div className="container">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Kursus SMA IPS</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Kursus SMA Kelas 10</h1>
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Kursus pembelajaran untuk siswa SMA kelas 11 dan 12 jurusan IPS meliputi Bahasa Indonesia, Bahasa Inggris, Matematika Dasar, Ekonomi, Geografi, Sejarah, Sosiologi, dan TPA
+              Kursus pembelajaran untuk siswa SMA kelas 10 semua jurusan meliputi Bahasa Indonesia, Bahasa Inggris, dan Matematika
             </p>
           </div>
         </section>
@@ -35,7 +34,7 @@ const SMAIPS = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <p className="text-muted-foreground">
-                {smaIPSCourses.length} kursus tersedia
+                {smaKelas10Courses.length} kursus tersedia
               </p>
             </div>
             
@@ -55,7 +54,7 @@ const SMAIPS = () => {
             </div>
             
             <div className="col-span-1 md:col-span-3">
-              <CourseGrid courses={smaIPSCourses} />
+              <CourseGrid courses={smaKelas10Courses} />
             </div>
           </div>
         </div>
@@ -65,4 +64,4 @@ const SMAIPS = () => {
   );
 };
 
-export default SMAIPS;
+export default SMAKelas10;

@@ -11,9 +11,10 @@ import { SlidersHorizontal, X } from "lucide-react";
 const SMAIPA = () => {
   const [showFilter, setShowFilter] = useState(false);
   
-  // Filter kursus untuk kategori SMA IPA
+  // Filter kursus untuk kategori SMA Kelas 11 IPA dan Kelas 12 IPA
   const smaIPACourses = mockCourses.filter(course => 
-    course.category === "Sekolah Menengah Atas (SMA) - IPA"
+    course.category === "SMA Kelas 11 IPA" || 
+    course.category === "SMA Kelas 12 IPA"
   );
 
   return (
@@ -25,7 +26,7 @@ const SMAIPA = () => {
           <div className="container">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Kursus SMA IPA</h1>
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Kursus pembelajaran untuk siswa SMA jurusan IPA meliputi Matematika, Fisika, Kimia, dan Biologi
+              Kursus pembelajaran untuk siswa SMA kelas 11 dan 12 jurusan IPA meliputi Bahasa Indonesia, Bahasa Inggris, Matematika Dasar, Matematika IPA, Fisika, Kimia, Biologi, dan TPA
             </p>
           </div>
         </section>

@@ -477,7 +477,7 @@ export const mockCourses: CourseType[] = [
     category: "SMP Kelas 9"
   },
 
-  // Kategori SMA Kelas 10
+  // Kategori SMA Kelas 10 - Adding Bahasa Inggris course
   {
     id: "18",
     title: "Matematika Wajib SMA Kelas 10",
@@ -534,7 +534,7 @@ export const mockCourses: CourseType[] = [
     category: "SMA Kelas 10"
   },
 
-  // Kategori SMA Kelas 11 IPA
+  // Kategori SMA Kelas 11 IPA - Adding missing courses
   {
     id: "22",
     title: "Matematika Peminatan SMA Kelas 11 IPA",
@@ -549,6 +549,48 @@ export const mockCourses: CourseType[] = [
     studentCount: 1776,
     category: "SMA Kelas 11 IPA",
     isBestseller: true
+  },
+  {
+    id: "sma11ipa-bahasa-indonesia",
+    title: "Bahasa Indonesia SMA Kelas 11 IPA: Teks dan Argumentasi",
+    instructor: "Ibu Siti Rahma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1740",
+    price: 389000,
+    discountPrice: 339000,
+    rating: 4.7,
+    reviewCount: 156,
+    level: "Mahir",
+    duration: "28 jam",
+    studentCount: 1234,
+    category: "SMA Kelas 11 IPA"
+  },
+  {
+    id: "sma11ipa-bahasa-inggris",
+    title: "Bahasa Inggris SMA Kelas 11 IPA: Advanced Grammar & Essay Writing",
+    instructor: "Pak Agus Wibowo, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=1740",
+    price: 409000,
+    discountPrice: 359000,
+    rating: 4.6,
+    reviewCount: 143,
+    level: "Mahir",
+    duration: "30 jam",
+    studentCount: 1123,
+    category: "SMA Kelas 11 IPA"
+  },
+  {
+    id: "sma11ipa-matematika-dasar",
+    title: "Matematika Dasar SMA Kelas 11 IPA",
+    instructor: "Pak Bambang Supriyadi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&q=80&w=1740",
+    price: 449000,
+    discountPrice: 399000,
+    rating: 4.8,
+    reviewCount: 198,
+    level: "Mahir",
+    duration: "32 jam",
+    studentCount: 1456,
+    category: "SMA Kelas 11 IPA"
   },
   {
     id: "23",
@@ -593,7 +635,49 @@ export const mockCourses: CourseType[] = [
     category: "SMA Kelas 11 IPA"
   },
 
-  // Kategori SMA Kelas 11 IPS
+  // Kategori SMA Kelas 11 IPS - Adding missing courses
+  {
+    id: "sma11ips-bahasa-indonesia",
+    title: "Bahasa Indonesia SMA Kelas 11 IPS: Teks dan Argumentasi",
+    instructor: "Ibu Siti Rahma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1740",
+    price: 389000,
+    discountPrice: 339000,
+    rating: 4.7,
+    reviewCount: 145,
+    level: "Mahir",
+    duration: "28 jam",
+    studentCount: 1123,
+    category: "SMA Kelas 11 IPS"
+  },
+  {
+    id: "sma11ips-bahasa-inggris",
+    title: "Bahasa Inggris SMA Kelas 11 IPS: Advanced Grammar & Essay Writing",
+    instructor: "Pak Agus Wibowo, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=1740",
+    price: 409000,
+    discountPrice: 359000,
+    rating: 4.6,
+    reviewCount: 134,
+    level: "Mahir",
+    duration: "30 jam",
+    studentCount: 1034,
+    category: "SMA Kelas 11 IPS"
+  },
+  {
+    id: "sma11ips-matematika-dasar",
+    title: "Matematika Dasar SMA Kelas 11 IPS",
+    instructor: "Pak Bambang Supriyadi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&q=80&w=1740",
+    price: 419000,
+    discountPrice: 369000,
+    rating: 4.7,
+    reviewCount: 167,
+    level: "Mahir",
+    duration: "30 jam",
+    studentCount: 1234,
+    category: "SMA Kelas 11 IPS"
+  },
   {
     id: "26",
     title: "Ekonomi SMA Kelas 11: Mikro Ekonomi",
@@ -650,7 +734,7 @@ export const mockCourses: CourseType[] = [
     isNew: true
   },
 
-  // Kategori SMA Kelas 12 IPA
+  // Kategori SMA Kelas 12 IPA - Adding missing courses including TPA
   {
     id: "30",
     title: "Matematika Peminatan SMA Kelas 12 IPA: Kalkulus dan Trigonometri",
@@ -665,6 +749,62 @@ export const mockCourses: CourseType[] = [
     studentCount: 1876,
     category: "SMA Kelas 12 IPA",
     isBestseller: true
+  },
+  {
+    id: "sma12ipa-bahasa-indonesia",
+    title: "Bahasa Indonesia SMA Kelas 12 IPA: Persiapan SNBT",
+    instructor: "Ibu Siti Rahma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1740",
+    price: 429000,
+    discountPrice: 379000,
+    rating: 4.7,
+    reviewCount: 198,
+    level: "Mahir",
+    duration: "32 jam",
+    studentCount: 1456,
+    category: "SMA Kelas 12 IPA"
+  },
+  {
+    id: "sma12ipa-bahasa-inggris",
+    title: "Bahasa Inggris SMA Kelas 12 IPA: SNBT Preparation",
+    instructor: "Pak Agus Wibowo, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=1740",
+    price: 449000,
+    discountPrice: 399000,
+    rating: 4.6,
+    reviewCount: 176,
+    level: "Mahir",
+    duration: "34 jam",
+    studentCount: 1334,
+    category: "SMA Kelas 12 IPA"
+  },
+  {
+    id: "sma12ipa-matematika-dasar",
+    title: "Matematika Dasar SMA Kelas 12 IPA: Persiapan SNBT",
+    instructor: "Pak Bambang Supriyadi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&q=80&w=1740",
+    price: 469000,
+    discountPrice: 419000,
+    rating: 4.8,
+    reviewCount: 234,
+    level: "Mahir",
+    duration: "36 jam",
+    studentCount: 1567,
+    category: "SMA Kelas 12 IPA"
+  },
+  {
+    id: "sma12ipa-tpa",
+    title: "TPA (Tes Potensi Akademik) untuk SMA Kelas 12 IPA",
+    instructor: "Dr. Siti Rahma, S.Psi",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 489000,
+    discountPrice: 439000,
+    rating: 4.8,
+    reviewCount: 203,
+    level: "Mahir",
+    duration: "38 jam",
+    studentCount: 1445,
+    category: "SMA Kelas 12 IPA"
   },
   {
     id: "31",
@@ -709,7 +849,63 @@ export const mockCourses: CourseType[] = [
     category: "SMA Kelas 12 IPA"
   },
   
-  // Kategori SMA Kelas 12 IPS
+  // Kategori SMA Kelas 12 IPS - Adding missing courses including TPA
+  {
+    id: "sma12ips-bahasa-indonesia",
+    title: "Bahasa Indonesia SMA Kelas 12 IPS: Persiapan SNBT",
+    instructor: "Ibu Siti Rahma, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=1740",
+    price: 429000,
+    discountPrice: 379000,
+    rating: 4.7,
+    reviewCount: 187,
+    level: "Mahir",
+    duration: "32 jam",
+    studentCount: 1345,
+    category: "SMA Kelas 12 IPS"
+  },
+  {
+    id: "sma12ips-bahasa-inggris",
+    title: "Bahasa Inggris SMA Kelas 12 IPS: SNBT Preparation",
+    instructor: "Pak Agus Wibowo, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=1740",
+    price: 449000,
+    discountPrice: 399000,
+    rating: 4.6,
+    reviewCount: 165,
+    level: "Mahir",
+    duration: "34 jam",
+    studentCount: 1234,
+    category: "SMA Kelas 12 IPS"
+  },
+  {
+    id: "sma12ips-matematika-dasar",
+    title: "Matematika Dasar SMA Kelas 12 IPS: Persiapan SNBT",
+    instructor: "Pak Bambang Supriyadi, S.Pd",
+    thumbnail: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&q=80&w=1740",
+    price: 449000,
+    discountPrice: 399000,
+    rating: 4.7,
+    reviewCount: 198,
+    level: "Mahir",
+    duration: "34 jam",
+    studentCount: 1456,
+    category: "SMA Kelas 12 IPS"
+  },
+  {
+    id: "sma12ips-tpa",
+    title: "TPA (Tes Potensi Akademik) untuk SMA Kelas 12 IPS",
+    instructor: "Dr. Siti Rahma, S.Psi",
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1740",
+    price: 489000,
+    discountPrice: 439000,
+    rating: 4.8,
+    reviewCount: 192,
+    level: "Mahir",
+    duration: "38 jam",
+    studentCount: 1334,
+    category: "SMA Kelas 12 IPS"
+  },
   {
     id: "34",
     title: "Ekonomi SMA Kelas 12: Makro Ekonomi dan Pembangunan",

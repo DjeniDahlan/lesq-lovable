@@ -48,6 +48,7 @@ import SekolahDasar from "./pages/categories/SekolahDasar";
 import SekolahMenengahPertama from "./pages/categories/SekolahMenengahPertama";
 import SDKelas123 from "./pages/categories/SDKelas123";
 import SDKelas456 from "./pages/categories/SDKelas456";
+import SMAKelas10 from "./pages/categories/SMAKelas10";
 import SMAIPA from "./pages/categories/SMAIPA";
 import SMAIPS from "./pages/categories/SMAIPS";
 import SNBTUTBK from "./pages/categories/SNBTUTBK";
@@ -119,7 +120,7 @@ const App = () => (
           <Route path="/category/smp-kelas-7" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-8" element={<SekolahMenengahPertama />} />
           <Route path="/category/smp-kelas-9" element={<SekolahMenengahPertama />} />
-          <Route path="/category/sma-kelas-10" element={<Categories />} />
+          <Route path="/category/sma-kelas-10" element={<SMAKelas10 />} />
           <Route path="/category/sma-kelas-11-ipa" element={<SMAIPA />} />
           <Route path="/category/sma-kelas-11-ips" element={<SMAIPS />} />
           <Route path="/category/sma-kelas-12-ipa" element={<SMAIPA />} />
