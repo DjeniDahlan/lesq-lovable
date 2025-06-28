@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search as SearchIcon, SlidersHorizontal, X } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { mockCourses } from '@/data/mockCourses';
+import { supabase } from '@/integrations/supabase/client';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,43 +30,75 @@ const Search = () => {
   const searchCourses = async (searchQuery: string) => {
     setIsLoading(true);
     try {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Filter the mock courses based on search criteria
-      let filteredCourses = [...mockCourses];
-      
-      if (searchQuery) {
-        filteredCourses = filteredCourses.filter(course => 
-          course.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+      console.log('Searching courses with params:', {
+        searchQuery,
+        category,
+        level,
+        minPrice,
+        maxPrice
+      });
+
+      // Use the get_active_courses RPC function for now
+      // We'll filter on the frontend until we create a dedicated search function
+      const { data, error } = await supabase.rpc('get_active_courses', {
+        p_category: category && category !== "Semua Kategori" ? category : null,
+        p_limit: null,
+      });
+
+      if (error) {
+        console.error('Error searching courses:', error);
+        throw error;
       }
 
-      if (category && category !== "Semua Kategori") {
-        filteredCourses = filteredCourses.filter(course => 
-          course.category === category
-        );
-      }
+      if (data) {
+        let filteredCourses = data.map(course => ({
+          id: course.id,
+          title: course.title,
+          instructor: course.instructor_name || 'Les-Q Team',
+          thumbnail: course.thumbnail_url || '/placeholder.svg',
+          price: course.price,
+          discountPrice: course.discount_percentage && course.discount_percentage > 0 ? 
+            Math.round(course.price * (1 - course.discount_percentage / 100)) : undefined,
+          rating: 4.5, // Default rating
+          reviewCount: 124, // Default review count
+          level: course.education_level as any || 'Semua Level',
+          duration: '8 jam', // Default duration
+          studentCount: 1250, // Default student count
+          category: course.category,
+          isBestseller: course.price > 200000,
+          isNew: new Date(course.created_at).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000
+        }));
 
-      if (level && level !== "Semua Level") {
-        filteredCourses = filteredCourses.filter(course => 
-          course.level === level
-        );
-      }
+        // Apply frontend filters
+        if (searchQuery) {
+          filteredCourses = filteredCourses.filter(course => 
+            course.title.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        }
 
-      if (minPrice) {
-        filteredCourses = filteredCourses.filter(course => 
-          (course.discountPrice || course.price) >= parseInt(minPrice)
-        );
-      }
+        if (level && level !== "Semua Level") {
+          filteredCourses = filteredCourses.filter(course => 
+            course.level === level
+          );
+        }
 
-      if (maxPrice) {
-        filteredCourses = filteredCourses.filter(course => 
-          (course.discountPrice || course.price) <= parseInt(maxPrice)
-        );
-      }
+        if (minPrice) {
+          filteredCourses = filteredCourses.filter(course => 
+            (course.discountPrice || course.price) >= parseInt(minPrice)
+          );
+        }
 
-      setSearchResults(filteredCourses);
+        if (maxPrice) {
+          filteredCourses = filteredCourses.filter(course => 
+            (course.discountPrice || course.price) <= parseInt(maxPrice)
+          );
+        }
+
+        console.log('Filtered courses:', filteredCourses);
+        setSearchResults(filteredCourses);
+      } else {
+        setSearchResults([]);
+      }
     } catch (error: any) {
       console.error('Error searching courses:', error);
       toast({
@@ -74,6 +106,7 @@ const Search = () => {
         description: "Gagal mencari kursus. Silakan coba lagi.",
         variant: "destructive"
       });
+      setSearchResults([]);
     } finally {
       setIsLoading(false);
     }
