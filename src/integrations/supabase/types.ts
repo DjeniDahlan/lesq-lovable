@@ -297,6 +297,10 @@ export type Database = {
           instructor_name: string
         }[]
       }
+      get_auth_user_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       get_course_details_by_id: {
         Args: { p_course_id: string }
         Returns: {
