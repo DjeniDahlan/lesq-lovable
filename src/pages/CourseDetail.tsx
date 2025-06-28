@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -24,31 +25,53 @@ interface Course {
   overview?: string;
   what_you_will_learn?: string[];
   is_active: boolean;
+  instructor_name: string;
 }
 
 const CourseDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isPurchaseDialogOpen, setIsPurchaseDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchCourse = async () => {
-      if (!id) return;
+      if (!id) {
+        setError('ID kursus tidak valid');
+        setLoading(false);
+        return;
+      }
+
+      console.log('Fetching course with ID:', id);
 
       try {
         const { data, error } = await supabase
-          .rpc('get_course_details_by_id', { p_course_id: id })
-          .single();
+          .rpc('get_course_details_by_id', { p_course_id: id });
+
+        console.log('RPC response:', { data, error });
 
         if (error) {
           console.error('Error fetching course:', error);
+          setError('Gagal memuat detail kursus');
           return;
         }
 
-        setCourse(data);
+        if (!data || data.length === 0) {
+          console.log('No course found with ID:', id);
+          setError('Kursus tidak ditemukan');
+          return;
+        }
+
+        // Ambil data pertama dari array hasil RPC
+        const courseData = data[0];
+        console.log('Course data:', courseData);
+        
+        setCourse(courseData);
+        setError(null);
       } catch (error) {
-        console.error('Error fetching course:', error);
+        console.error('Unexpected error:', error);
+        setError('Terjadi kesalahan saat memuat kursus');
       } finally {
         setLoading(false);
       }
@@ -73,14 +96,20 @@ const CourseDetail = () => {
     );
   }
 
-  if (!course) {
+  if (error || !course) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="container py-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Kursus tidak ditemukan</h1>
-            <p className="text-muted-foreground">Kursus yang Anda cari mungkin tidak tersedia.</p>
+            <h1 className="text-2xl font-bold mb-4">
+              {error || 'Kursus tidak ditemukan'}
+            </h1>
+            <p className="text-muted-foreground">
+              {error === 'Kursus tidak ditemukan' 
+                ? 'Kursus yang Anda cari mungkin tidak tersedia atau telah dihapus.' 
+                : 'Silakan coba lagi dalam beberapa saat.'}
+            </p>
           </div>
         </div>
         <Footer />
@@ -127,6 +156,10 @@ const CourseDetail = () => {
                   <Globe className="h-4 w-4" />
                   <span>Bahasa Indonesia</span>
                 </div>
+              </div>
+              
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+                <span>Instruktur: {course.instructor_name}</span>
               </div>
             </div>
 
